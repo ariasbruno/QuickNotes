@@ -1,0 +1,165 @@
+/* NOTE ITEM */
+.note_item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 10fr .2fr;
+  grid-template-rows: 1fr;
+  grid-auto-flow: row;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  padding: 1rem 1rem;
+  height: 8rem;
+  border-radius: 10px;
+  box-shadow: 1px 3px 7px .4px var(--box-shadow);
+  background-color: var(--background-color);
+  overflow: hidden;
+  transition: background-color .3s ease, box-shadow .3s ease;
+  &:hover {
+    background-color: var(--item_hover-background-color);
+    box-shadow: 1px 5px 10px 1px var(--box-shadow);
+  }
+}
+.note_item_grid{
+  min-width: 5rem;
+  max-width: 20rem;
+  flex-grow: 1;
+}
+.note_item_column{
+  width: 100%;
+}
+/* NOTE CONTENT */
+.note_content {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0px;
+  overflow: hidden;
+  & h4, p{
+    color: var(--text-color);
+    align-self: center;
+    max-height: 100%;
+    width: 100%;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  & h4{
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+/* NOTE CONTENT END*/
+
+/* DELETE & DELETE TRASH BUTTON */
+button.delete_button,
+button.delete_trash_button{
+  display: flex;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  background: none;
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+button.delete_button svg{
+  color: var(--icon-color);
+  transition: color .3s ease;
+}
+.note_item:hover .delete_button svg{
+  color: var(--item_hover-icon-color);
+}
+button.delete_button:hover svg:hover{
+  color: var(--btn-delete);
+  transition: color .3s ease;
+}
+button.delete_trash_button svg{
+  fill: var(--icon-color);
+  transition: fill .3s ease;
+}
+.note_item:hover .delete_trash_button svg{
+  fill: var(--item_hover-icon-color);
+}
+button.delete_trash_button:hover svg:hover{
+  fill: var(--btn-delete);
+  transition: fill .3s ease;
+}
+/* DELETE & DELETE TRASH BUTTON END */
+
+/* SELECT BUTTON & RESTORE BUTTON*/
+button.select_button,
+button.restore_note_button,
+button.select_trash_button {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  padding: 0;
+  background: none;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+.check{
+  fill: var(--background-color);
+  transition: fill .1s ease;
+}
+.note_item:hover .select_button .check,
+.note_item:hover .select_trash_button .check{
+  fill: var(--background-color);
+}
+.note_item:hover .select_button svg,
+.note_item:hover .select_trash_button svg,
+.note_item:hover .restore_note_button svg{
+  fill: var(--item_hover-icon-color);
+}
+button.select_button svg,
+button.select_trash_button svg,
+button.restore_note_button svg{
+  fill: var(--icon-color);
+  transition: fill .3s ease;
+  width: 24px;
+  height: 24px;
+}
+button.select_button:hover svg:hover,
+button.select_button:hover svg:hover .check,
+button.select_trash_button:hover svg:hover,
+button.select_trash_button:hover svg:hover .check,
+button.restore_note_button:hover svg:hover{
+  fill: var(--select-btn-hover);
+}
+.item_select{
+  outline: 3px solid var(--select-btn-hover);
+}
+.item_select .select_button,
+.item_select:hover .select_button .check,
+.item_select .select_trash_button,
+.item_select:hover .select_trash_button .check{
+  fill: var(--select-btn-hover);
+}
+.item_select .select_button:hover svg:hover .check,
+.item_select .select_trash_button:hover svg:hover .check{
+  fill: var(--background-color);
+}
+/* SELECT BUTTON & RESTORE BUTTON END */
+
+/* NOTE ITEM END */
+/* NEW NOTE */
+.new_note {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.new_note svg {
+  height: 50%;
+  fill: var(--icon-color);
+  transition: fill .3s ease;
+}
+.new_note:hover svg {
+  fill: var(--item_hover-icon-color);
+}
+/* NEW NOTE END */

@@ -1,0 +1,109 @@
+#popup_alert{
+  display: none;
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  &.add_background-transition{
+    transition: background-color .3s ease;
+    background-color: #000000a8;
+  }
+  &.remove_background-transition{
+    transition: background-color .3s ease;
+    background-color: #00000000;
+  }
+  & #popup_alert-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+    "icon icon"
+    "text text"
+    "input input"
+    "btn_ok btn_no";
+    gap: 1rem;
+    margin: auto;
+    width: 36rem;
+    height: 20rem;
+    padding: 3rem;
+    background-color: var(--background-color);
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    border-radius: 8px;
+    &.scale-up-center {
+      animation: scale-up 0.4s;
+    }
+    &.scale-down-center {
+      animation:scale-down 0.4s;
+    }
+    & #icon-popup_alert{
+      grid-area: icon;
+      display: flex;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 100%;
+      border: 5px solid var(--btn-delete);
+      justify-self: center;
+      align-self: center;
+      & #icon-content-popup_alert{
+        margin: auto;
+        align-items: center;
+        font-weight: 900;
+        font-size: 2rem;
+        color: var(--btn-delete);
+        animation: shake .7s;
+      }
+    }
+    & #text-popup_alert{
+      grid-area: text;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    & #label_do-not-show{
+      grid-area: input;
+      display: flex;
+      font-size: .9rem;
+      color: var(--text-color);
+      & #do-not-show{
+        margin-right: .5rem;
+      }
+    }
+    & #btn-cancel{
+      grid-area: btn_no;
+      font-weight: 600;
+      font-size: 1rem;
+      background-color: var(--btn_popup);
+      padding: .7rem;
+      border: none;
+      box-shadow: inset 0px 0px 0px 3px var(--btn-delete);
+      border-radius: 7px;
+      color: var(--text-color);
+      transition: background-color .3s ease;
+      margin: 0 1rem 0 0;
+      &:hover{
+        cursor: pointer;
+        background-color: var(--btn-delete) ;
+      }
+    }
+    & #btn-acept{
+      grid-area: btn_ok;
+      font-weight: 600;
+      font-size: 1rem;
+      background-color: var(--btn_popup);
+      padding: .7rem;
+      border: none;
+      border-radius: 7px;
+      color: var(--text-color);
+      transition: background-color .3s ease;
+      margin: 0 1rem 0 0;
+      &:hover{
+        cursor: pointer;
+        background-color: var(--slect-btn-hover) ;
+      }
+    }
+  }
+}

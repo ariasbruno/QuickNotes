@@ -1,0 +1,319 @@
+#note_modal {
+  display: none;
+  flex-direction: column;
+  background-color: var(--background-color);
+  position: fixed;
+  z-index: 10000;
+  bottom: 0;
+  left: 0;
+  height: calc(100vh - 4rem);
+  width: 100vw;
+  overflow-y: auto;
+  align-items: center;
+}
+#nav_modal{
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  padding: 1rem;
+  gap: 2rem;
+  z-index: 10000;
+  background-color: var(--background-color);
+  border-bottom: .1rem rgb(107, 106, 106) solid;
+
+  & #close {
+    border: none;
+    background: none;
+    height: 32px;
+    width: 32px;
+    color: var(--icon-color);
+    transition: color .3s ease;
+      &:hover{
+        color: var(--item_hover-icon-color);
+        cursor: pointer;
+      }
+  }
+  & #note_options{
+    border: none;
+    background: none;
+    height: 32px;
+    width: 32px;
+    color: var(--icon-color);
+    transition: color .3s ease;
+      &:hover{
+        color: var(--item_hover-icon-color);
+        cursor: pointer;
+      }
+  }
+  & #only_read-btn{
+    border: none;
+    background: none;
+    border-radius: 3px;
+    height: 32px;
+    width: 32px;
+    color: var(--icon-color);
+    transition: background-color .3s ease, color .3s ease;
+    & svg{
+      width: 32px;
+      height: 32px;
+      transition: background-color .3s ease, color .3s ease;
+    }
+      &:hover{
+        background-color: var(--item_hover-background-color);
+        cursor: pointer;
+        & svg{
+          color: var(--item_hover-icon-color);
+        }
+      }
+    }
+  & #open_toolbar-btn{
+    border: none;
+    background: none;
+    border-radius: 3px;
+    height: 32px;
+    width: 32px;
+    color: var(--icon-color);
+    transition: background-color .3s ease, color .3s ease;
+    &.open svg{
+      rotate: 90deg;
+    }
+    & svg{
+      width: 32px;
+      height: 32px;
+      rotate: -90deg;
+      transition: background-color .3s ease, color .3s ease, rotate .3s ease;
+    }
+      &:hover{
+        background-color: var(--item_hover-background-color);
+        cursor: pointer;
+        & svg{
+          color: var(--item_hover-icon-color);
+        }
+      }
+  }
+}
+
+#title {
+  flex: 1;
+  height: 2rem;
+  border: 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: var(--background-color);
+  color: var(--text-color);
+    &:focus {   outline: none  }
+}
+#note_text{
+  padding: 0 2rem 4rem 2rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  resize: none;
+  border: 0;
+  font-size: 1rem;
+  width: 100%;
+  height: 100%;
+
+    &:focus{  outline: none  }
+    &[data-placeholder="on"]:before{
+      position: absolute;
+      content: "Contenido de la nota...";
+      color: rgb(85, 85, 85);
+      cursor: text;
+    }
+}
+#note_modal-div{
+  width: calc(min(60rem, 100%));
+  margin: 0;
+  transition: margin .1s ease-out;
+
+
+  &.shifted {
+    margin-top: 120px;
+  }
+}
+.note_options-div {
+  position: absolute;
+  top: 3rem;
+  right: 1rem;
+  padding: 0;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px); /* Inicia fuera de la vista hacia arriba */
+  box-shadow: 0px 0px 10px 0px var(--box-shadow);
+  background-color: var(--background-color);
+  transition: opacity 0.3s ease, transform 0.3s ease, height 0s 0.3s; /* Delay para altura */
+}
+
+.note_options-div.open {
+  padding: 1rem;
+  height: auto;
+  opacity: 1;
+  transform: translateY(0); /* Desliza hacia abajo */
+  transition: opacity 0.3s ease, transform 0.3s ease, height 0s; /* Animación inversa */
+}
+
+.note_options-div ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.note_options-div ul li {
+  padding: 0.5rem 1rem;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.note_options-div ul li:hover {
+  background-color: var(--item_hover-background-color);
+}
+
+
+#options-modal{
+  position: fixed;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: .5rem;
+  margin: auto;
+  padding: 1rem;
+  height: 20rem;
+  width: 20rem;
+  background-color: var(--background-color);
+  border: none;
+  border-radius: 5px;
+  color: var(--text-color);
+  z-index: 10000001;
+
+  &[open]{
+    display: flex;
+  }
+}
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000000;
+  display: none;
+  background-color: rgb(0, 0, 0, .5);
+}
+
+#overlay.active {
+  display: block;
+}
+
+#close_options-modal{
+  border: none;
+  background-color: transparent;
+  width: 32px;
+  height: 32px;
+  align-self: flex-end;
+  & svg{
+    color: var(--icon-color);
+  }
+  &:hover svg{
+    cursor: pointer;
+    color: var(--item_hover-icon-color);
+  }
+}
+
+
+
+
+.toolbar {
+  position:absolute;
+  top: -8rem;
+  width: 100%;
+	padding: 16px;
+	background: #eee;
+  transition: top .1s ease-out;
+
+  &.open{
+    top: 0;
+  }
+}
+.toolbar .head {
+	display: flex;
+	grid-gap: 10px;
+	margin-bottom: 16px;
+	flex-wrap: wrap;
+}
+.toolbar .head > input {
+	max-width: 100px;
+	padding: 6px 10px;
+	border-radius: 6px;
+	border: 2px solid #ddd;
+	outline: none;
+}
+.toolbar .head select {
+	background: #fff;
+	border: 2px solid #ddd;
+	border-radius: 6px;
+	outline: none;
+	cursor: pointer;
+}
+.toolbar .head .input_color {
+	background: transparent;
+	border-radius: 6px;
+	outline: none;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	grid-gap: 6px;
+	padding: 0 10px;
+}
+.toolbar .head .input_color label {
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  color: var(--icon-color);
+}
+.toolbar .head .input_color input {
+display: none;
+}
+.toolbar .head .input_color input::-moz-color-swatch {
+display: none;
+}
+.toolbar .btn-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	grid-gap: 10px;
+}
+.toolbar .btn-toolbar button {
+  color: var(--icon-color);
+	background: transparent;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+}
+.toolbar .btn-toolbar button:hover {
+	background: #d3d3d3;
+}
+#content {
+	padding: 16px;
+	outline: none;
+	max-height: 50vh;
+	overflow: auto;
+
+}
+#show-code[data-active="true"] {
+	background: #eee;
+}

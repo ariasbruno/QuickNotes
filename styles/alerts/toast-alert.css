@@ -1,0 +1,81 @@
+#toast_alert{
+  position: fixed;
+  display: grid; 
+  grid-template-columns: 1fr 2.5fr; 
+  grid-template-rows: 1.5fr 1.4fr 0.1fr; 
+  grid-template-areas: 
+    "icon text"
+    "icon button"
+    "process process";
+  background-color: var(--background-color);
+  box-shadow: 0px 0px 10px 1px var(--box-shadow);
+  border-radius: 7px;
+  bottom: -160px;
+  /* bottom: 0; */
+  right: 0;
+  width: 300px;
+  height: 120px;
+  margin: 1rem;
+  gap: .3rem;
+  align-items: center;
+  transition: bottom .3s ease;
+  animation:bounce-out .3s linear both;
+  &.open{
+    animation:bounce-in .8s linear both;
+    bottom: 0;
+    & #icon-toast_alert #icon-content-toast_alert{
+      animation: shake .7s;
+    }
+  }
+  & #icon-toast_alert{
+    grid-area: icon;
+    display: flex;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100%;
+    border: 5px solid var(--select-btn-hover);
+    justify-self: center;
+    align-self: center;
+    & #icon-content-toast_alert{
+      margin: auto;
+      align-items: center;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--select-btn-hover);
+    }
+  }
+  & #text-toast_alert{
+    grid-area: text;
+    color: var(--text-color);
+    margin: 1rem 1rem 0 0;
+  }
+  & #btn-toast_alert{
+    grid-area: button;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: var(--btn_toast_alert);
+    padding: .4rem;
+    border: none;
+    border-radius: 7px;
+    color: var(--text-color);
+    transition: background-color .3s ease;
+    margin: 0 1rem 0 0;
+    &:hover{
+      cursor: pointer;
+      background-color: var(--select-btn-hover) ;
+    }
+  }
+  & #progressBar-container {
+    grid-area: process;
+    width: 100%;
+    height: 4px;
+  }
+  & #progressBar-toast_alert {
+    background: var(--select-btn-hover);
+    height: 100%;
+    width: 60%;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 7px;
+  }
+}
