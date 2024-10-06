@@ -8,13 +8,10 @@ export function updateToolbar() {
   const $highlightColor = $("#highlight_color")
   console.log($fontSize.selectedIndex);
   
-
-$header.selectedIndex=0;
-$fontSize.selectedIndex=0;
-$textColor.value='#000000';
-$highlightColor.value='#000000';
-
-
+  $header.selectedIndex=0;
+  $fontSize.selectedIndex=0;
+  // $textColor.value='#ffffff';
+  // $highlightColor.value='#000000';
 
   if ($content.innerHTML.trim() === '' || $content.innerHTML === '<div><br></div>' || $content.innerHTML === '<br>') {
     $content.setAttribute("data-placeholder", "on")
