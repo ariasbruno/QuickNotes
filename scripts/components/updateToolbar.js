@@ -4,14 +4,13 @@ export function updateToolbar() {
   $content.setAttribute("contenteditable", "true")
   const $fontSize = $("#font-size")
   const $header = $("#header")
-  const $textColor = $("#text_color")
-  const $highlightColor = $("#highlight_color")
-  console.log($fontSize.selectedIndex);
+  const $textColorSvg = $("#change_text_color-svg")
+  const $highlightColorSvg = $("#change_background_color-svg")
   
   $header.selectedIndex=0;
   $fontSize.selectedIndex=0;
-  // $textColor.value='#ffffff';
-  // $highlightColor.value='#000000';
+  $textColorSvg.style.color='var(--icon-color)';
+  $highlightColorSvg.style.color ='var(--icon-color)';
 
   if ($content.innerHTML.trim() === '' || $content.innerHTML === '<div><br></div>' || $content.innerHTML === '<br>') {
     $content.setAttribute("data-placeholder", "on")

@@ -6,8 +6,6 @@
   <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <title>Notas</title>
-  <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
-  <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
   <script type="module" src="script.js"></script>
   <script type="module" src="./scripts/components/textEditor.js"></script>
 </head>
@@ -99,6 +97,7 @@
 
   <main id="main"></main>
 
+  <!-- NOTE MODAL START -->
   <section id="note_modal">
     <nav id="nav_modal">
       <button id="close" class="close">
@@ -134,16 +133,9 @@
       </div>
     </nav>
 
-    <!-- TOOLBAR -->
+    <!-- TOOLBAR START-->
     <div class="toolbar">
-      <div class="head">
-        <input type="text" placeholder="Filename" value="Untitled">
-        <select onchange="fileHandle(this.value); this.selectedIndex=0">
-          <option value="" selected="" hidden="" disabled="">File</option>
-          <option value="new">New File</option>
-          <option value="txt">Save as txt</option>
-          <option value="pdf">Save as PDF</option>
-        </select>
+      <!-- <div class="head"> -->
         <select id="header">
           <option value="" selected="" hidden="" disabled="">Format</option>
           <option value="h1">H1</option>
@@ -165,14 +157,20 @@
           <option value="7">Big</option>
         </select>
 
+        <!-- color del texto start -->
+        <button id="change_text_color-btn" class="color input_color">
+          <svg id="change_text_color-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M3 24q-.425 0-.712-.288T2 23v-2q0-.425.288-.712T3 20h18q.425 0 .713.288T22 21v2q0 .425-.288.713T21 24zm4.125-7q-.575 0-.913-.488t-.137-1.037l4.4-11.725q.125-.35.425-.55t.65-.2h.9q.375 0 .663.2t.412.55L17.95 15.5q.2.55-.137 1.025T16.9 17q-.35 0-.65-.2t-.425-.55l-.975-2.85H9.2l-1.025 2.875q-.125.35-.413.538T7.126 17M9.9 11.4h4.2l-2.05-5.8h-.1z" />
+          </svg>
+        </button>
 
-
-<!-- color del texto start -->
-<button id="change_text_color-btn" class="color input_color">
-            <svg id="change_text_color-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M3 24q-.425 0-.712-.288T2 23v-2q0-.425.288-.712T3 20h18q.425 0 .713.288T22 21v2q0 .425-.288.713T21 24zm4.125-7q-.575 0-.913-.488t-.137-1.037l4.4-11.725q.125-.35.425-.55t.65-.2h.9q.375 0 .663.2t.412.55L17.95 15.5q.2.55-.137 1.025T16.9 17q-.35 0-.65-.2t-.425-.55l-.975-2.85H9.2l-1.025 2.875q-.125.35-.413.538T7.126 17M9.9 11.4h4.2l-2.05-5.8h-.1z" />
-            </svg>
-          </button>
+        <!-- resaltado del texto start -->
+        <button id="change_background_color-btn" class="color input_color">
+          <svg id="change_background_color-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="currentColor" d="m8.3.7l7.875 7.875q.575.575.575 1.425t-.575 1.425l-4.75 4.75q-.575.575-1.425.575t-1.425-.575l-4.75-4.75Q3.25 10.85 3.25 10t.575-1.425L8.575 3.8l-1.7-1.7q-.3-.3-.288-.7T6.9.7q.3-.275.7-.287T8.3.7M10 5.225L5.225 10h9.55zM19 17q-.825 0-1.412-.587T17 15q0-.525.313-1.125T18 12.75q.225-.3.475-.625T19 11.5q.275.3.525.625t.475.625q.375.525.688 1.125T21 15q0 .825-.587 1.413T19 17M4 24q-.825 0-1.412-.587T2 22t.588-1.412T4 20h16q.825 0 1.413.588T22 22t-.587 1.413T20 24z" />
+          </svg>
+        </button>
+        <!-- resaltado del texto end -->
       
         <div id="text_color-content" class="text_color-content" style="display: none;">
           <div id="color-groups"></div>
@@ -186,34 +184,10 @@
             <button id="add-custom-color">+</button>
           </div>
         </div>
-<!-- color del texto end -->
+        <!-- color del texto end -->
 
-<!-- resaltado del texto start -->
-<button id="change_background_color-btn" class="color input_color">
-  <svg id="change_background_color-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path fill="currentColor" d="m8.3.7l7.875 7.875q.575.575.575 1.425t-.575 1.425l-4.75 4.75q-.575.575-1.425.575t-1.425-.575l-4.75-4.75Q3.25 10.85 3.25 10t.575-1.425L8.575 3.8l-1.7-1.7q-.3-.3-.288-.7T6.9.7q.3-.275.7-.287T8.3.7M10 5.225L5.225 10h9.55zM19 17q-.825 0-1.412-.587T17 15q0-.525.313-1.125T18 12.75q.225-.3.475-.625T19 11.5q.275.3.525.625t.475.625q.375.525.688 1.125T21 15q0 .825-.587 1.413T19 17M4 24q-.825 0-1.412-.587T2 22t.588-1.412T4 20h16q.825 0 1.413.588T22 22t-.587 1.413T20 24z" />
-  </svg>
-</button>
-
-<!-- <div id="text_color-content" class="text_color-content" style="display: none;">
-<div id="color-groups"></div>
-<hr style="margin: 16px 0;"/>
-<div id="custom-colors"></div>
-
-<div class="custom-color-input">
-  <input id="highlight_color" type="color" style="opacity: 0; position: absolute;" />
-  <div id="custom-color-display" class="custom-color-display"></div>
-  <input id="custom-color-input" type="text" value="#000000" />
-  <button id="add-custom-color">+</button>
-</div>
-</div> -->
-<!-- resaltado del texto end -->
-
-
-
-
-      </div>
-      <div class="btn-toolbar">
+      <!-- </div> -->
+      <!-- <div class="btn-toolbar"> -->
         <button id="btn-undo">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path fill="currentColor" d="M8 19q-.425 0-.712-.288T7 18t.288-.712T8 17h6.1q1.575 0 2.738-1T18 13.5T16.838 11T14.1 10H7.8l1.9 1.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275L4.7 9.7q-.15-.15-.213-.325T4.426 9t.063-.375T4.7 8.3l3.6-3.6q.275-.275.7-.275t.7.275t.275.7t-.275.7L7.8 8h6.3q2.425 0 4.163 1.575T20 13.5t-1.737 3.925T14.1 19z" />
@@ -284,10 +258,9 @@
             <path fill="currentColor" d="M15.625 12.775L13.85 11H15q.425 0 .713.288T16 12q0 .25-.1.45t-.275.325M20.5 21.9q-.275.275-.7.275t-.7-.275l-17-17q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l17 17q.275.275.275.7t-.275.7M7 17q-2.075 0-3.537-1.463T2 12q0-1.725 1.05-3.075t2.7-1.775L7.6 9H7q-1.25 0-2.125.875T4 12t.875 2.125T7 15h3q.425 0 .713.288T11 16t-.288.713T10 17zm2-4q-.425 0-.712-.288T8 12t.288-.712T9 11h.625l1.975 2zm9.5 2.8q-.225-.35-.162-.75t.412-.625q.575-.425.913-1.05T20 12q0-1.25-.875-2.125T17 9h-3q-.425 0-.712-.288T13 8t.288-.712T14 7h3q2.075 0 3.538 1.463T22 12q0 1.225-.562 2.288t-1.563 1.762q-.35.225-.75.163T18.5 15.8" />
           </svg>
         </button>
-      </div>
+      <!-- </div> -->
     </div>
-
-
+    <!-- TOOLBAR END -->
 
     <div id="note_modal-div">
       <div id="note_text" contenteditable="true" spellcheck="false"></div>
@@ -303,20 +276,24 @@
       <p id="date_last_edit"></p>
     </dialog>
   </section>
+  <!-- NOTE MODAL END -->
 
+  <!-- TOAST ALERT START -->
   <div id="toast_alert">
-      <div id="icon-toast_alert">
-        <div id="icon-content-toast_alert">
-          i
-        </div>
+    <div id="icon-toast_alert">
+      <div id="icon-content-toast_alert">
+        i
       </div>
-      <p id="text-toast_alert"></p>
-      <button id="btn-toast_alert">Deshacer</button>
+    </div>
+    <p id="text-toast_alert"></p>
+    <button id="btn-toast_alert">Deshacer</button>
     <div id="progressBar-container">
       <div id="progressBar-toast_alert"></div>
     </div>
   </div>
+  <!-- TOAST ALERT END -->
   
+  <!-- TOAST POPUP START -->
   <div id="popup_alert">
     <div id="popup_alert-content" class="scale-up-center">
       <div id="icon-popup_alert">
@@ -333,6 +310,7 @@
       <button id="btn-acept">Aceptar</button>
     </div>
   </div>
+  <!-- TOAST POPUP END -->
 
 </body>
 </html>

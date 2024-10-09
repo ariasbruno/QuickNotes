@@ -12,9 +12,6 @@ $fontSize.addEventListener("change", () => formatDoc('fontSize', $fontSize.value
 const $textColor = $("#text_color")
 const $highlightColor = $("#highlight_color")
 
-// $textColor.addEventListener("input", () => formatDoc('foreColor', $textColor.value))
-// $highlightColor.addEventListener("input", () => formatDoc('hiliteColor', $highlightColor.value))
-
 //btn toolbar
 const $btnUndo = $("#btn-undo")
 const $btnRedo = $("#btn-redo")
@@ -109,42 +106,6 @@ $content.addEventListener('mouseenter', () => {
 		})
 	})
 })
-
-
-// const showCode = document.getElementById('show-code');
-// let active = false;
-
-// showCode.addEventListener('click', () => {
-// 	showCode.dataset.active = !active;
-// 	active = !active
-// 	if(active) {
-// 		content.textContent = content.innerHTML;
-// 		content.setAttribute('contenteditable', false);
-// 	} else {
-// 		content.innerHTML = content.textContent;
-// 		content.setAttribute('contenteditable', true);
-// 	}
-// })
-
-
-
-const filename = document.getElementById('filename');
-
-function fileHandle(value) {
-	if(value === 'new') {
-		$content.innerHTML = '';
-		filename.value = 'untitled';
-	} else if(value === 'txt') {
-		const blob = new Blob([$content.innerText])
-		const url = URL.createObjectURL(blob)
-		const link = document.createElement('a');
-		link.href = url;
-		link.download = `${filename.value}.txt`;
-		link.click();
-	} else if(value === 'pdf') {
-		html2pdf($content).save(filename.value);
-	}
-}
 
 
 

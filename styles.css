@@ -1,6 +1,6 @@
 @import url(styles/nav.css);
 @import url(styles/sidebar.css);
-@import url(styles/modal.css);
+@import url(styles/Modal/modal.css);
 @import url(styles/note-item.css);
 @import url(styles/alerts/toast-alert.css);
 @import url(styles/alerts/popup-alert.css);
