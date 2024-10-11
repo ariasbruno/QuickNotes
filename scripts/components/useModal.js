@@ -30,5 +30,44 @@ $inputContent.addEventListener('input', () => adjustInputHeight($inputContent));
     $noteModal.style.display = "none";
     $body.style.overflow = "";
   }
-};
 
+  $noteModal.addEventListener("click", e => {
+    if(e.target.id !== "note_modal") {
+      return;
+    }
+    
+    $inputContent.focus();
+    
+    // Crea un rango
+    const range = document.createRange();
+    const selection = window.getSelection();
+  
+    // Función recursiva para obtener el último nodo de texto
+    function getLastTextNode(node) {
+      // Si el nodo tiene hijos, busca el último nodo de texto en su interior
+      if (node.hasChildNodes()) {
+        return getLastTextNode(node.lastChild);
+      }
+      // Si el nodo es un nodo de texto, lo retorna
+      return node.nodeType === Node.TEXT_NODE ? node : null;
+    }
+  
+    // Obtiene el último nodo de texto dentro del contenteditable
+    const lastTextNode = getLastTextNode($inputContent);
+  
+    if (lastTextNode) {
+      // Colapsa el rango al final del último nodo de texto
+      range.setStart(lastTextNode, lastTextNode.length);
+      range.setEnd(lastTextNode, lastTextNode.length);
+    } else {
+      // Si no hay nodo de texto, colapsa el rango al final del div
+      range.selectNodeContents($inputContent);
+      range.collapse(false);
+    }
+  
+    // Remueve cualquier rango existente y agrega el nuevo
+    selection.removeAllRanges();
+    selection.addRange(range);
+  });
+  
+};
