@@ -2,7 +2,7 @@
 .note_item {
   position: relative;
   display: grid;
-  grid-template-columns: 10fr .2fr;
+  grid-template-columns: 1fr 19px;
   grid-template-rows: 1fr;
   grid-auto-flow: row;
   grid-column-gap: 0px;
@@ -20,9 +20,10 @@
   }
 }
 .note_item_grid{
-  min-width: 5rem;
-  max-width: 20rem;
   flex-grow: 1;
+  flex-basis: 20%;
+  min-width: 180px;
+  max-width: 20rem;
 }
 .note_item_column{
   width: 100%;
@@ -35,7 +36,7 @@
   gap: 0px;
   overflow: hidden;
   & h4, p{
-    color: var(--text-color);
+    position: relative;
     align-self: center;
     max-height: 100%;
     width: 100%;
@@ -44,6 +45,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    text-overflow: ellipsis;
+    background: linear-gradient(90deg , var(--text-color) 80%, transparent);
+    background-size: cover;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   & h4{
     font-size: 1.5rem;

@@ -46,6 +46,12 @@ export function DisplayConfig() {
       <span class="slider config_empty-note" name="config_empty-note"></span>
     </label>
   </div>
+    <div class="div_delete-all-data">
+    <p>Borrar todos los datos guardados en la web</p>
+    <div>
+      <button id="config_delete-all-data">Borrar Todo</button>
+    </div>
+  </div>
 
 
 

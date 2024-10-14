@@ -45,7 +45,7 @@ window.addEventListener("click", (e) => {
     "nav_select_all": () => clickSelectNotesNav(),
     "btn-select_nav": () => clickNavSelectNotesBtn(),
     "esc_nav_selection": () => clickEscNavSelection(),
-    "nav_new_note_dynamic": () => clickCreateNote(),
+    "nav_new_note_dynamic": () => {clickCreateNote(); updateToolbar()},
     "btn_order": () => clickOrderBtn(),
     "open_sidebar": () => clickOpenCloseSidebar("toggle"),
     "note": () => {clickEditNote(noteIndex); updateToolbar()},
@@ -69,6 +69,7 @@ window.addEventListener("click", (e) => {
       "config_delete-permanently": () => configItems("#config_delete-permanently"),
       "config_delete-permanently-selection": () => configItems("#config_delete-permanently-selection"),
       "config_move-to-trash": () => configItems("#config_move-to-trash"),
+      "config_delete-all-data": () => deleteAllData(),
       "config_empty-note": () => configItems("#config_empty-note"),
       "note_options-info": () => notesInfo(noteIndex),
     }
@@ -76,14 +77,27 @@ window.addEventListener("click", (e) => {
   if (clickEvents.forId[e.target.id]){
     clickEvents.forId[e.target.id]()
   } else {
-    for (let i = 0; i < e.target.classList.length; i++) {
-      const itemClassName = e.target.classList[i]
-      if (clickEvents[itemClassName]) {
-        clickEvents[itemClassName]()
+    for (const className of e.target.classList) {
+      if (clickEvents[className]) {
+        clickEvents[className]();
+        break;
       }
     }
   }
 });
+
+
+
+function deleteAllData () {
+    useAlert("delete data").then((resolve) => {
+      if (resolve) {
+        localStorage.clear()
+      }
+    });
+}
+
+
+
 
 function handlerRead () {
   $inputContent.getAttribute("contenteditable") === "false" ? 
@@ -467,7 +481,7 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
           showAlert("empty note")
           $inputTitle.value = n.title;
           $inputContent.innerHTML = n.text;
-          $inputTitle.focus()
+          updateToolbar()
           backButtonListener()
         }
       })

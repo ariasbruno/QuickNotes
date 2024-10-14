@@ -62,6 +62,10 @@
       font-size: 1.3rem;
       font-weight: 600;
       color: var(--text-color);
+      & span {
+        font-size: 1rem;
+        font-weight: 400;
+      }
     }
     & #label_do-not-show{
       grid-area: input;
@@ -89,7 +93,7 @@
         background-color: var(--btn-delete) ;
       }
     }
-    & #btn-acept{
+    & #btn-accept{
       grid-area: btn_ok;
       font-weight: 600;
       font-size: 1rem;

@@ -5,24 +5,27 @@ import { handleColors } from './handleColors.js';
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 
+const $modalContainer = $("#note_modal")
+
 const $customColorPickerInput = $("#custom-color_picker-input")
 const $highlightColor = $("#highlight_color")
 
 //btn toolbar
-const $btnUndo = $("#btn-undo")
-const $btnRedo = $("#btn-redo")
-const $btnBold = $("#btn-bold")
-const $btnUnderline = $("#btn-underline")
-const $btnItalic = $("#btn-italic")
-const $btnStrike = $("#btn-strike")
-const $btnJustifyLeft = $("#btn-justify_left")
-const $btnJustifyCenter = $("#btn-justify_center")
-const $btnJustifyRight = $("#btn-justify_right")
-const $btnJustifyJustified = $("#btn-justify_justified")
-const $btnOrderedList = $("#btn-ordered_list")
-const $btnUnorderedList = $("#btn-unordered_list")
-const $btnLink = $("#btn-link")
-const $btnUnlink = $("#btn-unlink")
+const $btnUndo = $(".btn-undo")
+const $btnRedo = $(".btn-redo")
+const $btnBold = $(".btn-bold")
+const $btnUnderline = $(".btn-underline")
+const $btnItalic = $(".btn-italic")
+const $btnStrike = $(".btn-strike")
+const $btnJustifyLeft = $(".btn-justify_left")
+const $btnJustifyCenter = $(".btn-justify_center")
+const $btnJustifyRight = $(".btn-justify_right")
+const $btnJustifyJustified = $(".btn-justify_justified")
+const $btnOrderedList = $(".btn-ordered_list")
+const $btnUnorderedList = $(".btn-unordered_list")
+const $btnLink = $(".btn-link")
+const $btnUnlink = $(".btn-unlink")
+
 
 $btnUndo.addEventListener("click", () => formatDoc('undo'))
 $btnRedo.addEventListener("click", () => formatDoc('redo'))
@@ -50,7 +53,7 @@ const $content = $('#note_text');
 
 $content.addEventListener("input", updatePlaceholder);
 $content.addEventListener("keyup", updatePlaceholder);
-window.addEventListener("DOMContentLoaded", updateToolbar);
+$modalContainer.addEventListener("DOMContentLoaded", updateToolbar);
 
 
 function updatePlaceholder () {
@@ -78,11 +81,11 @@ $content.addEventListener('mouseenter', () => {
 // TEXT & BACKGROUND TEXT COLOR START
 let typeBtn
 
-$('#add_custom_color-btn').addEventListener('click', e => handleColors(e, "create custom color", typeBtn) );
+$('.add_custom_color-btn').addEventListener('click', e => handleColors(e, "create custom color", typeBtn) )
 
 $customColorPickerInput.addEventListener('input', e => handleColors(e, "pick color", typeBtn) );
 
-window.addEventListener("click", e => handleColors(e, "close container", typeBtn) )
+$modalContainer.addEventListener("click", e => handleColors(e, "close container", typeBtn) )
 
 $('#change_text_color-btn').addEventListener('click', e => {
 	typeBtn = "text"
@@ -113,6 +116,7 @@ const $changeFontSizeOptions = $('#change_font_size-options');
 
 $("#change_font_size-open-btn").addEventListener('click', () => {
 		$changeFontSizeOptions.classList.toggle('show');
+		$("#svg-open_change_font-size").classList.toggle('rotate');
 		const selection = window.getSelection();
 		if (selection.rangeCount > 0) {
 			savedRange = selection.getRangeAt(0);
@@ -125,12 +129,14 @@ $changeFontSizeOptions.addEventListener('click', e => {
 			formatDoc('fontSize', e.target.getAttribute('data-value'));
 			$changeFontSizeDisplayText.textContent = e.target.textContent;
 			$changeFontSizeOptions.classList.remove('show');
+			$("#svg-open_change_font-size").classList.remove('rotate');
 		}
 });
 
-window.addEventListener("click", e => {
-	if (!e.target.matches('.dropdown-btn')) {
+$modalContainer.addEventListener("click", e => {
+	if (!e.target.matches('.dropdown-font_size')) {
 		$changeFontSizeOptions.classList.remove('show');
+		$("#svg-open_change_font-size").classList.remove('rotate');
 	}
 });
 
@@ -140,6 +146,7 @@ const $changeHeaderOptions = $('#change_header-options');
 
 $("#change_header-open-btn").addEventListener('click', () => {
 		$changeHeaderOptions.classList.toggle('show');
+		$("#svg-open_change_header").classList.toggle('rotate');
 		const selection = window.getSelection();
 		if (selection.rangeCount > 0) {
 			savedRange = selection.getRangeAt(0);
@@ -152,11 +159,13 @@ $changeHeaderOptions.addEventListener('click', e => {
 		formatDoc('formatBlock', e.target.getAttribute('data-value'));
 		$changeHeaderDisplayText.textContent = e.target.textContent;
 		$changeHeaderOptions.classList.remove('show');
+		$("#svg-open_change_header").classList.remove('rotate');
 	}
 });
 
-window.addEventListener("click", e => {
-	if (!e.target.matches('.dropdown-btn')) {
+$modalContainer.addEventListener("click", e => {
+	if (!e.target.matches('.dropdown-header')) {
 		$changeHeaderOptions.classList.remove('show');
+		$("#svg-open_change_header").classList.remove('rotate');
 	}
 });

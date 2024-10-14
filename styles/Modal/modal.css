@@ -43,6 +43,16 @@
         cursor: pointer;
       }
   }
+  #title {
+    flex: 1;
+    height: 2rem;
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    &:focus {   outline: none  }
+  }
   & #note_options{
     border: none;
     background: none;
@@ -103,28 +113,25 @@
   }
 }
 
-#title {
-  flex: 1;
-  height: 2rem;
-  border: 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-  background-color: var(--background-color);
-  color: var(--text-color);
-    &:focus {   outline: none  }
-}
-#note_text{
-  padding: 0 2rem 4rem 2rem;
-  margin-top: 1rem;
-  overflow: hidden;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  resize: none;
-  border: 0;
-  font-size: 1rem;
-  width: 100%;
-  height: 100%;
+#note_modal-div{
+  width: calc(min(60rem, 100%));
+  margin: 0;
+  transition: margin .1s ease-out;
+  &.shifted {
+    margin-top: 70px;
+  }
 
+  #note_text{
+    padding: 0 2rem 4rem 2rem;
+    margin-top: 1rem;
+    overflow: hidden;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    resize: none;
+    border: 0;
+    font-size: 1rem;
+    width: 100%;
+    height: 100%;
     &:focus{  outline: none  }
     
     &[data-placeholder="on"]:before{
@@ -133,15 +140,6 @@
       color: rgb(85, 85, 85);
       cursor: text;
     }
-}
-#note_modal-div{
-  width: calc(min(60rem, 100%));
-  margin: 0;
-  transition: margin .1s ease-out;
-
-
-  &.shifted {
-    margin-top: 120px;
   }
 }
 .note_options-div {
@@ -230,259 +228,5 @@
   &:hover svg{
     cursor: pointer;
     color: var(--item_hover-icon-color);
-  }
-}
-
-
-
-
-.toolbar {
-  position:absolute;
-  top: -8rem;
-  width: 100%;
-	padding: 16px;
-	background: var(--background-color);
-  box-shadow: 1px 1px 10px 0px var(--box-shadow);
-  transition: top .1s ease-out;
-  display: flex;
-	gap: 10px;
-	margin-bottom: 16px;
-	flex-wrap: wrap;
-  flex-direction: row;
-
-  &.open{
-    top: 0;
-  }
-
-  & > input {
-    max-width: 100px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    border: 2px solid #ddd;
-    outline: none;
-  }
-
-  & .tool-select {
-    background: var(--background-color);
-    color: var(--text-color);
-    border: none;
-    border-radius: 6px;
-    outline: none;
-    cursor: pointer;
-  }
-
-  & button {
-    color: var(--icon-color);
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-  & button:hover {
-    background: #d3d3d3;
-  }
-}
-
-
-
-#change_text_color-div, #change_background_color-div{
-  position: relative;
-}
-#change_text_color-btn, #change_background_color-btn{
-  border: none;
-  cursor: pointer;
-
-}
-#change_text_color-svg, #change_background_color-svg{
-  height: 28px;
-  width: 28px;
-  color: var(--icon-color);
-}
-
-.text_color-content{
-  position: absolute;
-  top: 40px;
-  left: 0;
-  z-index: 100;
-  background-color: var(--background-color);
-  width: 256px;
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 16px;
-  color: var(--text-color);
-  border-radius: 5px;
-  box-shadow: 1px 1px 4px 6px rgba(0, 0, 0, 0.1);
-
-  .color-group {
-    margin-bottom: 16px;
-  }
-  
-  .color-group-title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    text-transform: capitalize;
-  }
-  
-  .color-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 8px;
-  }
-  
-  .color-button {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-  }
-  
-  #custom-color-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-
-    #custom-color_picker-input{
-      opacity: 0;
-      width: 100%;
-      height: 100%;
-    }
-    #custom-color-display {
-      position: relative; /* Asegura que el pseudo-elemento se posicione dentro del contenedor */
-      border-radius: 50%;
-      height: 32px;
-      width: 32px;
-      background: conic-gradient(
-        from 0deg,
-        hsl(0 100% 50%), 
-        hsl(45 100% 50%), 
-        hsl(90 100% 50%), 
-        hsl(135 100% 50%), 
-        hsl(180 100% 50%), 
-        hsl(225 100% 50%), 
-        hsl(270 100% 50%), 
-        hsl(315 100% 50%), 
-        hsl(360 100% 50%)
-      );
-    }
-    
-    #custom-color-display::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      z-index: 1;
-      background: radial-gradient(circle, rgba(255,255,255,0.8), transparent 50%);
-    }
-
-    #custom-color-input{
-      width: 130px;
-      height: 30px;
-      padding: 5px;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      border-radius: 5px;
-      border: none;
-      outline: none;
-
-      &:hover {
-        box-shadow: 0 0 0 .15vw var(--icon-color);
-      }
-
-      &:focus {
-        box-shadow: 0 0 0 .15vw var(--item_hover-icon-color);
-      }
-    }
-    #add_custom_color-btn {
-      width: 32px;
-      height: 32px;
-    }
-  }
-
-  & {
-    --sb-track-color: var(--background-color);
-    --sb-thumb-color: #989898;
-    --sb-size: 10px;
-  }
-  
-  &::-webkit-scrollbar {
-    width: var(--sb-size);
-  }
-  
-  &::-webkit-scrollbar-track {
-    background: var(--sb-track-color);
-    border-radius: 50px;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: var(--sb-thumb-color);
-    border-radius: 50px;
-  }
-}
-
-
-
-
-
-
-
-
-#change_font_size-container, #change_header-container {
-  position: relative;
-  display: inline-block;
-  width: 94px;
-  height: 32px;
-  & #change_font_size-display, #change_header-display {
-    position: relative;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    /* padding: 10px; */
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    align-content: center;
-    cursor: pointer;
-
-    & #change_font_size-open-btn, #change_header-open-btn {
-      opacity: 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 2;
-    }
-  }
-  
-  #change_font_size-options, #change_header-options {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    z-index: 1;
-    width: 200px;
-    &.show {
-      display: block;
-    }
-
-    & .option {
-      padding: 10px;
-      cursor: pointer;
-
-      &:hover{
-        background-color: #f1f1f1;
-      }
-    }
   }
 }

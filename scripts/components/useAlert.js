@@ -86,15 +86,49 @@ export function useAlert(action, message) {
       $inputCheckAlert.checked = false;
       
       let text = "¿Estas seguro de que quiere guardar una nota vacía? Si guardas una nota vacía esta sera eliminada";      
-      textPopup.innerText = text
+      textPopup.innerText = text;
   
       popup.style.display = "flex";
-      popupContent.className = "scale-up-center"
-      popup.className = "add_background-transition"
+      popupContent.className = "scale-up-center";
+      popup.className = "add_background-transition";
       
       btnAccept.addEventListener("click", () => {
+        popupContent.className = "scale-down-center";
+        popup.className = "remove_background-transition";
+        setTimeout(() => {
+          popup.style.display = "none";          
+        },200);
+        resolve(true);
+      });
+      
+      btnCancel.addEventListener("click", () => {
         popupContent.className = "scale-down-center"
         popup.className = "remove_background-transition"
+        setTimeout(() => {
+          popup.style.display = "none";          
+        },200);
+        resolve(false);
+      });
+    } else if (action === "delete data"){
+      const popup = document.querySelector("#popup_alert");
+      const popupContent = document.querySelector("#popup_alert-content");
+      const btnCancel = document.querySelector("#btn-cancel");
+      const btnAccept = document.querySelector("#btn-accept");
+      const textPopup = document.querySelector("#text-popup_alert");
+      const $labelCheckAlert = document.getElementById("label_do-not-show");
+
+      $labelCheckAlert.style.display = "none";
+      
+      let text = `¿Estas seguro de que quiere eliminar todos los datos? <br> <span>Si presiona aceptar se eliminaran todas sus preferencias, notas y notas de papelera</span>`;      
+      textPopup.innerHTML = text;
+  
+      popup.style.display = "flex";
+      popupContent.className = "scale-up-center";
+      popup.className = "add_background-transition";
+      
+      btnAccept.addEventListener("click", () => {
+        popupContent.className = "scale-down-center";
+        popup.className = "remove_background-transition";
         setTimeout(() => {
           popup.style.display = "none";          
         },200);
