@@ -79,7 +79,7 @@
     fill: var(--item_hover-icon-color);
   }
   /* NAV  SELECTION START */
-  & .close_nav_selection{
+  & #nav_bar-selection{
     top: -6rem;
     right: 0;
     padding: 1rem;
@@ -87,10 +87,10 @@
     flex-direction: row-reverse;
     box-shadow: 1px 3px 7px .4px var(--box-shadow);
     transition: top 0.3s ease, box-shadow 1s ease;
-  }
-  & .open_nav_selection{
-    top: 0;
-    box-shadow: none;
+    &.open{
+      top: 0;
+      box-shadow: none;
+    }
   }
   & .delete_selection_btn,
   .delete_trash_selection_btn{

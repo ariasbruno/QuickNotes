@@ -1,8 +1,4 @@
-import { loadIconOrder } from "../loadIconOrder.js";
-
 export function DisplayNotes() {
-
-loadIconOrder()
 
   let config = JSON.parse(localStorage.getItem("config"));
   let notes = JSON.parse(localStorage.getItem("notes"));
@@ -24,11 +20,11 @@ loadIconOrder()
   $("#nav_select_all").style.display = "flex"
 
 
-const $navSelection = $(`.close_nav_selection`);
+const $navSelection = $(`#nav_bar-selection`);
   if ($$(".item_select").length > 0) {
-    $navSelection.classList.add("open_nav_selection");
+    $navSelection.classList.add("open");
   } else {
-    $navSelection.classList.remove("open_nav_selection");
+    $navSelection.classList.remove("open");
   }
 
   const classChecker = config.notesOrder === "grid" ? "note_item new_note note_item_grid" : "note_item new_note note_item_column"

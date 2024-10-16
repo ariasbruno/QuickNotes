@@ -1,12 +1,14 @@
 import { DisplayNotes } from './scripts/view/DisplayNotes.js';
 import { DisplayTrash } from './scripts/view/DisplayTrash.js';
 import { DisplayConfig } from './scripts/view/DisplayConfig.js';
-import { notesOrder } from './scripts/notesOrder.js';
+import { changeNotesOrder } from './scripts/changeNotesOrder.js';
+import { loadIconOrder } from './scripts/loadIconOrder.js';
 import { useAlert } from './scripts/components/useAlert.js';
 import { modalAction } from './scripts/components/useModal.js'
 import { clickOpenCloseSidebar } from './scripts/components/useSidebar.js'
 import { isAlertActive } from './scripts/config/isAlertActive.js'
 import { configItems } from './scripts/config/configItems.js'
+import { deleteAllData } from './scripts/config/deleteAllData.js'
 import { handlerTheme } from './scripts/theme/handlerTheme.js';
 import { loadIcon } from './scripts/theme/loadIcon.js';
 import { updateToolbar } from './scripts/components/rich_text_editor/updateToolbar.js';
@@ -14,11 +16,12 @@ import { handlerRead } from './scripts/components/modal/handlerRead.js';
 import { notesInfo } from './scripts/components/modal/notesInfo.js';
 import { handlerNoteOptions } from './scripts/components/modal/handlerNoteOptions.js';
 import { selectionAllVerification } from './scripts/selectionAllVerification.js';
+import { clickEscNavSelection } from './scripts/clickEscNavSelection.js';
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 
-const $navSelection = $(".close_nav_selection");
+const $navSelection = $("#nav_bar-selection");
 const $main = $("#main");
 const $closeSaveNote = $("#close");
 const $$closeSaveNote = $$(".close");
@@ -39,9 +42,9 @@ window.addEventListener("load", () => { DisplayNotes(); loadIcon() });
 
 window.addEventListener("click", (e) => {
   
-  let idElemento = e.target.getAttribute("data-note-id");
-  let noteIndex = notes.findIndex(note => note.id === Number(idElemento));
-  let trashIndex = trash.findIndex(note => note.id === Number(idElemento));
+  let idElement = e.target.getAttribute("data-note-id");
+  let noteIndex = notes.findIndex(note => note.id === Number(idElement));
+  let trashIndex = trash.findIndex(note => note.id === Number(idElement));
 
   const clickEvents = {
     "open_toolbar": () => {$(".toolbar").classList.toggle("open");$("#open_toolbar-btn").classList.toggle("open"); $("#note_modal-div").classList.toggle('shifted');},
@@ -60,8 +63,8 @@ window.addEventListener("click", (e) => {
     "note_options": () => handlerNoteOptions(),
     "delete_button": () => clickDeleteNotes(noteIndex),
     "btn-toast_alert": () => DisplayNotes(),
-    "select_button": () => selectNote(idElemento),
-    "select_trash_button": () => selectNote(idElemento),
+    "select_button": () => selectNote(idElement),
+    "select_trash_button": () => selectNote(idElement),
     "delete_selection_btn": () => deleteNoteSelected(),
     "delete_trash_selection_btn": () => deleteAllSelectionTrash(),
     "restore_selection_btn": () => restoreAllSelectionTrash(),
@@ -91,34 +94,26 @@ window.addEventListener("click", (e) => {
   }
 });
 
-
-
-function deleteAllData () {
-  useAlert("delete data").then((resolve) => {
-    if (resolve) {
-      localStorage.clear()
-    }
-  });
-}
-
-function OpenNotes () { // ! ABRIR NOTAS
+function OpenNotes () { // ! ABRIR SECCIÓN NOTAS
   DisplayNotes();
   clickOpenCloseSidebar("close")
-  $navSelection.classList.remove("open_nav_selection");
+  $navSelection.classList.remove("open");
+  loadIconOrder()
 }
-function OpenTrash() { // ! ABRIR PAPELERA
+function OpenTrash() { // ! ABRIR SECCIÓN PAPELERA
   DisplayTrash();
   clickOpenCloseSidebar("close")
-  $navSelection.classList.remove("open_nav_selection");
+  $navSelection.classList.remove("open");
+  loadIconOrder()
 }
-function OpenConfig () { // ! ABRIR CONFIGURACIÓN
+function OpenConfig () { // ! ABRIR SECCIÓN CONFIGURACIÓN
   DisplayConfig();
   clickOpenCloseSidebar("close")
-  $navSelection.classList.remove("open_nav_selection");
+  $navSelection.classList.remove("open");
 }
 
 function clickOrderBtn () { // ! ORDENAR NOTAS
-  notesOrder();
+  changeNotesOrder();
   if ($main.className === "notes_section") {
     DisplayNotes();
   } else if ($main.className === "trash_section") {
@@ -140,7 +135,7 @@ function clickCreateNote() { // ! CREAR NOTA
 
 let note
 function clickEditNote (nI) { // ! EDITAR NOTA
-  if(!$(".nav_bar-selection").classList.contains("open_nav_selection")){
+  if(!$(".nav_bar-selection").classList.contains("open")){
     $$(".close").forEach(e =>{
       e.setAttribute("data-note-id", `${nI}`)
     })
@@ -250,7 +245,7 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
 
 function clickSelectNotesNav () { // ! ABRIR NAV DE SELECCIÓN
   selectionAllVerification()
-  $navSelection.classList.add("open_nav_selection"); 
+  $navSelection.classList.add("open"); 
   if ($main.className === "trash_section") {
     $(".restore_selection_btn").style.display = "flex"
     $("#delete_trash_selection_btn").style.display = "flex"
@@ -311,7 +306,7 @@ function selectNote (idElemento) { // ! SELECCIONAR NOTAS O NOTAS DE PAPELERA
     $$btnDelete.forEach(button => {
       button.style.display = "none";
     });
-      $navSelection.classList.add("open_nav_selection");
+      $navSelection.classList.add("open");
     if ($main.className === "notes_section"){
       $(".restore_selection_btn").style.display = "none"
     }
@@ -320,56 +315,13 @@ function selectNote (idElemento) { // ! SELECCIONAR NOTAS O NOTAS DE PAPELERA
     $$btnDelete.forEach(button => {
       button.style.display = "flex";
     });
-    $navSelection.classList.remove("open_nav_selection");
+    $navSelection.classList.remove("open");
   }  
-}
-
-function clickEscNavSelection () { // ! ESC DE SELECCIÓN
-  $("#btn-select_nav").className = "btn-select_nav"
-  if ($main.className === "trash_section") {
-    $navSelection.classList.remove("open_nav_selection");
-    if ($$(".item_select").length > 0){
-      for (let i = 0; i < trash.length; i++) {
-        const $$noteItem = $$(`[data-note-id="${trash[i].id}"]`)[0];
-        if ($$noteItem.classList.contains("item_select")) {
-          $$noteItem.classList.toggle("item_select");
-        }
-      }
-    }
-    
-    let $$btnDelete = $$(".delete_trash_button");
-    $$btnDelete.forEach(button => {
-      button.style.display = "flex";
-    });
-    let $$btnRestoreNote = $$(".restore_note_button");
-    $$btnRestoreNote.forEach(button => {
-      button.style.display = "flex";
-    });
-    let $$btnSelect = $$(".select_trash_button");
-    $$btnSelect.forEach(button => {
-      button.style.display = "none";
-    });
-  }
-  if ($main.className === "notes_section") {
-    $navSelection.classList.remove("open_nav_selection");
-    if ($$(".item_select").length > 0){
-      for (let i = 0; i < notes.length; i++) {
-        const $$noteItem = $$(`[data-note-id="${notes[i].id}"]`)[0];
-        if ($$noteItem.classList.contains("item_select")) {
-          $$noteItem.classList.toggle("item_select");
-        }
-      }
-    }
-    let $$btnDelete = $$(".delete_button");
-    $$btnDelete.forEach(button => {
-    button.style.display = "flex";
-    });
-  }
 }
 
 let lastDeletedNote = null;
 
-function clickDeleteNotes(nI) {
+function clickDeleteNotes(nI) { // ! MOVER NOTA A PAPELERA
   let showAlertConfirm = JSON.parse(localStorage.getItem("config")).toastUndo;
   const deletedNote = notes[nI];
   lastDeletedNote = deletedNote;
@@ -406,7 +358,7 @@ function deleteNoteSelected () { // ! MOVER A PAPELERA LAS NOTAS SELECCIONADAS
   let selectedItems = $$(".item_select").length
   let trashSelected = []
   let messageAlert = selectedItems > 1 ? "notes" : "note";
-  if (selectedItems <= 0) {$navSelection.classList.remove("open_nav_selection"); return};
+  if (selectedItems <= 0) {$navSelection.classList.remove("open"); return};
 
   for (let i = selectedItems -1; i >= 0; i--) {
     let noteIndexSelected = notes.findIndex(note => note.id === Number(document.getElementsByClassName("item_select")[i].dataset.noteId));
@@ -433,7 +385,7 @@ function deleteNoteSelected () { // ! MOVER A PAPELERA LAS NOTAS SELECCIONADAS
       DisplayNotes();
     }
   }));
-    $navSelection.classList.remove("open_nav_selection");
+    $navSelection.classList.remove("open");
 };
 
 function deletePermanently(index){  // ! BORRAR NOTA PERMANENTEMENTE DE LA PAPELERA
@@ -475,8 +427,8 @@ function restoreAllSelectionTrash () { // ! RESTAURAR NOTAS SELECCIONADAS
     localStorage.setItem('notes', JSON.stringify(notes));
   };
     DisplayTrash()
-  if ($$(".item_select").length === 0 && $navSelection.classList.contains("open_nav_selection")) {
-    $navSelection.classList.remove("open_nav_selection");
+  if ($$(".item_select").length === 0 && $navSelection.classList.contains("open")) {
+    $navSelection.classList.remove("open");
   }
 }
 
@@ -494,8 +446,8 @@ function deleteAllSelectionTrash () { // ! BORRAR NOTAS DE PAPELERA SELECCIONADA
           localStorage.setItem('trash', JSON.stringify(trash));
         };
           DisplayTrash()
-        if ($$(".item_select").length === 0 && $navSelection.classList.contains("open_nav_selection")) {
-          $navSelection.classList.remove("open_nav_selection");
+        if ($$(".item_select").length === 0 && $navSelection.classList.contains("open")) {
+          $navSelection.classList.remove("open");
         }
       }
       isAlertActive("delete selection")
@@ -507,8 +459,8 @@ function deleteAllSelectionTrash () { // ! BORRAR NOTAS DE PAPELERA SELECCIONADA
       localStorage.setItem('trash', JSON.stringify(trash));
     };
       DisplayTrash()
-    if ($$(".item_select").length === 0 && $navSelection.classList.contains("open_nav_selection")) {
-      $navSelection.classList.remove("open_nav_selection");
+    if ($$(".item_select").length === 0 && $navSelection.classList.contains("open")) {
+      $navSelection.classList.remove("open");
     }
   }
 }

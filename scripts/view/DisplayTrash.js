@@ -1,8 +1,4 @@
-import { loadIconOrder } from "../loadIconOrder.js";
-
 export function DisplayTrash() {
-
-  loadIconOrder()
 
   let trash = JSON.parse(localStorage.getItem("trash"));
   let config = JSON.parse(localStorage.getItem("config"))
