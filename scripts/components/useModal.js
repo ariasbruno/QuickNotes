@@ -69,5 +69,4 @@ $inputContent.addEventListener('input', () => adjustInputHeight($inputContent));
     selection.removeAllRanges();
     selection.addRange(range);
   });
-  
 };

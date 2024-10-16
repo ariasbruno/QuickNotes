@@ -1,7 +1,7 @@
 export function configItems(params) {
   const $ = selector => document.querySelector(selector)
-  let config = JSON.parse(localStorage.getItem("config")) || {notesOrder: "column", alertConfirmDelete: true,alertConfirmDeleteSelection: true, alertEmptyNote: true, toastUndo: true};
-  localStorage.setItem('config', JSON.stringify(config));
+  
+  let config = JSON.parse(localStorage.getItem("config"));
 
   if($(params).checked){
     params === "#config_delete-permanently"

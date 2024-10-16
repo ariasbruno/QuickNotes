@@ -1,39 +1,47 @@
-export function DisplayNotes() {
-  let config = JSON.parse(localStorage.getItem("config")) || {notesOrder: "column", alertConfirmDelete: true,alertConfirmDeleteSelection: true, alertEmptyNote: true, toastUndo: true};
-  let notes = JSON.parse(localStorage.getItem("notes")) || [];
-  const navText = document.getElementById("nav-text")
-  navText.innerText="Notas"
+import { loadIconOrder } from "../loadIconOrder.js";
 
-  const btnNotesSidebar = document.getElementById("btn_notes");
-  const btnTrashSidebar = document.getElementById("btn_trash");
-  const btnConfigSidebar = document.getElementById("btn_config");
+export function DisplayNotes() {
+
+loadIconOrder()
+
+  let config = JSON.parse(localStorage.getItem("config"));
+  let notes = JSON.parse(localStorage.getItem("notes"));
+
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => document.querySelectorAll(selector);
+
+  $("#nav-text").innerText="Notas"
+
+  const btnNotesSidebar = $("#btn_notes");
+  const btnTrashSidebar = $("#btn_trash");
+  const btnConfigSidebar = $("#btn_config");
   btnNotesSidebar.classList.add("active");
   btnTrashSidebar.classList.remove("active");
   btnConfigSidebar.classList.remove("active");
 
-  document.getElementById("nav_dynamic_button").style.display = "flex"
-  document.getElementById("btn_order").style.display = "flex"
-  document.getElementById("nav_select_all").style.display = "flex"
+  $("#nav_dynamic_button").style.display = "flex"
+  $("#btn_order").style.display = "flex"
+  $("#nav_select_all").style.display = "flex"
 
 
-const navSelection = document.querySelector(`.close_nav_selection`);
-  if (document.querySelectorAll(".item_select").length > 0) {
-    navSelection.classList.add("open_nav_selection");
+const $navSelection = $(`.close_nav_selection`);
+  if ($$(".item_select").length > 0) {
+    $navSelection.classList.add("open_nav_selection");
   } else {
-    navSelection.classList.remove("open_nav_selection");
+    $navSelection.classList.remove("open_nav_selection");
   }
 
   const classChecker = config.notesOrder === "grid" ? "note_item new_note note_item_grid" : "note_item new_note note_item_column"
   notes.sort((a, b) => a.edit - b.edit);
-  const navDynamicImg = document.getElementById('nav_dynamic_img');
+  const $navOrderImg = $('#nav_order_img');
 
   if (config.notesOrder === "grid") {
-  navDynamicImg.innerHTML = `
+  $navOrderImg.innerHTML = `
   <path class="btn_order" d="M2,11H22a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H22V9H2Z"/>
   <path class="btn_order" d="M22,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V15A2,2,0,0,0,22,13Zm0,9H2V15H22Z"/>
 `
   } else if (config.notesOrder === "column") {
-    navDynamicImg.innerHTML = `
+    $navOrderImg.innerHTML = `
   <path class="btn_order" d="M2,11H13a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H13V9H2Z"/>
   <path class="btn_order" d="M22,0H19a2,2,0,0,0-2,2V9a2,2,0,0,0,2,2h3a2,2,0,0,0,2-2V2A2,2,0,0,0,22,0Zm0,9H19V2h3Z"/>
   <path class="btn_order" d="M5,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H5a2,2,0,0,0,2-2V15A2,2,0,0,0,5,13Zm0,9H2V15H5Z"/>
@@ -41,14 +49,14 @@ const navSelection = document.querySelector(`.close_nav_selection`);
 `
   }
   
-  const main = document.getElementById("main");
-  main.innerHTML = ``;
-  main.className = "notes_section";
+  const $main = $("#main");
+  $main.innerHTML = ``;
+  $main.className = "notes_section";
 
   const notesSection = document.createElement("section");
   notesSection.setAttribute("id", "notes_section");
   notesSection.setAttribute("class", "notes_section_grid");
-  main.prepend(notesSection);
+  $main.prepend(notesSection);
 
 
   notesSection.innerHTML = `<div class="${classChecker}">  

@@ -1,48 +1,38 @@
-export function DisplayTrash(config) {
-  let trash = JSON.parse(localStorage.getItem("trash")) || [];
-  const navText = document.getElementById("nav-text")
-  navText.innerText="Papelera"
+import { loadIconOrder } from "../loadIconOrder.js";
 
-  document.getElementById("nav_dynamic_button").style.display = "none"
-  document.getElementById("btn_order").style.display = "flex"
-  document.getElementById("nav_select_all").style.display = "flex"
+export function DisplayTrash() {
 
-  const btnNotesSidebar = document.getElementById("btn_notes");
-  const btnTrashSidebar = document.getElementById("btn_trash");
-  const btnConfigSidebar = document.getElementById("btn_config");
-  btnNotesSidebar.classList.remove("active");
-  btnTrashSidebar.classList.add("active");
-  btnConfigSidebar.classList.remove("active");
+  loadIconOrder()
 
+  let trash = JSON.parse(localStorage.getItem("trash"));
+  let config = JSON.parse(localStorage.getItem("config"))
+
+  const $ = selector => document.querySelector(selector);
+  const $$ = selector => document.querySelectorAll(selector);
+
+  $("#nav-text").innerText="Papelera"
+
+  $("#nav_dynamic_button").style.display = "none"
+  $("#btn_order").style.display = "flex"
+  $("#nav_select_all").style.display = "flex"
+
+  const $btnNotesSidebar = $("#btn_notes");
+  const $btnTrashSidebar = $("#btn_trash");
+  const $btnConfigSidebar = $("#btn_config");
+  $btnNotesSidebar.classList.remove("active");
+  $btnTrashSidebar.classList.add("active");
+  $btnConfigSidebar.classList.remove("active");
   
   const trashSection = document.createElement("section");
   trashSection.setAttribute("id", "trash_section");
   trashSection.setAttribute("class", "notes_section_grid");
 
-
-  const main = document.getElementById("main")
-  main.innerHTML = ``;
-  main.prepend(trashSection);
-  main.className = "trash_section";
-  
-  
-  
+  const $main = $("#main")
+  $main.innerHTML = ``;
+  $main.prepend(trashSection);
+  $main.className = "trash_section";
   
   trash.sort((a, b) => a.edit - b.edit);
-  const navDynamicImg = document.getElementById('nav_dynamic_img');
-  if (config.notesOrder === "grid") {
-    navDynamicImg.innerHTML = `
-    <path class="btn_order" d="M2,11H22a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H22V9H2Z"/>
-    <path class="btn_order" d="M22,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V15A2,2,0,0,0,22,13Zm0,9H2V15H22Z"/>
-  `
-    } else if (config.notesOrder === "column") {
-      navDynamicImg.innerHTML = `
-    <path class="btn_order" d="M2,11H13a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H13V9H2Z"/>
-    <path class="btn_order" d="M22,0H19a2,2,0,0,0-2,2V9a2,2,0,0,0,2,2h3a2,2,0,0,0,2-2V2A2,2,0,0,0,22,0Zm0,9H19V2h3Z"/>
-    <path class="btn_order" d="M5,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H5a2,2,0,0,0,2-2V15A2,2,0,0,0,5,13Zm0,9H2V15H5Z"/>
-    <path class="btn_order" d="M22,13H11a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V15A2,2,0,0,0,22,13Zm0,9H11V15H22Z"/>
-  `
-    }
 
   if (config.notesOrder === "grid") {
     trashSection.className = "notes_section_grid";
@@ -100,7 +90,7 @@ export function DisplayTrash(config) {
     
     trashSection.prepend(noteItem);
   });
-  let $$btnSelect = document.querySelectorAll(".select_trash_button");
+  let $$btnSelect = $$(".select_trash_button");
   $$btnSelect.forEach(button => {
     button.style.display = "none";
   });

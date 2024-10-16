@@ -1,9 +1,7 @@
-export function showAlert (action) {
+export function isAlertActive (action) {
   let config = JSON.parse(localStorage.getItem("config"));
   const $inputCheckAlert = document.getElementById("do-not-show");
 
-  
-  
   if (action === "empty note"){
     if (!$inputCheckAlert.checked) {
       config.alertEmptyNote = true;
