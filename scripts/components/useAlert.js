@@ -51,7 +51,7 @@ export function useAlert(action, message) {
 
       $inputCheckAlert.checked = false;
       
-      let text = message === "notes" ? "¿Quiere borrar la notas seleccionadas de manera permanente?" : "¿Quiere borrar la nota de manera permanente?";      
+      let text = message === "notes" ? "¿Quiere borrar las notas seleccionadas de manera permanente?" : "¿Quiere borrar la nota de manera permanente?";      
       textPopup.innerText = text
   
       popup.style.display = "flex";
