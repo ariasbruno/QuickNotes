@@ -21,6 +21,7 @@ import { deleteAllSelectionTrash } from './scripts/components/trash_section_acti
 import { restoreAllSelectionTrash } from './scripts/components/trash_section_actions/restoreAllSelectionTrash.js'
 import { restoreNote } from './scripts/components/trash_section_actions/restoreNote.js'
 import { deletePermanently } from './scripts/components/trash_section_actions/deletePermanently.js'
+import { deleteNoteSelected } from './scripts/components/note_section_actions/deleteNoteSelected.js'
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
@@ -33,19 +34,19 @@ const $inputTitle = $("#title");
 const $inputContent = $("#note_text");
 
 
-let notes = JSON.parse(localStorage.getItem("notes")) || [];
-let config = JSON.parse(localStorage.getItem("config")) || {notesOrder: "column", alertConfirmDelete: true,alertConfirmDeleteSelection: true, alertEmptyNote: true, toastUndo: true};
-let trash = JSON.parse(localStorage.getItem("trash")) || [];
+let getNotes = JSON.parse(localStorage.getItem("notes")) || [];
+let getConfig = JSON.parse(localStorage.getItem("config")) || {notesOrder: "column", alertConfirmDelete: true,alertConfirmDeleteSelection: true, alertEmptyNote: true, toastUndo: true};
+let getTrash = JSON.parse(localStorage.getItem("trash")) || [];
 
-localStorage.setItem("notes", JSON.stringify(notes))
-localStorage.setItem("config", JSON.stringify(config))
-localStorage.setItem("trash", JSON.stringify(trash))
+localStorage.setItem("notes", JSON.stringify(getNotes))
+localStorage.setItem("config", JSON.stringify(getConfig))
+localStorage.setItem("trash", JSON.stringify(getTrash))
 
 window.addEventListener("load", () => { DisplayNotes(); loadIcon() });
 
 window.addEventListener("click", (e) => {
   let notesNow = JSON.parse(localStorage.getItem("notes"))
-  let trashNow = JSON.parse(localStorage.getItem("trash"))
+  let trashNow = JSON.parse(localStorage.getItem("trash"))  
   
   let idElement = e.target.getAttribute("data-note-id");
   let noteIndex = notesNow.findIndex(n => n.id === Number(idElement));
@@ -355,41 +356,3 @@ function clickDeleteNotes(nI) { // ! MOVER NOTA A PAPELERA
     });
   }
 }
-
-
-function deleteNoteSelected () { // ! MOVER A PAPELERA LAS NOTAS SELECCIONADAS
-  let notesNow = JSON.parse(localStorage.getItem("notes"))
-  let trashNow = JSON.parse(localStorage.getItem("trash"))
-
-  let selectedItems = $$(".item_select").length
-  let trashSelected = []
-  let messageAlert = selectedItems > 1 ? "notes" : "note";
-  if (selectedItems <= 0) {$navSelection.classList.remove("open"); return};
-
-  for (let i = selectedItems -1; i >= 0; i--) {
-    let noteIndexSelected = notesNow.findIndex(n => n.id === Number(document.getElementsByClassName("item_select")[i].dataset.noteId));
-    trashSelected.push(notesNow[noteIndexSelected].id)
-    const newTrash = notesNow[noteIndexSelected];
-    notesNow = notesNow.filter(n => n.id !== notesNow[noteIndexSelected].id);
-    localStorage.setItem('notes', JSON.stringify(notesNow));
-    trashNow.push(newTrash);
-    localStorage.setItem('trash', JSON.stringify(trashNow));
-  };
-  DisplayNotes();
-  
-  useAlert("move to trash", messageAlert).then((resolver => {
-    if (resolver) {
-      let numberOfDeletedNotes = trashSelected.length
-      for (let i = 0; i < numberOfDeletedNotes; i++) {
-        let noteIndexSelected = trashNow.findIndex(t => t.id === trashSelected[i]);
-        const newNote = trashNow[noteIndexSelected];
-        trashNow = trashNow.filter(t => t.id !== trashNow[noteIndexSelected].id);
-        localStorage.setItem('trash', JSON.stringify(trashNow));
-        notesNow.push(newNote);
-        localStorage.setItem('notes', JSON.stringify(notesNow));
-      }
-      DisplayNotes();
-    }
-  }));
-    $navSelection.classList.remove("open");
-};
