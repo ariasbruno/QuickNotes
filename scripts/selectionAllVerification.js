@@ -6,12 +6,10 @@ export function selectionAllVerification () { // ! CAMBIAR EL ICONO DE SELECCION
   const $$allItems = $$(".note_item");
   const $$allSelectedItems = $$(".item_select");
 
-  let toggleDeleteTrashNav = $main.className === "trash_section" ? "flex" : "none";
-  let toggleDeleteNoteNav = $main.className === "trash_section" ? "none" : "flex";
-  let itemLength = $main.className === "trash_section" ? 0 : 1;
+  let itemLength = $main.classList.contains("trash_section") ? 0 : 1;
 
-  $("#delete_selection_btn").style.display = toggleDeleteNoteNav
-  $("#delete_trash_selection_btn").style.display = toggleDeleteTrashNav
+  $("#delete_selection_btn").style.display = $main.classList.contains("notes_section") ? "flex" : "none";
+  $("#delete_trash_selection_btn").style.display = $main.classList.contains("trash_section") ? "flex" : "none";
 
   if ($$allSelectedItems.length === $$allItems.length - itemLength && $$allItems.length > itemLength){
     $btnSelectNav.classList.add("all-select")

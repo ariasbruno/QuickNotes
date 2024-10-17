@@ -17,11 +17,15 @@ import { notesInfo } from './scripts/components/modal/notesInfo.js';
 import { handlerNoteOptions } from './scripts/components/modal/handlerNoteOptions.js';
 import { selectionAllVerification } from './scripts/selectionAllVerification.js';
 import { clickEscNavSelection } from './scripts/clickEscNavSelection.js';
+import { openSelectNotesNav } from './scripts/openSelectNotesNav.js';
+import { clickNavSelectNotesBtn } from './scripts/clickNavSelectNotesBtn.js';
 import { deleteAllSelectionTrash } from './scripts/components/trash_section_actions/deleteAllSelectionTrash.js'
 import { restoreAllSelectionTrash } from './scripts/components/trash_section_actions/restoreAllSelectionTrash.js'
 import { restoreNote } from './scripts/components/trash_section_actions/restoreNote.js'
 import { deletePermanently } from './scripts/components/trash_section_actions/deletePermanently.js'
 import { deleteNoteSelected } from './scripts/components/note_section_actions/deleteNoteSelected.js'
+import { clickDeleteNotes } from './scripts/components/note_section_actions/clickDeleteNotes.js'
+import { selectNote } from './scripts/components/note_section_actions/selectNote.js'
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
@@ -56,7 +60,7 @@ window.addEventListener("click", (e) => {
     "open_toolbar": () => {$(".toolbar").classList.toggle("open");$("#open_toolbar-btn").classList.toggle("open"); $("#note_modal-div").classList.toggle('shifted');},
     "only_read": () => handlerRead(),
     "theme_toggle": () => handlerTheme(),
-    "nav_select_all": () => clickSelectNotesNav(),
+    "nav_select_all": () => openSelectNotesNav(),
     "btn-select_nav": () => clickNavSelectNotesBtn(),
     "esc_nav_selection": () => clickEscNavSelection(),
     "nav_new_note_dynamic": () => {clickCreateNote(); updateToolbar()},
@@ -249,110 +253,3 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
     }
   }
 };
-
-function clickSelectNotesNav () { // ! ABRIR NAV DE SELECCIÓN
-  selectionAllVerification()
-  $navSelection.classList.add("open"); 
-
-  if ($main.className === "trash_section") {
-    $(".restore_selection_btn").style.display = "flex"
-    $("#delete_trash_selection_btn").style.display = "flex"
-    $("#delete_selection_btn").style.display = "none";
-
-    const $$allBtnSelect = $$(".select_trash_button");
-    $$allBtnSelect.forEach(button => button.style.display = "flex");
-    const $$allBtnDelete = $$(".delete_trash_button");
-    $$allBtnDelete.forEach(button => button.style.display = "none");
-    const $$allBtnRestoreNote = $$(".restore_note_button");
-    $$allBtnRestoreNote.forEach(button => button.style.display = "none");
-
-  } else if ($main.className === "notes_section") {
-    $(".restore_selection_btn").style.display = "none";
-    $("#delete_trash_selection_btn").style.display = "none";
-    $("#delete_selection_btn").style.display = "flex";
-
-    const $$btnDelete = $$(".delete_button");
-    $$btnDelete.forEach(button => button.style.display = "none");
-  }
-}
-
-function clickNavSelectNotesBtn () { // ! SELECCIONAR TODO DESDE EL NAV DE SELECCIÓN
-  let notesNow = JSON.parse(localStorage.getItem("notes"))
-  let trashNow = JSON.parse(localStorage.getItem("trash"))
-
-let n = $main.className === "notes_section" ? 1 : 0
-let typeItem = $main.className === "notes_section" ? notesNow : trashNow
-
-  if ($$(".item_select").length !== $$(".note_item").length - n) {
-    for (let i = 0; i < typeItem.length; i++) {
-      const $$noteItem = $$(`[data-note-id="${typeItem[i].id}"]`)[0];
-      if (!$$noteItem.classList.contains("item_select")) {
-        $$noteItem.classList.add("item_select");
-      }
-    }
-  } else if ($$(".item_select").length === $$(".note_item").length - n) {
-    for (let i = 0; i < typeItem.length; i++) {
-      const $$noteItem = $$(`[data-note-id="${typeItem[i].id}"]`)[0];
-      if ($$noteItem.classList.contains("item_select")) {
-        $$noteItem.classList.remove("item_select");
-      }
-    }
-  }
-  selectionAllVerification()
-}
-
-function selectNote (idElemento) { // ! SELECCIONAR NOTAS O NOTAS DE PAPELERA
-  const $$noteItem = $$(`[data-note-id="${idElemento}"]`)[0];
-  $$noteItem.classList.toggle("item_select");
-  
-  if ($$(".item_select").length > 0) {
-    selectionAllVerification()
-    let $$btnDelete = $$(".delete_button");
-    $$btnDelete.forEach(button => button.style.display = "none");
-      $navSelection.classList.add("open");
-    if ($main.className === "notes_section"){
-      $(".restore_selection_btn").style.display = "none"
-    }
-  } else if ($$(".item_select").length === 0) {
-    let $$btnDelete = $$(".delete_button");
-    $$btnDelete.forEach(button => button.style.display = "flex");
-    $navSelection.classList.remove("open");
-  }  
-}
-
-let lastDeletedNote = null;
-
-function clickDeleteNotes(nI) { // ! MOVER NOTA A PAPELERA
-  let notesNow = JSON.parse(localStorage.getItem("notes"))
-  let trashNow = JSON.parse(localStorage.getItem("trash"))
-
-  let showAlertConfirm = JSON.parse(localStorage.getItem("config")).toastUndo;
-  const deletedNote = notesNow[nI];
-  lastDeletedNote = deletedNote;
-  
-  notesNow = notesNow.filter(n => n.id !== deletedNote.id);
-  localStorage.setItem('notes', JSON.stringify(notesNow));
-  trashNow.push(deletedNote);
-  localStorage.setItem('trash', JSON.stringify(trashNow));
-
-  DisplayNotes();
-
-  if (showAlertConfirm) {
-    useAlert("move to trash", "note").then((resolve) => {
-      if (resolve && lastDeletedNote) {
-        let tI = trashNow.findIndex(n => n.id === lastDeletedNote.id);
-        
-        if (tI !== -1) {
-          const noteToRestore = trashNow[tI];
-          trashNow = trashNow.filter(t => t.id !== noteToRestore.id);
-          localStorage.setItem('trash', JSON.stringify(trashNow));
-          notesNow.push(noteToRestore);
-          localStorage.setItem('notes', JSON.stringify(notesNow));
-  
-          DisplayNotes();
-        }
-        lastDeletedNote = null;
-      }
-    });
-  }
-}
