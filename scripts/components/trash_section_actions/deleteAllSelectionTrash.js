@@ -1,6 +1,6 @@
 import { DisplayTrash } from "../../view/DisplayTrash.js";
 import { isAlertActive } from "../../config/isAlertActive.js";
-import { useAlert } from "../useAlert.js";
+import { useAlert } from "../use_interactables/useAlert.js";
 
 const $$ = (selector) => document.querySelectorAll(selector);
 const $ = (selector) => document.querySelector(selector);

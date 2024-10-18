@@ -1,5 +1,5 @@
 import { DisplayNotes } from "../../view/DisplayNotes.js";
-import { useAlert } from "../useAlert.js";
+import { useAlert } from "../use_interactables/useAlert.js";
 
 export function clickDeleteNotes(nI) { // ! MOVER NOTA A PAPELERA
   let notes = JSON.parse(localStorage.getItem("notes"))

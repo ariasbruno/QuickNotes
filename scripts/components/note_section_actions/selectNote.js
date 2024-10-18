@@ -1,4 +1,4 @@
-import { selectionAllVerification } from "../../selectionAllVerification.js";
+import { selectionAllVerification } from "../selectionAllVerification.js";
 
 const $$ = (selector) => document.querySelectorAll(selector);
 const $ = (selector) => document.querySelector(selector);

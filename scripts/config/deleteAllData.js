@@ -1,4 +1,4 @@
-import { useAlert } from "../components/useAlert.js";
+import { useAlert } from "../components/use_interactables/useAlert.js";
 
 export function deleteAllData () {
   useAlert("delete data").then((resolve) => {

@@ -1,10 +1,16 @@
+import { loadIconOrder } from "../components/loadIconOrder.js";
+import { clickOpenCloseSidebar } from "../components/use_interactables/useSidebar.js";
+
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
+
 export function DisplayNotes() {
+  clickOpenCloseSidebar("close")
+  loadIconOrder()
+  $("#nav_bar-selection").classList.remove("open");
 
   let config = JSON.parse(localStorage.getItem("config"));
   let notes = JSON.parse(localStorage.getItem("notes"));
-
-  const $ = selector => document.querySelector(selector);
-  const $$ = selector => document.querySelectorAll(selector);
 
   $("#nav-text").innerText="Notas"
 

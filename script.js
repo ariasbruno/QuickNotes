@@ -1,11 +1,11 @@
 import { DisplayNotes } from './scripts/view/DisplayNotes.js';
 import { DisplayTrash } from './scripts/view/DisplayTrash.js';
 import { DisplayConfig } from './scripts/view/DisplayConfig.js';
-import { changeNotesOrder } from './scripts/changeNotesOrder.js';
-import { loadIconOrder } from './scripts/loadIconOrder.js';
-import { useAlert } from './scripts/components/useAlert.js';
-import { modalAction } from './scripts/components/useModal.js'
-import { clickOpenCloseSidebar } from './scripts/components/useSidebar.js'
+import { changeNotesOrder } from './scripts/components/changeNotesOrder.js';
+import { loadIconOrder } from './scripts/components/loadIconOrder.js';
+import { useAlert } from './scripts/components/use_interactables/useAlert.js';
+import { modalAction } from './scripts/components/use_interactables/useModal.js'
+import { clickOpenCloseSidebar } from './scripts/components/use_interactables/useSidebar.js'
 import { isAlertActive } from './scripts/config/isAlertActive.js'
 import { configItems } from './scripts/config/configItems.js'
 import { deleteAllData } from './scripts/config/deleteAllData.js'
@@ -15,10 +15,9 @@ import { updateToolbar } from './scripts/components/rich_text_editor/updateToolb
 import { handlerRead } from './scripts/components/modal/handlerRead.js';
 import { notesInfo } from './scripts/components/modal/notesInfo.js';
 import { handlerNoteOptions } from './scripts/components/modal/handlerNoteOptions.js';
-import { selectionAllVerification } from './scripts/selectionAllVerification.js';
-import { clickEscNavSelection } from './scripts/clickEscNavSelection.js';
-import { openSelectNotesNav } from './scripts/openSelectNotesNav.js';
-import { clickNavSelectNotesBtn } from './scripts/clickNavSelectNotesBtn.js';
+import { clickEscNavSelection } from './scripts/components/clickEscNavSelection.js';
+import { openSelectNotesNav } from './scripts/components/openSelectNotesNav.js';
+import { clickNavSelectNotesBtn } from './scripts/components/clickNavSelectNotesBtn.js';
 import { deleteAllSelectionTrash } from './scripts/components/trash_section_actions/deleteAllSelectionTrash.js'
 import { restoreAllSelectionTrash } from './scripts/components/trash_section_actions/restoreAllSelectionTrash.js'
 import { restoreNote } from './scripts/components/trash_section_actions/restoreNote.js'
@@ -64,7 +63,7 @@ window.addEventListener("click", (e) => {
     "btn-select_nav": () => clickNavSelectNotesBtn(),
     "esc_nav_selection": () => clickEscNavSelection(),
     "nav_new_note_dynamic": () => {clickCreateNote(); updateToolbar()},
-    "btn_order": () => clickOrderBtn(),
+    "btn_order": () => changeNotesOrder(),
     "open_sidebar": () => clickOpenCloseSidebar("toggle"),
     "note": () => {clickEditNote(noteIndex); updateToolbar()},
     "new_note": () => {clickCreateNote(); updateToolbar()},
@@ -80,9 +79,9 @@ window.addEventListener("click", (e) => {
     "restore_selection_btn": () => restoreAllSelectionTrash(),
     "delete_trash_button": () => deletePermanently(trashIndex),
     "restore_note_button": () => restoreNote(trashIndex),
-    "sidebar_div_trash": () => OpenTrash(),
-    "sidebar_div_notes": () => OpenNotes(),
-    "sidebar_div_config": () => OpenConfig(),
+    "sidebar_div_trash": () => DisplayTrash(),
+    "sidebar_div_notes": () => DisplayNotes(),
+    "sidebar_div_config": () => DisplayConfig(),
     forId:{
       "config_delete-permanently": () => configItems("#config_delete-permanently"),
       "config_delete-permanently-selection": () => configItems("#config_delete-permanently-selection"),
@@ -104,33 +103,6 @@ window.addEventListener("click", (e) => {
   }
 });
 
-function OpenNotes () { // ! ABRIR SECCIÓN NOTAS
-  DisplayNotes();
-  clickOpenCloseSidebar("close")
-  $navSelection.classList.remove("open");
-  loadIconOrder()
-}
-function OpenTrash() { // ! ABRIR SECCIÓN PAPELERA
-  DisplayTrash();
-  clickOpenCloseSidebar("close")
-  $navSelection.classList.remove("open");
-  loadIconOrder()
-}
-function OpenConfig () { // ! ABRIR SECCIÓN CONFIGURACIÓN
-  DisplayConfig();
-  clickOpenCloseSidebar("close")
-  $navSelection.classList.remove("open");
-}
-
-function clickOrderBtn () { // ! ORDENAR NOTAS
-  changeNotesOrder();
-  if ($main.className === "notes_section") {
-    DisplayNotes();
-  } else if ($main.className === "trash_section") {
-    DisplayTrash();
-  }
-}
-
 function clickCreateNote() { // ! CREAR NOTA
   $$closeSaveNote.forEach(e => e.setAttribute("data-note-id", `new-note`))
   $inputTitle.value = "";
@@ -139,7 +111,6 @@ function clickCreateNote() { // ! CREAR NOTA
   $inputTitle.focus()
   backButtonListener();
 }
-
 
 let note
 function clickEditNote (nI) { // ! EDITAR NOTA

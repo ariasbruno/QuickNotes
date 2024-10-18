@@ -1,10 +1,16 @@
+import { loadIconOrder } from "../components/loadIconOrder.js";
+import { clickOpenCloseSidebar } from "../components/use_interactables/useSidebar.js";
+
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
+
 export function DisplayTrash() {
+  clickOpenCloseSidebar("close")
+  $("#nav_bar-selection").classList.remove("open");
+  loadIconOrder()
 
   let trash = JSON.parse(localStorage.getItem("trash"));
   let config = JSON.parse(localStorage.getItem("config"))
-
-  const $ = selector => document.querySelector(selector);
-  const $$ = selector => document.querySelectorAll(selector);
 
   $("#nav-text").innerText="Papelera"
 

@@ -1,8 +1,12 @@
-export function DisplayConfig() {
-  let config = JSON.parse(localStorage.getItem("config"));
+import { clickOpenCloseSidebar } from "../components/use_interactables/useSidebar.js";
 
-  const $ = selector => document.querySelector(selector);
-  const $$ = selector => document.querySelectorAll(selector);
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
+
+export function DisplayConfig() {
+  clickOpenCloseSidebar("close")
+  $("#nav_bar-selection").classList.remove("open");
+  let config = JSON.parse(localStorage.getItem("config"));
 
   $("#nav-text").innerText="Configuración"
 
