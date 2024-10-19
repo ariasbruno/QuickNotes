@@ -37,6 +37,7 @@ const $inputTitle = $("#title");
 const $inputContent = $("#note_text");
 
 
+
 let getNotes = JSON.parse(localStorage.getItem("notes")) || [];
 let getConfig = JSON.parse(localStorage.getItem("config")) || {notesOrder: "column", alertConfirmDelete: true,alertConfirmDeleteSelection: true, alertEmptyNote: true, toastUndo: true};
 let getTrash = JSON.parse(localStorage.getItem("trash")) || [];
@@ -136,6 +137,7 @@ function backButtonListener () { // * EVENTO CLICK Y KEYDOWN[esc] PARA SALIR DEL
   let typeNote = $closeSaveNote.getAttribute("data-note-id")
   
   function handleCloseNote() {
+    notesInfo(undefined, "close")
     if (typeNote === "new-note") {
       createNoteFunction();
     } else {
@@ -148,8 +150,9 @@ function backButtonListener () { // * EVENTO CLICK Y KEYDOWN[esc] PARA SALIR DEL
   function handleEscKey(event) {
     if (event.key === "Escape") {
       handleCloseNote();
+      notesInfo(undefined, "close")
     }
-  } 
+  }
 }
 
 function createNoteFunction () { // ! CREAR NOTAS
