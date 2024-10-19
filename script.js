@@ -2,7 +2,6 @@ import { DisplayNotes } from './scripts/view/DisplayNotes.js';
 import { DisplayTrash } from './scripts/view/DisplayTrash.js';
 import { DisplayConfig } from './scripts/view/DisplayConfig.js';
 import { changeNotesOrder } from './scripts/components/changeNotesOrder.js';
-import { loadIconOrder } from './scripts/components/loadIconOrder.js';
 import { useAlert } from './scripts/components/use_interactables/useAlert.js';
 import { modalAction } from './scripts/components/use_interactables/useModal.js'
 import { clickOpenCloseSidebar } from './scripts/components/use_interactables/useSidebar.js'
@@ -35,7 +34,6 @@ const $closeSaveNote = $("#close");
 const $$closeSaveNote = $$(".close");
 const $inputTitle = $("#title");
 const $inputContent = $("#note_text");
-
 
 
 let getNotes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -188,21 +186,26 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
   const note = notesNow[index]
   let titleValue = $inputTitle.value.trim();
   let textValue = $inputContent.innerHTML.trim();
+  
+  const noChange = note.title === titleValue && note.text === textValue;
 
-  if (note.title === titleValue && note.text === textValue) {
+  const titleOrText = titleValue !== "" || (textValue !== "" && textValue !== "<br>");
 
+  const emptyNote = titleValue === "" && (textValue === "" || textValue === "<br>");
+
+  if (noChange) {
     DisplayNotes();
     modalAction("close");
-  } else if ( titleValue || textValue) {
 
+  } else if (titleOrText) {
     note.title = titleValue;
     note.text = textValue;
     note.edit = Date.now();
     localStorage.setItem("notes", JSON.stringify(notesNow));
     DisplayNotes();
     modalAction("close");
-  } else if (!titleValue && !textValue) {
 
+  } else if (emptyNote) {
     if (showAlertConfirm) {
       useAlert("empty note").then(resolve=> {
         if(resolve){

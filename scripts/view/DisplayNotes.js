@@ -5,6 +5,7 @@ const $ = selector => document.querySelector(selector);
 const $$ = selector => document.querySelectorAll(selector);
 
 export function DisplayNotes() {
+
   clickOpenCloseSidebar("close")
   $("#nav_bar-selection").classList.remove("open");
   loadIconOrder()

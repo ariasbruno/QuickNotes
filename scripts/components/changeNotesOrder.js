@@ -2,7 +2,7 @@ import { DisplayNotes } from "../view/DisplayNotes.js";
 import { DisplayTrash } from "../view/DisplayTrash.js";
 
 export function changeNotesOrder () {
-  const $main = $("#main");
+  const $main = document.querySelector("#main");
   let config = JSON.parse(localStorage.getItem("config"))
 
   if (config.notesOrder === "grid") {
