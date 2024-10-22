@@ -204,6 +204,7 @@
     justify-content: space-evenly;
     &:hover{
       background-color: var(--item_hover-background-color);
+      cursor: pointer;
     }
 
     & p {
@@ -236,6 +237,9 @@
       width: 100%;
       height: 100%;
       z-index: 2;
+      &:hover{
+        cursor: pointer;
+      }
     }
   }
   

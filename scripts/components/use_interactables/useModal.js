@@ -4,6 +4,9 @@ const $inputTitle = document.querySelector("#title");
 const $inputContent = document.querySelector("#note_text");
 const $body = document.querySelector("#body");
 const $closeNote = document.querySelector(".close");
+document.querySelector("#toolbar").classList.remove("open")
+document.querySelector("#open_toolbar-btn").classList.remove("open")
+document.querySelector("#note_modal-div").classList.remove("shifted")
 
 function adjustInputHeight(element) { // ? AJUSTAR EL TEXTAREA AUTOMÁTICAMENTE
   const scrollPosition = $noteModal.scrollTop;

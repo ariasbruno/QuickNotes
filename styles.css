@@ -206,16 +206,6 @@ input:checked + .slider:before {
 @keyframes rotate-loader  { to { transform: rotate(1turn); } }
 
 
-
-@media (min-width: 480px) {
-  #notes_section,
-  #trash_section,
-  #config_section {
-    padding-left: calc(var(--sidebar-close_value) + 1rem);
-    }
-}
-
-
 @keyframes scale-up {
   0% {
     transform: scale(0);
@@ -306,5 +296,29 @@ input:checked + .slider:before {
   }
   100%{
     transform:scale3d(0,0,1)
+  }
+}
+
+
+@media (min-width: 480px){
+  #notes_section,
+  #trash_section,
+  #config_section {
+    padding-left: calc(var(--sidebar-close_value) + 1rem);
+    }
+}
+
+@media (max-width: 480px) {
+  #notes_section.notes_section_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    gap: 1rem; /* Espacio entre elementos */
+  }
+
+  .notes_section_grid .note_item_grid {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    background-color: red;
   }
 }

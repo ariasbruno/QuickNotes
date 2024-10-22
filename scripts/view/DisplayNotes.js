@@ -34,7 +34,8 @@ const $navSelection = $(`#nav_bar-selection`);
     $navSelection.classList.remove("open");
   }
 
-  const classChecker = config.notesOrder === "grid" ? "note_item new_note note_item_grid" : "note_item new_note note_item_column"
+  const classChecker = config.notesOrder === "grid" ? "note_item new_note note_item_grid" : "note_item new_note note_item_column";
+  const classSection = config.notesOrder === "grid" ? "notes_section_grid" : "notes_section_column";
   notes.sort((a, b) => a.edit - b.edit);
   const $navOrderImg = $('#nav_order_img');
 
@@ -58,7 +59,7 @@ const $navSelection = $(`#nav_bar-selection`);
 
   const notesSection = document.createElement("section");
   notesSection.setAttribute("id", "notes_section");
-  notesSection.setAttribute("class", "notes_section_grid");
+  notesSection.setAttribute("class", classSection);
   $main.prepend(notesSection);
 
 
