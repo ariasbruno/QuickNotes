@@ -26,37 +26,37 @@ export function DisplayConfig() {
   $main.innerHTML= `
   <div id="config_section">
     <div class="div_switch">
-      <p>Mostrar alerta de confirmación para borrar notas de la papelera</p>
+      <p id="config_delete-permanently-p">Mostrar alerta de confirmación para borrar notas de la papelera</p>
       <label class="switch config_delete-permanently" for="config_delete-permanently">
-        <input id="config_delete-permanently" class="config_delete-permanently" type="checkbox" name="config_delete-permanently">
+        <input aria-labelledby="config_delete-permanently-p" id="config_delete-permanently" class="config_delete-permanently" type="checkbox" name="config_delete-permanently">
         <span class="slider config_delete-permanently" name="config_delete-permanently"></span>
       </label>
     </div>
     <div class="div_switch">
-      <p>Mostrar alerta de confirmación para borrar las notas seleccionadas de la papelera</p>
+      <p id="config_delete-permanently-selection-p">Mostrar alerta de confirmación para borrar las notas seleccionadas de la papelera</p>
       <label class="switch config_delete-permanently-selection" for="config_delete-permanently-selection">
-        <input id="config_delete-permanently-selection" class="config_delete-permanently-selection" type="checkbox" name="config_delete-permanently-selection">
+        <input aria-labelledby="config_delete-permanently-selection-p" id="config_delete-permanently-selection" class="config_delete-permanently-selection" type="checkbox" name="config_delete-permanently-selection">
         <span class="slider config_delete-permanently-selection" name="config_delete-permanently-selection"></span>
       </label>
     </div>
     <div class="div_switch">
-      <p>Mostrar alerta para deshacer luego de mover una nota a la papelera</p>
+      <p id="config_move-to-trash-p">Mostrar alerta para deshacer luego de mover una nota a la papelera</p>
       <label class="switch config_move-to-trash" for="config_move-to-trash">
-        <input id="config_move-to-trash" class="config_move-to-trash" type="checkbox" name="config_move-to-trash">
+        <input aria-labelledby="config_move-to-trash-p" id="config_move-to-trash" class="config_move-to-trash" type="checkbox" name="config_move-to-trash">
         <span class="slider config_move-to-trash" name="config_move-to-trash"></span>
       </label>
     </div>
     <div class="div_switch">
-      <p>Mostrar alerta de confirmación de borrar una nota vacía</p>
+      <p id="config_empty-note-p">Mostrar alerta de confirmación de borrar una nota vacía</p>
       <label class="switch config_empty-note" for="config_empty-note">
-        <input id="config_empty-note" class="config_empty-note" type="checkbox" name="config_empty-note">
+        <input aria-labelledby="config_empty-note-p" id="config_empty-note" class="config_empty-note" type="checkbox" name="config_empty-note">
         <span class="slider config_empty-note" name="config_empty-note"></span>
       </label>
     </div>
     <div class="div_delete-all-data">
-      <p>Borrar todos los datos guardados en la web</p>
+      <p id="delete-all-data-p">Borrar todos los datos guardados en la web</p>
       <div>
-        <button id="config_delete-all-data">Borrar Todo</button>
+        <button aria-labelledby="delete-all-data-p" id="config_delete-all-data">Borrar Todo</button>
       </div>
     </div>
   </div>`

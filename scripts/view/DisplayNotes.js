@@ -37,21 +37,24 @@ const $navSelection = $(`#nav_bar-selection`);
   const classChecker = config.notesOrder === "grid" ? "note_item new_note note_item_grid" : "note_item new_note note_item_column";
   const classSection = config.notesOrder === "grid" ? "notes_section_grid" : "notes_section_column";
   notes.sort((a, b) => a.edit - b.edit);
-  const $navOrderImg = $('#nav_order_img');
+//   const $navOrderImg = $('#nav_order_img');
+//   const $navOrderBtn = $('#btn_order');
 
-  if (config.notesOrder === "grid") {
-  $navOrderImg.innerHTML = `
-  <path class="btn_order" d="M2,11H22a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H22V9H2Z"/>
-  <path class="btn_order" d="M22,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V15A2,2,0,0,0,22,13Zm0,9H2V15H22Z"/>
-`
-  } else if (config.notesOrder === "column") {
-    $navOrderImg.innerHTML = `
-  <path class="btn_order" d="M2,11H13a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H13V9H2Z"/>
-  <path class="btn_order" d="M22,0H19a2,2,0,0,0-2,2V9a2,2,0,0,0,2,2h3a2,2,0,0,0,2-2V2A2,2,0,0,0,22,0Zm0,9H19V2h3Z"/>
-  <path class="btn_order" d="M5,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H5a2,2,0,0,0,2-2V15A2,2,0,0,0,5,13Zm0,9H2V15H5Z"/>
-  <path class="btn_order" d="M22,13H11a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V15A2,2,0,0,0,22,13Zm0,9H11V15H22Z"/>
-`
-  }
+//   if (config.notesOrder === "grid") {
+//   $navOrderBtn.setAttribute('aria-label', 'Cambiar a vista de fila');
+//   $navOrderImg.innerHTML = `
+//   <path class="btn_order" d="M2,11H22a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H22V9H2Z"/>
+//   <path class="btn_order" d="M22,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V15A2,2,0,0,0,22,13Zm0,9H2V15H22Z"/>
+// `
+//   } else if (config.notesOrder === "column") {
+//     $navOrderBtn.setAttribute('aria-label', 'Cambiar a vista de cuadrícula');
+//     $navOrderImg.innerHTML = `
+//   <path class="btn_order" d="M2,11H13a2,2,0,0,0,2-2V2a2,2,0,0,0-2-2H2A2,2,0,0,0,0,2V9A2,2,0,0,0,2,11ZM2,2H13V9H2Z"/>
+//   <path class="btn_order" d="M22,0H19a2,2,0,0,0-2,2V9a2,2,0,0,0,2,2h3a2,2,0,0,0,2-2V2A2,2,0,0,0,22,0Zm0,9H19V2h3Z"/>
+//   <path class="btn_order" d="M5,13H2a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H5a2,2,0,0,0,2-2V15A2,2,0,0,0,5,13Zm0,9H2V15H5Z"/>
+//   <path class="btn_order" d="M22,13H11a2,2,0,0,0-2,2v7a2,2,0,0,0,2,2H22a2,2,0,0,0,2-2V15A2,2,0,0,0,22,13Zm0,9H11V15H22Z"/>
+// `
+//   }
   
   const $main = $("#main");
   $main.innerHTML = ``;
@@ -70,8 +73,8 @@ const $navSelection = $(`#nav_bar-selection`);
   </div>`;
   
   notes.forEach(note => {
-    const svgSelectNote = `<svg class="select_button" data-note-id="${note.id}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"> <path class="select_button" data-note-id="${note.id}" d="M394.667,512H117.333C52.561,511.929,0.071,459.439,0,394.667V117.333C0.071,52.561,52.561,0.071,117.333,0h277.333C459.439,0.071,511.929,52.561,512,117.333v277.333C511.929,459.439,459.439,511.929,394.667,512z M117.333,64C87.878,64,64,87.878,64,117.333v277.333C64,424.122,87.878,448,117.333,448h277.333C424.122,448,448,424.122,448,394.667V117.333C448,87.878,424.122,64,394.667,64H117.333z"/> <path class="select_button check" data-note-id="${note.id}" d="M206.229,379.456c-13.462,0.009-26.368-5.368-35.84-14.933l-63.723-63.616c-12.501-12.493-12.507-32.754-0.014-45.255c0.005-0.005,0.01-0.01,0.014-0.015l0,0c12.496-12.492,32.752-12.492,45.248,0l54.315,54.293l153.856-153.856c12.496-12.492,32.752-12.492,45.248,0l0,0c12.501,12.493,12.507,32.754,0.014,45.255c-0.005,0.005-0.01,0.01-0.014,0.014L242.048,364.629C232.566,374.154,219.669,379.493,206.229,379.456z"/> </svg>`;
-    const svgDeleteNote = `<svg class="delete_button" data-note-id="${note.id}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline class="delete_button" data-note-id="${note.id}" points="3 6 5 6 21 6"></polyline>  <path class="delete_button" data-note-id="${note.id}" d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6m3-3h8a2 2 0 0 1 2 2H6a2 2 0 0 1 2-2z"></path>  <line class="delete_button" data-note-id="${note.id}" x1="10" y1="11" x2="10" y2="17"></line>  <line class="delete_button" data-note-id="${note.id}" x1="14" y1="11" x2="14" y2="17"> </line> </svg>`;
+    const svgSelectNote = `<svg aria-hidden="true" focusable="false" class="select_button" data-note-id="${note.id}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="24" height="24"> <path class="select_button" data-note-id="${note.id}" d="M394.667,512H117.333C52.561,511.929,0.071,459.439,0,394.667V117.333C0.071,52.561,52.561,0.071,117.333,0h277.333C459.439,0.071,511.929,52.561,512,117.333v277.333C511.929,459.439,459.439,511.929,394.667,512z M117.333,64C87.878,64,64,87.878,64,117.333v277.333C64,424.122,87.878,448,117.333,448h277.333C424.122,448,448,424.122,448,394.667V117.333C448,87.878,424.122,64,394.667,64H117.333z"/> <path class="select_button check" data-note-id="${note.id}" d="M206.229,379.456c-13.462,0.009-26.368-5.368-35.84-14.933l-63.723-63.616c-12.501-12.493-12.507-32.754-0.014-45.255c0.005-0.005,0.01-0.01,0.014-0.015l0,0c12.496-12.492,32.752-12.492,45.248,0l54.315,54.293l153.856-153.856c12.496-12.492,32.752-12.492,45.248,0l0,0c12.501,12.493,12.507,32.754,0.014,45.255c-0.005,0.005-0.01,0.01-0.014,0.014L242.048,364.629C232.566,374.154,219.669,379.493,206.229,379.456z"/> </svg>`;
+    const svgDeleteNote = `<svg aria-hidden="true" focusable="false" class="delete_button" data-note-id="${note.id}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <polyline class="delete_button" data-note-id="${note.id}" points="3 6 5 6 21 6"></polyline>  <path class="delete_button" data-note-id="${note.id}" d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6m3-3h8a2 2 0 0 1 2 2H6a2 2 0 0 1 2-2z"></path>  <line class="delete_button" data-note-id="${note.id}" x1="10" y1="11" x2="10" y2="17"></line>  <line class="delete_button" data-note-id="${note.id}" x1="14" y1="11" x2="14" y2="17"> </line> </svg>`;
 
     
     const noteItem = document.createElement("div");
@@ -100,6 +103,12 @@ const $navSelection = $(`#nav_bar-selection`);
     noteText.setAttribute("data-note-id", `${note.id}`);
     noteContent.setAttribute("data-note-id", `${note.id}`);
     selectNote.setAttribute("data-note-id", `${note.id}`);
+    
+    noteItem.setAttribute("role", "button");
+    noteItem.setAttribute("tabindex", "0");
+    noteItem.setAttribute("aria-label", `abrir nota con titulo ${note.title}`);
+    deleteNote.setAttribute("aria-label", `seleccionar nota con titulo ${note.title}`);
+    selectNote.setAttribute("aria-label", `mover a papelera nota con titulo ${note.title}`);
     
     selectNote.innerHTML = svgSelectNote;
     deleteNote.innerHTML = svgDeleteNote;
