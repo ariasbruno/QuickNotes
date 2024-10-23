@@ -33,9 +33,12 @@
     cursor: pointer;
     width: 32px;
     height: 32px;
-    &:hover {
+    @media (hover: hover) and (pointer: fine) {
+          &:hover {
       background-color: var(--item_hover-background-color);
     }
+    }
+
 
     & svg {
       width: 20px;
@@ -141,9 +144,12 @@
       border: none;
       outline: none;
 
-      &:hover {
+      @media (hover: hover) and (pointer: fine) {
+              &:hover {
         box-shadow: 0 0 0 .15vw var(--icon-color);
       }
+      }
+
 
       &:focus {
         box-shadow: 0 0 0 .15vw var(--item_hover-icon-color);
@@ -202,10 +208,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    &:hover{
+    @media (hover: hover) and (pointer: fine) {
+          &:hover{
       background-color: var(--item_hover-background-color);
       cursor: pointer;
     }
+    }
+
 
     & p {
       font-size: 14px;
@@ -237,9 +246,12 @@
       width: 100%;
       height: 100%;
       z-index: 2;
-      &:hover{
+      @media (hover: hover) and (pointer: fine) {
+              &:hover{
         cursor: pointer;
       }
+      }
+
     }
   }
   
@@ -262,9 +274,13 @@
       padding: 10px;
       cursor: pointer;
 
-      &:hover{
+      @media (hover: hover) and (pointer: fine) {
+              &:hover{
         background-color: var(--item_hover-background-color);
       }
+      }
+
+
 
       &:last-child {
         border-bottom-left-radius: 5px;

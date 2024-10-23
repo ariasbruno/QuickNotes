@@ -76,8 +76,8 @@ html{
   transition: padding-left .5s ease;
 
   &.notes_section_grid{
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(184px, 1fr));
     width: 100%;
     gap: 1rem;
   }
@@ -85,6 +85,12 @@ html{
     display: flex;
     flex-direction: column;
     width: 100%;
+  }
+
+  &.trash_section_empty{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
   }
 }
 /* NOTES SECTION END*/
@@ -99,6 +105,12 @@ html{
   height: 100%;
   padding: 5rem 1rem 0 1rem;
   gap: 1rem;
+
+  & hr {
+    border: none;
+    height: 1px;
+    background-color: var(--item_hover-background-color);
+  }
 }
 .div_switch{
   width: 100%;
@@ -129,9 +141,13 @@ html{
   background-color: var(--btn_popup);
   color: var(--text-color);
   cursor: pointer;
-  &:hover {
-    background-color: var(--item_hover-background-color);
+  transition: background-color .3s ease;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--btn-delete);
+    }
   }
+  
 }
 
 .switch {
@@ -319,6 +335,5 @@ input:checked + .slider:before {
     width: 100%;
     max-width: none;
     min-width: auto;
-    background-color: red;
   }
 }

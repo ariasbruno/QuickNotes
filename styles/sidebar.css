@@ -25,11 +25,14 @@
     }
   }
 
-  &:hover .open_sidebar__burger,
+  @media (hover: hover) and (pointer: fine) {
+      &:hover .open_sidebar__burger,
   &:hover .open_sidebar__burger::before,
   &:hover .open_sidebar__burger::after{
     background-color: var(--item_hover-icon-color);
   }
+  }
+
 }
 
 .open_sidebar__burger {
@@ -86,13 +89,25 @@
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   transition: background-color .3s ease;
-
-  &:hover{
+  @media (hover: hover) and (pointer: fine){
+      &:hover{
     cursor: pointer;
-
-
   }
-  &.active, &:hover{
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover{
+      background-color: var(--select-btn-hover);
+      
+      & svg:not(.sidebar_div_notes){
+        color: var(--background-color);
+      }
+      & svg.sidebar_div_notes{
+        fill: var(--background-color);
+      }
+    }
+  }
+
+  &.active{
     background-color: var(--select-btn-hover);
     
     & svg:not(.sidebar_div_notes){
@@ -136,12 +151,15 @@ svg.sidebar_div_notes{
   justify-content: space-between;
   align-items: center;
 
-  &:hover{
+  @media (hover: hover) and (pointer: fine) {
+      &:hover{
     cursor: pointer;
     & svg{
       color: var(--item_hover-icon-color);
     }
   }
+  }
+
   & svg{
     height: 32px;
     width: 32px;

@@ -41,11 +41,12 @@
     fill: var(--icon-color);
     transition: fill .1s ease;
   }
-  & #nav_dynamic_button:hover .nav-new_note,
+  @media (hover: hover) and (pointer: fine) {
+      & #nav_dynamic_button:hover .nav-new_note,
   #nav_dynamic_button:hover .nav-select{
     fill: var(--item_hover-icon-color);
   }
-  & #nav_dynamic_button:hover,
+    & #nav_dynamic_button:hover,
   #btn_order:hover,
   .delete_selection_btn:hover,
   .delete_trash_selection_btn:hover,
@@ -55,6 +56,9 @@
   #restore_selection_btn:hover{
     cursor: pointer;
   }
+  }
+
+
   & #nav_dynamic_button,
   #btn_order,
   .delete_selection_btn,
@@ -75,9 +79,12 @@
     fill: var(--icon-color);
     transition: fill .3s ease;
   }
-  & #btn_order:hover svg{
+  @media (hover: hover) and (pointer: fine) {
+      & #btn_order:hover svg{
     fill: var(--item_hover-icon-color);
   }
+  }
+
   /* NAV  SELECTION START */
   & #nav_bar-selection{
     top: -6rem;
@@ -104,11 +111,14 @@
   #nav_select_all{ 
     padding: .2rem;
   }
-  & .delete_selection_btn:hover,
+  @media (hover: hover) and (pointer: fine)  {
+      & .delete_selection_btn:hover,
   #delete_selection_btn:hover .delete_selection_btn,
   #delete_trash_selection_btn:hover .delete_trash_selection_btn{
     color: var(--btn-delete);
   }
+  }
+
   & .btn-select_nav{
     grid-area: area3;
     fill: var(--icon-color);
@@ -117,12 +127,15 @@
   & .check{
     fill: var(--background-color);
   }
-  & .btn-select_nav:hover,
+  @media (hover: hover) and (pointer: fine) {
+      & .btn-select_nav:hover,
   #btn-select_nav:hover .btn-select_nav,
   #restore_selection_btn:hover .restore_selection_btn,
   #btn-select_nav:hover .check {
     fill: var(--select-btn-hover);
   }
+  }
+
   & #nav_select_all{
     width: fit-content;
     height: fit-content;
@@ -131,27 +144,36 @@
     color: var(--icon-color);
     font-weight: 600;
     transition: background-color .3s ease, color .3s ease;
-    &:hover{
+    @media (hover: hover) and (pointer: fine) {
+          &:hover{
       background-color: var(--select-btn-hover);
       color: var(--background-color);
     }
+    }
+
   }
   & .all-select .btn-select_nav{
     fill: var(--select-btn-hover);
   }
-  & #btn-select_nav.all-select:hover .btn-select_nav .check,
+  @media (hover: hover) and (pointer: fine) {
+      & #btn-select_nav.all-select:hover .btn-select_nav .check,
   #btn-select_nav.all-select .btn-select_nav:hover .check{
     fill: var(--icon-color);
   }
+  }
+
   & #esc_nav_selection{
     color: var(--icon-color);
     font-weight: 9000;
     grid-area: text;
     justify-self: start;
     transition: color .3s ease;
-    &:hover{
+    @media (hover: hover) and (pointer: fine) {
+          &:hover{
       color: var(--item_hover-icon-color);
     }
+    }
+
   }
   /* NAV  SELECTION END */
 }

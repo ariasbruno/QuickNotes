@@ -88,10 +88,13 @@
       color: var(--text-color);
       transition: background-color .3s ease;
       margin: 0 1rem 0 0;
-      &:hover{
+      @media (hover: hover) and (pointer: fine) {
+            &:hover{
         cursor: pointer;
         background-color: var(--btn-delete) ;
       }
+      }
+
     }
     & #btn-accept{
       grid-area: btn_ok;
@@ -104,10 +107,13 @@
       color: var(--text-color);
       transition: background-color .3s ease;
       margin: 0 1rem 0 0;
-      &:hover{
+      @media (hover: hover) and (pointer: fine) {
+              &:hover{
         cursor: pointer;
         background-color: var(--slect-btn-hover) ;
       }
+      }
+
     }
   }
 }

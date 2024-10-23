@@ -10,8 +10,23 @@
   width: 100vw;
   overflow-y: auto;
   align-items: center;
-  &:hover{
-    cursor: text;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover{
+      cursor: text;
+    }
+  }
+
+
+  &::-webkit-scrollbar {
+    width: 11px;
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 50px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--icon-color);
+    border-radius: 50px;
   }
 }
 #nav_modal{
@@ -36,10 +51,13 @@
     width: 28px;
     color: var(--icon-color);
     transition: color .3s ease;
+    @media (hover: hover) and (pointer: fine) {
       &:hover{
         color: var(--item_hover-icon-color);
         cursor: pointer;
       }
+    }
+
   }
   #title {
     height: 2rem;
@@ -57,10 +75,13 @@
     width: 28px;
     color: var(--icon-color);
     transition: color .3s ease;
+    @media (hover: hover) and (pointer: fine){
       &:hover{
         color: var(--item_hover-icon-color);
         cursor: pointer;
       }
+    }
+
   }
   & #only_read-btn{
     border: none;
@@ -75,6 +96,7 @@
       height: 28px;
       transition: background-color .3s ease, color .3s ease;
     }
+    @media (hover: hover) and (pointer: fine) {
       &:hover{
         background-color: var(--item_hover-background-color);
         cursor: pointer;
@@ -82,6 +104,8 @@
           color: var(--item_hover-icon-color);
         }
       }
+    }
+
     }
   & #open_toolbar-btn{
     border: none;
@@ -100,6 +124,7 @@
       rotate: -90deg;
       transition: background-color .3s ease, color .3s ease, rotate .3s ease;
     }
+    @media (hover: hover) and (pointer: fine) {
       &:hover{
         background-color: var(--item_hover-background-color);
         cursor: pointer;
@@ -107,6 +132,7 @@
           color: var(--item_hover-icon-color);
         }
       }
+    }
   }
 }
 
@@ -129,6 +155,8 @@
     font-size: 1rem;
     width: 100%;
     height: 100%;
+    white-space: pre-wrap;
+    word-wrap: break-word;
     &:focus{  outline: none  }
     
     &[data-placeholder="on"]:before{
@@ -152,9 +180,13 @@
   box-shadow: 0px 0px 10px 0px var(--box-shadow);
   background-color: var(--background-color);
   transition: opacity 0.3s ease, transform 0.3s ease, height 0s ease;
-  &:hover{
-    background-color: var(--item_hover-background-color);
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover{
+      background-color: var(--item_hover-background-color);
+    }
   }
+
 
   &.open{
     height: auto;
@@ -224,9 +256,11 @@
     & svg{
       color: var(--icon-color);
     }
-    &:hover svg{
-      cursor: pointer;
-      color: var(--item_hover-icon-color);
+    @media (hover: hover) and (pointer: fine){
+      &:hover svg {
+        cursor: pointer;
+        color: var(--item_hover-icon-color);
+      }
     }
   }
 

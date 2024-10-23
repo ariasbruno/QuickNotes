@@ -13,20 +13,64 @@
   box-shadow: 1px 3px 7px .4px var(--box-shadow);
   background-color: var(--background-color);
   overflow: hidden;
-  transition: background-color .3s ease, box-shadow .3s ease;
-  &:hover {
-    background-color: var(--item_hover-background-color);
-    box-shadow: 1px 5px 10px 1px var(--box-shadow);
+  transition: background-color .3s ease, box-shadow .3s ease, width .3s ease;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: var(--item_hover-background-color);
+      box-shadow: 1px 5px 10px 1px var(--box-shadow);
+    }
   }
+  
 }
 .note_item_grid{
-  flex-grow: 1;
-  flex-basis: 20%;
   min-width: 180px;
   max-width: 20rem;
 }
 .note_item_column{
   width: 100%;
+}
+.trash_section_empty-item{
+  width: 80%;
+  max-width: 400px;
+  height: 50%;
+  margin: auto;
+  border: 2px solid var(--icon-color);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--text-color);
+  padding: 8px;
+
+  & .trash_section_empty-img{
+    width: 30%;
+    height: 30%;
+    & svg{
+      width: 100%;
+      height: 100%;
+      color: var(--icon-color);
+    }
+  }
+
+  & .trash_section_empty-text-container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+
+    & h4{
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+    
+    & p{
+      color: var(--icon-color);
+      font-size: 14px;
+    }
+  }
+
 }
 /* NOTE CONTENT */
 .note_content {
@@ -76,24 +120,32 @@ button.delete_button svg{
   color: var(--icon-color);
   transition: color .3s ease;
 }
-.note_item:hover .delete_button svg{
-  color: var(--item_hover-icon-color);
+@media (hover: hover) and (pointer: fine) {
+  .note_item:hover .delete_button svg {
+    color: var(--item_hover-icon-color);
+  }
 }
-button.delete_button:hover svg:hover{
-  color: var(--btn-delete);
-  transition: color .3s ease;
+@media (hover: hover) and (pointer: fine)  {
+  button.delete_button:hover svg:hover {
+    color: var(--btn-delete);
+    transition: color .3s ease;
+  }
 }
+
 button.delete_trash_button svg{
   fill: var(--icon-color);
   transition: fill .3s ease;
 }
-.note_item:hover .delete_trash_button svg{
+@media (hover: hover) and (pointer: fine) {
+  .note_item:hover .delete_trash_button svg{
   fill: var(--item_hover-icon-color);
 }
 button.delete_trash_button:hover svg:hover{
   fill: var(--btn-delete);
   transition: fill .3s ease;
 }
+}
+
 /* DELETE & DELETE TRASH BUTTON END */
 
 /* SELECT BUTTON & RESTORE BUTTON*/
@@ -114,7 +166,8 @@ button.select_trash_button {
   fill: var(--background-color);
   transition: fill .1s ease;
 }
-.note_item:hover .select_button .check,
+@media (hover: hover) and (pointer: fine){
+  .note_item:hover .select_button .check,
 .note_item:hover .select_trash_button .check{
   fill: var(--background-color);
 }
@@ -123,6 +176,8 @@ button.select_trash_button {
 .note_item:hover .restore_note_button svg{
   fill: var(--item_hover-icon-color);
 }
+}
+
 button.select_button svg,
 button.select_trash_button svg,
 button.restore_note_button svg{
@@ -131,26 +186,36 @@ button.restore_note_button svg{
   width: 24px;
   height: 24px;
 }
-button.select_button:hover svg:hover,
+@media (hover: hover) and (pointer: fine){
+  button.select_button:hover svg:hover,
 button.select_button:hover svg:hover .check,
 button.select_trash_button:hover svg:hover,
 button.select_trash_button:hover svg:hover .check,
 button.restore_note_button:hover svg:hover{
   fill: var(--select-btn-hover);
 }
+}
+
 .item_select{
   outline: 3px solid var(--select-btn-hover);
 }
 .item_select .select_button,
-.item_select:hover .select_button .check,
-.item_select .select_trash_button,
-.item_select:hover .select_trash_button .check{
+.item_select .select_trash_button{
   fill: var(--select-btn-hover);
 }
-.item_select .select_button:hover svg:hover .check,
-.item_select .select_trash_button:hover svg:hover .check{
-  fill: var(--background-color);
+@media (hover: hover) and (pointer: fine){
+  .item_select:hover .select_button .check,
+  .item_select:hover .select_trash_button .check{
+    fill: var(--select-btn-hover);
+  }
 }
+@media (hover: hover) and (pointer: fine) {
+  .item_select .select_button:hover svg:hover .check,
+  .item_select .select_trash_button:hover svg:hover .check{
+    fill: var(--background-color);
+  }
+}
+
 /* SELECT BUTTON & RESTORE BUTTON END */
 
 /* NOTE ITEM END */
@@ -165,7 +230,11 @@ button.restore_note_button:hover svg:hover{
   fill: var(--icon-color);
   transition: fill .3s ease;
 }
-.new_note:hover svg {
+
+@media (hover: hover) and (pointer: fine) {
+  .new_note:hover svg {
   fill: var(--item_hover-icon-color);
 }
+}
+
 /* NEW NOTE END */

@@ -119,7 +119,7 @@ export function useAlert(action, message) {
 
       $labelCheckAlert.style.display = "none";
       
-      let text = `¿Estas seguro de que quiere eliminar todos los datos? <br> <span>Si presiona aceptar se eliminaran todas sus preferencias, notas y notas de papelera</span>`;      
+      let text = `¿Estas seguro de que quiere eliminar todos los datos? <br> <span>Borrar todos los datos de la web eliminará permanentemente todas tus notas y configuraciones. Esta acción no se puede deshacer.</span>`;      
       textPopup.innerHTML = text;
   
       popup.style.display = "flex";

@@ -103,6 +103,7 @@ window.addEventListener("click", (e) => {
 });
 
 function clickCreateNote() { // ! CREAR NOTA
+  if($(".nav_bar-selection").classList.contains("open")) return;
   $$closeSaveNote.forEach(e => e.setAttribute("data-note-id", `new-note`))
   $inputTitle.value = "";
   $inputContent.innerHTML = "";
@@ -114,16 +115,15 @@ function clickCreateNote() { // ! CREAR NOTA
 let note
 function clickEditNote (nI) { // ! EDITAR NOTA
   let notesNow = JSON.parse(localStorage.getItem("notes"))
-  if(!$(".nav_bar-selection").classList.contains("open")){
-    $$(".close").forEach(e => e.setAttribute("data-note-id", `${nI}`))
-    $("#note_options-info").setAttribute("data-note-id", `${notesNow[nI].id}`)
-    note = notesNow[nI];
-    $inputTitle.value = note.title;
-    $inputContent.innerHTML = note.text;
-    modalAction("open");
-    $inputTitle.focus()
-    backButtonListener();
-  }
+  if($(".nav_bar-selection").classList.contains("open")) return;
+  $$(".close").forEach(e => e.setAttribute("data-note-id", `${nI}`))
+  $("#note_options-info").setAttribute("data-note-id", `${notesNow[nI].id}`)
+  note = notesNow[nI];
+  $inputTitle.value = note.title;
+  $inputContent.innerHTML = note.text;
+  modalAction("open");
+  $inputTitle.focus()
+  backButtonListener();
 }
 
 function backButtonListener () { // * EVENTO CLICK Y KEYDOWN[esc] PARA SALIR DEL MODAL
