@@ -9,7 +9,8 @@
   display: flex;
 	gap: 10px;
 	margin-bottom: 16px;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
+  /* overflow: hidden; */
   flex-direction: row;
   cursor: default;
   &.open{
@@ -17,6 +18,7 @@
   }
 
   & .div-btn_toolbar {
+    flex-shrink: 0;
     width: 32px;
     height: 32px;
 
@@ -26,6 +28,7 @@
   }
 
   & .btn_toolbar {
+    flex-shrink: 0;
     color: var(--icon-color);
     background: transparent;
     border: none;
@@ -190,6 +193,7 @@
 
 
 #change_font_size-container, #change_header-container {
+  flex-shrink: 0;
   position: relative;
   display: inline-block;
   width: 94px;
@@ -217,16 +221,19 @@
 
 
     & p {
+      flex-shrink: 0;
       font-size: 14px;
     }
 
     & button.open_change_font-size, & button.open_change_header {
+      flex-shrink: 0;
       width: 20px;
       height: 20px;
       background-color: transparent;
       border: none;
 
       & svg {
+        flex-shrink: 0;
         rotate: -90deg;
         color: var(--text-color);
         transition: rotate .3s ease;
@@ -239,6 +246,7 @@
 
 
     & #change_font_size-open-btn, #change_header-open-btn {
+      flex-shrink: 0;
       opacity: 0;
       position: absolute;
       top: 0;
@@ -256,6 +264,7 @@
   }
   
   #change_font_size-options, #change_header-options {
+    flex-shrink: 0;
     display: none;
     position: absolute;
     top: 40px;
@@ -290,6 +299,58 @@
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
       }
+    }
+  }
+}
+
+
+#dropdown{
+  flex-shrink: 0;
+  position: relative;
+  color: var(--icon-color);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+    background-color: var(--item_hover-background-color);
+  }
+  }
+
+  & #dropdown-open {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    & svg {
+      rotate: -90deg;
+      color: var(--icon-color);
+      transition: rotate .3s ease;
+      &.rotate{
+        rotate: 90deg;
+      }
+    }
+  }
+
+  #dropdown-container{
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--background-color);
+    box-shadow: 0 2px 10px var(--box-shadow);
+    padding: 8px;
+    border-radius: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+
+    &.show{
+      display: flex;
     }
   }
 }

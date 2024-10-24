@@ -297,6 +297,18 @@
           </div>
         </div>
 
+
+        <button id="btn-undo" class="btn-undo btn_toolbar">
+          <svg aria-hidden="true" focusable="false"class="btn-undo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path class="btn-undo" fill="currentColor" d="M8 19q-.425 0-.712-.288T7 18t.288-.712T8 17h6.1q1.575 0 2.738-1T18 13.5T16.838 11T14.1 10H7.8l1.9 1.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275L4.7 9.7q-.15-.15-.213-.325T4.426 9t.063-.375T4.7 8.3l3.6-3.6q.275-.275.7-.275t.7.275t.275.7t-.275.7L7.8 8h6.3q2.425 0 4.163 1.575T20 13.5t-1.737 3.925T14.1 19z" />
+          </svg>
+        </button>
+        <button id="btn-redo" class="btn-redo btn_toolbar">
+          <svg aria-hidden="true" focusable="false"class="btn-redo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path class="btn-redo" fill="currentColor" d="M16.2 10H9.9q-1.575 0-2.738 1T6 13.5T7.163 16T9.9 17H16q.425 0 .713.288T17 18t-.288.713T16 19H9.9q-2.425 0-4.163-1.575T4 13.5t1.738-3.925T9.9 8h6.3l-1.9-1.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l3.6 3.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-3.6 3.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z" />
+          </svg>
+        </button>
+
         <!-- color del texto start -->
         <div id="change_text_color-div" class="color-picker div-btn_toolbar">
           <button id="change_text_color-btn" class="color color-picker btn_toolbar">
@@ -315,36 +327,7 @@
           </button>
         </div>
         <!-- resaltado del texto end -->
-      
-        <div id="colors_container" class="colors_container color-picker" style="display: none;">
-          <div id="color-groups" class="color-picker"></div>
-          <hr class="color-picker" style="margin: 16px 0;"/>
-          <div id="custom-colors" class="color-picker"></div>
-      
-          <div id="custom-color-div" class="custom-color-input color-picker">
-            <div id="custom-color-display" class="custom-color-display color-picker">
-              <input id="custom-color_picker-input" class="color-picker" type="color"/>
-            </div>
-            <input id="custom-color-input" class="color-picker" type="text" value="#000000" />
-            <button id="add_custom_color-btn" class="color-picker add_custom_color-btn">
-              <svg aria-hidden="true" focusable="false"class="color-picker add_custom_color-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path class="color-picker add_custom_color-btn" fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
-              </svg>
-            </button>
-          </div>
-        </div>
 
-
-        <button id="btn-undo" class="btn-undo btn_toolbar">
-          <svg aria-hidden="true" focusable="false"class="btn-undo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path class="btn-undo" fill="currentColor" d="M8 19q-.425 0-.712-.288T7 18t.288-.712T8 17h6.1q1.575 0 2.738-1T18 13.5T16.838 11T14.1 10H7.8l1.9 1.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275L4.7 9.7q-.15-.15-.213-.325T4.426 9t.063-.375T4.7 8.3l3.6-3.6q.275-.275.7-.275t.7.275t.275.7t-.275.7L7.8 8h6.3q2.425 0 4.163 1.575T20 13.5t-1.737 3.925T14.1 19z" />
-          </svg>
-        </button>
-        <button id="btn-redo" class="btn-redo btn_toolbar">
-          <svg aria-hidden="true" focusable="false"class="btn-redo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path class="btn-redo" fill="currentColor" d="M16.2 10H9.9q-1.575 0-2.738 1T6 13.5T7.163 16T9.9 17H16q.425 0 .713.288T17 18t-.288.713T16 19H9.9q-2.425 0-4.163-1.575T4 13.5t1.738-3.925T9.9 8h6.3l-1.9-1.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l3.6 3.6q.15.15.213.325t.062.375t-.062.375t-.213.325l-3.6 3.6q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7z" />
-          </svg>
-        </button>
         <button id="btn-bold" class="btn-bold btn_toolbar">
           <svg aria-hidden="true" focusable="false"class="btn-bold" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path class="btn-bold" fill="currentColor" d="M8.8 19q-.825 0-1.412-.587T6.8 17V7q0-.825.588-1.412T8.8 5h3.525q1.625 0 3 1T16.7 8.775q0 1.275-.575 1.963t-1.075.987q.625.275 1.388 1.025T17.2 15q0 2.225-1.625 3.113t-3.05.887zm1.025-2.8h2.6q1.2 0 1.463-.612t.262-.888t-.262-.887t-1.538-.613H9.825zm0-5.7h2.325q.825 0 1.2-.425t.375-.95q0-.6-.425-.975t-1.1-.375H9.825z" />
@@ -405,9 +388,36 @@
             <path class="btn-unlink" fill="currentColor" d="M15.625 12.775L13.85 11H15q.425 0 .713.288T16 12q0 .25-.1.45t-.275.325M20.5 21.9q-.275.275-.7.275t-.7-.275l-17-17q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l17 17q.275.275.275.7t-.275.7M7 17q-2.075 0-3.537-1.463T2 12q0-1.725 1.05-3.075t2.7-1.775L7.6 9H7q-1.25 0-2.125.875T4 12t.875 2.125T7 15h3q.425 0 .713.288T11 16t-.288.713T10 17zm2-4q-.425 0-.712-.288T8 12t.288-.712T9 11h.625l1.975 2zm9.5 2.8q-.225-.35-.162-.75t.412-.625q.575-.425.913-1.05T20 12q0-1.25-.875-2.125T17 9h-3q-.425 0-.712-.288T13 8t.288-.712T14 7h3q2.075 0 3.538 1.463T22 12q0 1.225-.562 2.288t-1.563 1.762q-.35.225-.75.163T18.5 15.8" />
           </svg>
         </button>
-      <!-- </div> -->
+        <div id="dropdown">
+          <button id="dropdown-open">
+            <svg aria-hidden="true" focusable="false" id="dropdown-open-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z" />
+            </svg>
+          </button>
+          <div id="dropdown-container">
+
+          </div>
+        </div>
     </div>
     <!-- TOOLBAR END -->
+     
+    <div id="colors_container" class="colors_container color-picker" style="display: none;">
+      <div id="color-groups" class="color-picker"></div>
+      <hr class="color-picker" style="margin: 16px 0;"/>
+      <div id="custom-colors" class="color-picker"></div>
+  
+      <div id="custom-color-div" class="custom-color-input color-picker">
+        <div id="custom-color-display" class="custom-color-display color-picker">
+          <input id="custom-color_picker-input" class="color-picker" type="color"/>
+        </div>
+        <input id="custom-color-input" class="color-picker" type="text" value="#000000" />
+        <button id="add_custom_color-btn" class="color-picker add_custom_color-btn">
+          <svg aria-hidden="true" focusable="false"class="color-picker add_custom_color-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path class="color-picker add_custom_color-btn" fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
+          </svg>
+        </button>
+      </div>
+    </div>
 
     <div id="note_modal-div">
       <div id="note_text" contenteditable="true" spellcheck="false"></div>
