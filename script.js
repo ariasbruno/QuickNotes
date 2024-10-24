@@ -46,7 +46,7 @@ localStorage.setItem("trash", JSON.stringify(getTrash))
 
 window.addEventListener("load", () => { DisplayNotes(); loadIcon() });
 
-window.addEventListener("click", (e) => {
+document.addEventListener("click", (e) => {
   let notesNow = JSON.parse(localStorage.getItem("notes"))
   let trashNow = JSON.parse(localStorage.getItem("trash"))  
   
@@ -109,7 +109,7 @@ function clickCreateNote() { // ! CREAR NOTA
   $inputContent.innerHTML = "";
   modalAction("open");
   $inputTitle.focus()
-  backButtonListener();
+  backButtonListener("add");
 }
 
 let note
@@ -123,18 +123,22 @@ function clickEditNote (nI) { // ! EDITAR NOTA
   $inputContent.innerHTML = note.text;
   modalAction("open");
   $inputTitle.focus()
-  backButtonListener();
+  backButtonListener("add");
 }
 
-function backButtonListener () { // * EVENTO CLICK Y KEYDOWN[esc] PARA SALIR DEL MODAL
-  $closeSaveNote.removeEventListener("click", handleCloseNote);
-  document.removeEventListener("keydown", handleEscKey);
-  $closeSaveNote.addEventListener("click", handleCloseNote);
-  document.addEventListener("keydown", handleEscKey);
+function backButtonListener (action) { // * EVENTO CLICK Y KEYDOWN[esc] PARA SALIR DEL MODAL
+  if (action === "add") {
+    $closeSaveNote.addEventListener("click", handleCloseNote);
+    document.addEventListener("keydown", handleEscKey);
+  } else if (action === "remove") {
+    $closeSaveNote.removeEventListener("click", handleCloseNote);
+    document.removeEventListener("keydown", handleEscKey); 
+  }
 
   let typeNote = $closeSaveNote.getAttribute("data-note-id")
   
   function handleCloseNote() {
+    
     notesInfo(undefined, "close")
     if (typeNote === "new-note") {
       createNoteFunction();
@@ -143,9 +147,11 @@ function backButtonListener () { // * EVENTO CLICK Y KEYDOWN[esc] PARA SALIR DEL
     }
     $closeSaveNote.removeEventListener("click", handleCloseNote);
     document.removeEventListener("keydown", handleEscKey);
+    backButtonListener("remove")
   };
   
   function handleEscKey(event) {
+
     if (event.key === "Escape") {
       handleCloseNote();
       notesInfo(undefined, "close")

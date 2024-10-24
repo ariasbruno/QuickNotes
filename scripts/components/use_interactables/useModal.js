@@ -4,44 +4,46 @@ const $$ =  selector => document.querySelectorAll(selector);
 const allButtonsDefault = [...$("#toolbar").children];
 
 export function modalAction(action) {
-const $noteModal = document.querySelector("#note_modal");
-const $inputTitle = document.querySelector("#title");
-const $inputContent = document.querySelector("#note_text");
-const $body = document.querySelector("#body");
-const $closeNote = document.querySelector(".close");
-document.querySelector("#toolbar").classList.remove("open")
-document.querySelector("#open_toolbar-btn").classList.remove("open")
-document.querySelector("#note_modal-div").classList.remove("shifted")
+const $noteModal = $("#note_modal");
+const $inputContent = $("#note_text");
+const $body = $("#body");
 
-function adjustInputHeight(element) { // ? AJUSTAR EL TEXTAREA AUTOMÁTICAMENTE
+$("#toolbar").classList.remove("open")
+$("#open_toolbar-btn").classList.remove("open")
+$("#note_modal-div").classList.remove("shifted")
+
+function adjustInputHeight() {
   const scrollPosition = $noteModal.scrollTop;
 
-  element.style.height = 'auto';
-  element.style.height = `${element.scrollHeight}px`;
-  $inputContent.style.height = `${element.scrollHeight + 100}px`;
+  $inputContent.style.height = 'auto';
+  $inputContent.style.height = `${$inputContent.scrollHeight}px`;
 
   $noteModal.scrollTop = scrollPosition;
-};
-
-function adjustModalSizes() {
-  adjustInputHeight($inputContent);
 }
 
-$inputContent.addEventListener('input', () => adjustInputHeight($inputContent));
+
+function adjustModalSizes() {
+  adjustInputHeight();
+}
 
   if (action === 'open') {
     $body.style.overflow = "hidden";
     $noteModal.style.display = "flex";
     adjustModalSizes();
+    handleOverflowIcons();
     window.addEventListener("resize", handleOverflowIcons);
+    $noteModal.addEventListener("click", focusContent);
+    $inputContent.addEventListener('input', adjustInputHeight);
     
-  } else if (action === 'close') {
+  } else if (action === 'close') {    
     $noteModal.style.display = "none";
     $body.style.overflow = "";
     window.removeEventListener("resize", handleOverflowIcons);
+    $noteModal.removeEventListener("click", focusContent);
+    $inputContent.removeEventListener('input', adjustInputHeight);
   }
 
-  $noteModal.addEventListener("click", e => {
+  function focusContent(e) {
     if(e.target.id !== "note_modal") {
       return;
     }
@@ -78,9 +80,8 @@ $inputContent.addEventListener('input', () => adjustInputHeight($inputContent));
     // Remueve cualquier rango existente y agrega el nuevo
     selection.removeAllRanges();
     selection.addRange(range);
-  });
+  }
 
-  handleOverflowIcons();
   function handleOverflowIcons() {
   const $toolbar = document.getElementById('toolbar');
   const $toolbarIcons = $toolbar.querySelectorAll('.btn_toolbar');
@@ -116,7 +117,7 @@ $inputContent.addEventListener('input', () => adjustInputHeight($inputContent));
         console.log('Removed button:', allButtonsDefault[i]);
       
         if (!$dropdownContainer.contains(allButtonsDefault[i])) {
-          $dropdownContainer.appendChild(allButtonsDefault[i]);          
+          $dropdownContainer.prepend(allButtonsDefault[i]);          
 
         }
       }
@@ -135,4 +136,5 @@ $inputContent.addEventListener('input', () => adjustInputHeight($inputContent));
     document.querySelector('#dropdown-container').classList.toggle('show');
     document.querySelector('#dropdown-open-svg').classList.toggle('rotate');
   }
+
 };
