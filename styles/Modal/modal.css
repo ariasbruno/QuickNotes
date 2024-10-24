@@ -6,7 +6,7 @@
   z-index: 10000;
   bottom: 0;
   left: 0;
-  height: calc(100vh - 4rem);
+  height: calc(100dvh - 4rem);
   width: 100vw;
   overflow-y: auto;
   align-items: center;
