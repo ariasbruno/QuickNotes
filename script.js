@@ -66,7 +66,7 @@ document.addEventListener("click", (e) => {
     "open_sidebar": () => clickOpenCloseSidebar("toggle"),
     "note": () => {clickEditNote(noteIndex); updateToolbar()},
     "new_note": () => {clickCreateNote(); updateToolbar()},
-    "close": () => backButtonListener(),
+    // "close": () => backButtonListener(),
     "close_options-modal": () => notesInfo(undefined, "close"),
     "note_options": () => handlerNoteOptions(),
     "delete_button": () => clickDeleteNotes(noteIndex),
@@ -225,7 +225,7 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
           $inputTitle.value = n.title;
           $inputContent.innerHTML = n.text;
           updateToolbar()
-          backButtonListener()
+          backButtonListener("add")
         }
       })
     } else if (!showAlertConfirm) {

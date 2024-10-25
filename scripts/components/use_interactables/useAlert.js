@@ -51,8 +51,8 @@ export function useAlert(action, message) {
 
       $inputCheckAlert.checked = false;
       
-      let text = message === "notes" ? "¿Quiere borrar las notas seleccionadas de manera permanente?" : "¿Quiere borrar la nota de manera permanente?";      
-      textPopup.innerText = text
+      let text = message === "notes" ? `<p>¿Quiere borrar las notas seleccionadas de manera permanente?</p>` : `<p>¿Quiere borrar la nota de manera permanente?</p>`;
+      textPopup.innerHTML = text
   
       popup.style.display = "flex";
       popupContent.className = "scale-up-center"
@@ -85,8 +85,8 @@ export function useAlert(action, message) {
 
       $inputCheckAlert.checked = false;
       
-      let text = "¿Estas seguro de que quiere guardar una nota vacía? Si guardas una nota vacía esta sera eliminada";      
-      textPopup.innerText = text;
+      let text = `<p>¿Estas seguro de que quiere guardar una nota vacía?</p> <span>Si guardas una nota vacía esta sera eliminada</span>`;      
+      textPopup.innerHTML = text;
   
       popup.style.display = "flex";
       popupContent.className = "scale-up-center";
@@ -119,7 +119,7 @@ export function useAlert(action, message) {
 
       $labelCheckAlert.style.display = "none";
       
-      let text = `¿Estas seguro de que quiere eliminar todos los datos? <br> <span>Borrar todos los datos de la web eliminará permanentemente todas tus notas y configuraciones. Esta acción no se puede deshacer.</span>`;      
+      let text = `<p>¿Estas seguro de que quiere eliminar todos los datos?</p> <span>Borrar todos los datos de la web eliminará permanentemente todas tus notas y configuraciones. Esta acción no se puede deshacer.</span>`;      
       textPopup.innerHTML = text;
   
       popup.style.display = "flex";
