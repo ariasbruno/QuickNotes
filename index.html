@@ -310,6 +310,23 @@
               <path class="color-picker" fill="currentColor" d="M3 24q-.425 0-.712-.288T2 23v-2q0-.425.288-.712T3 20h18q.425 0 .713.288T22 21v2q0 .425-.288.713T21 24zm4.125-7q-.575 0-.913-.488t-.137-1.037l4.4-11.725q.125-.35.425-.55t.65-.2h.9q.375 0 .663.2t.412.55L17.95 15.5q.2.55-.137 1.025T16.9 17q-.35 0-.65-.2t-.425-.55l-.975-2.85H9.2l-1.025 2.875q-.125.35-.413.538T7.126 17M9.9 11.4h4.2l-2.05-5.8h-.1z" />
             </svg>
           </button>
+          <div id="text_colors_container" class="colors_container color-picker" style="display: none;">
+            <div id="text_color-groups" class="color-picker"></div>
+            <hr class="color-picker" style="margin: 16px 0;"/>
+            <div id="text_custom-colors" class="color-picker"></div>
+        
+            <div id="text_custom-color-div" class="custom-color-input color-picker">
+              <div id="text_custom-color-display" class="custom-color-display color-picker">
+                <input id="text_custom-color_picker-input" class="color-picker" type="color"/>
+              </div>
+              <input id="text_custom-color-input" class="color-picker" type="text" value="#000000" />
+              <button id="text_add_custom_color-btn" class="color-picker add_custom_color-btn">
+                <svg aria-hidden="true" focusable="false"class="color-picker add_custom_color-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path class="color-picker add_custom_color-btn" fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
         <!-- color del texto end -->
         <!-- resaltado del texto start -->
@@ -319,6 +336,23 @@
               <path class="color-picker" fill="currentColor" d="m8.3.7l7.875 7.875q.575.575.575 1.425t-.575 1.425l-4.75 4.75q-.575.575-1.425.575t-1.425-.575l-4.75-4.75Q3.25 10.85 3.25 10t.575-1.425L8.575 3.8l-1.7-1.7q-.3-.3-.288-.7T6.9.7q.3-.275.7-.287T8.3.7M10 5.225L5.225 10h9.55zM19 17q-.825 0-1.412-.587T17 15q0-.525.313-1.125T18 12.75q.225-.3.475-.625T19 11.5q.275.3.525.625t.475.625q.375.525.688 1.125T21 15q0 .825-.587 1.413T19 17M4 24q-.825 0-1.412-.587T2 22t.588-1.412T4 20h16q.825 0 1.413.588T22 22t-.587 1.413T20 24z" />
             </svg>
           </button>
+          <div id="background_colors_container" class="colors_container color-picker" style="display: none;">
+            <div id="background_color-groups" class="color-picker"></div>
+            <hr class="color-picker" style="margin: 16px 0;"/>
+            <div id="background_custom-colors" class="color-picker"></div>
+        
+            <div id="background_custom-color-div" class="custom-color-input color-picker">
+              <div id="background_custom-color-display" class="custom-color-display color-picker">
+                <input id="background_custom-color_picker-input" class="color-picker" type="color"/>
+              </div>
+              <input id="background_custom-color-input" class="color-picker" type="text" value="#000000" />
+              <button id="background_add_custom_color-btn" class="color-picker add_custom_color-btn">
+                <svg aria-hidden="true" focusable="false"class="color-picker add_custom_color-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path class="color-picker add_custom_color-btn" fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
         <!-- resaltado del texto end -->
 
@@ -393,24 +427,6 @@
         </div>
     </div>
     <!-- TOOLBAR END -->
-    
-    <div id="colors_container" class="colors_container color-picker" style="display: none;">
-      <div id="color-groups" class="color-picker"></div>
-      <hr class="color-picker" style="margin: 16px 0;"/>
-      <div id="custom-colors" class="color-picker"></div>
-  
-      <div id="custom-color-div" class="custom-color-input color-picker">
-        <div id="custom-color-display" class="custom-color-display color-picker">
-          <input id="custom-color_picker-input" class="color-picker" type="color"/>
-        </div>
-        <input id="custom-color-input" class="color-picker" type="text" value="#000000" />
-        <button id="add_custom_color-btn" class="color-picker add_custom_color-btn">
-          <svg aria-hidden="true" focusable="false"class="color-picker add_custom_color-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path class="color-picker add_custom_color-btn" fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
-          </svg>
-        </button>
-      </div>
-    </div>
 
     <div id="note_modal-div">
       <div id="note_text" contenteditable="true" spellcheck="false"></div>

@@ -7,7 +7,8 @@ const $$ = (selector) => document.querySelectorAll(selector);
 
 const $modalContainer = $("#note_modal")
 
-const $customColorPickerInput = $("#custom-color_picker-input")
+const $textCustomColorPickerInput = $("#text_custom-color_picker-input")
+const $backgroundCustomColorPickerInput = $("#background_custom-color_picker-input")
 const $highlightColor = $("#highlight_color")
 
 //btn toolbar
@@ -91,7 +92,8 @@ let typeBtn
 
 $('.add_custom_color-btn').addEventListener('click', e => handleColors(e, "create custom color", typeBtn) )
 
-$customColorPickerInput.addEventListener('input', e => handleColors(e, "pick color", typeBtn) );
+$textCustomColorPickerInput.addEventListener('input', e => handleColors(e, "pick color", typeBtn) );
+$backgroundCustomColorPickerInput.addEventListener('input', e => handleColors(e, "pick color", typeBtn) );
 
 $modalContainer.addEventListener("click", e => handleColors(e, "close container", typeBtn) )
 

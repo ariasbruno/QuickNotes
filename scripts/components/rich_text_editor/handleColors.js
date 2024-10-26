@@ -29,13 +29,16 @@ const customColors = [];
 export function handleColors (e, action, typeBtn) {
 
   const $ = (selector) => document.querySelector(selector);
-  const $content = $('#note_text');
-  const $colorGroupsContainer = $('#color-groups');
-  const $customColorsContainer = $('#custom-colors');
-  const $colorInput = $('#custom-color-input');
+  const $textColorGroupsContainer = $('#text_color-groups');
+  const $backgroundColorGroupsContainer = $('#background_color-groups');
+  const $textCustomColorsContainer = $('#text_custom-colors');
+  const $backgroundCustomColorsContainer = $('#background_custom-colors');
+  const $textColorInput = $('#text_custom-color-input');
+  const $backgroundColorInput = $('#background_custom-color-input');
   const $changeTextColorSvg = $("#change_text_color-svg")
   const $changeBackgroundColorSvg = $("#change_background_color-svg")
-  const $textColorContent = $('#colors_container');
+  const $textColorContent = $('#text_colors_container');
+  const $backgroundColorContent = $('#background_colors_container');
   
   function handleColorSelect(color) {
     if (typeBtn === "background") {
@@ -60,7 +63,7 @@ export function handleColors (e, action, typeBtn) {
   }
   
   function renderColorGroups() {
-    $colorGroupsContainer.innerHTML = '';
+    typeBtn === "background" ? $backgroundColorGroupsContainer.innerHTML = '' : $textColorGroupsContainer.innerHTML = '';
     for (const [groupName, colors] of Object.entries(colorGroups)) {
       const groupDiv = document.createElement('div');
       groupDiv.className = 'color-group color-picker';
@@ -77,44 +80,46 @@ export function handleColors (e, action, typeBtn) {
       });
       groupDiv.appendChild(grid);
   
-      $colorGroupsContainer.appendChild(groupDiv);
+      typeBtn === "background" ? $backgroundColorGroupsContainer.appendChild(groupDiv) : $textColorGroupsContainer.appendChild(groupDiv);
     }
   }
   
   function renderCustomColors() {
-    $customColorsContainer.innerHTML = ''; 
+    typeBtn === "text" ? $textCustomColorsContainer.innerHTML = '' : $backgroundCustomColorsContainer.innerHTML = '';
     const grid = document.createElement('div');
     grid.className = 'color-grid color-picker';    
     customColors.forEach(color => {
       grid.appendChild(createColorButton(color));
     });
-    $customColorsContainer.appendChild(grid);
+    typeBtn === "text" ? $textCustomColorsContainer.appendChild(grid) : $backgroundCustomColorsContainer.appendChild(grid);
   }
 
   if (action === "create custom color") {
-    const newColor = $colorInput.value;
+    const newColor = typeBtn === "background" ? $backgroundColorInput.value : $textColorInput.value;
     if (!customColors.includes(newColor)) {      
       customColors.push(newColor);
       renderCustomColors();
     }
 
   } else if (action === "pick color") {
-    $colorInput.value = e.target.value;
+    typeBtn === "background" ? $backgroundColorInput.value = e.target.value : $textColorInput.value = e.target.value;
 
   } else if (action === "open pick text color") {
+    $backgroundColorContent.style.display = $backgroundColorContent.style.display = 'none';
     $textColorContent.style.display = $textColorContent.style.display === 'none' ? 'block' : 'none';
-    $('#change_text_color-div').appendChild($textColorContent);
 
   } else if (action === "open pick text background") {
-    $textColorContent.style.display = $textColorContent.style.display === 'none' ? 'block' : 'none';
-    $('#change_background_color-div').appendChild($textColorContent);
+    $textColorContent.style.display = $textColorContent.style.display = 'none';
+    $backgroundColorContent.style.display = $backgroundColorContent.style.display === 'none' ? 'block' : 'none';
 
   } else if (action === "close container") {
     if (!e.target.classList.contains("color-picker")) {
       $textColorContent.style.display = 'none';
+      $backgroundColorContent.style.display = 'none';
     }
   } else {
     $textColorContent.style.display = 'none';
+    $backgroundColorContent.style.display = 'none';
   }
 
   renderColorGroups()
