@@ -189,3 +189,13 @@ $modalContainer.addEventListener("click", e => {
 		$("#svg-open_change_header").classList.remove('rotate');
 	}
 });
+
+
+function ensureFirstDiv() {
+  if ($content.innerHTML.trim() === '' || $content.innerHTML === '<br>' || $content.innerHTML === '<div><br></div>') {
+    $content.innerHTML = '<div><br></div>';
+  }
+}
+
+$content.addEventListener("input", ensureFirstDiv);
+$content.addEventListener("focus", ensureFirstDiv);

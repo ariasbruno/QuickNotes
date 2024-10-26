@@ -12,6 +12,11 @@ export function formatDoc(cmd, value = null) {
     if (cmd === "fontSize") {
       block.style.fontSize = `${value}px`;
     } else if (cmd.includes('justify')) {
+      if (block.nodeName !== "DIV") {
+        for (let el = block.parentNode; el.nodeName !== "DIV"; el = el.parentNode) {
+          block = el.parentNode
+        }
+      }
       block.style.textAlign = cmd.replace('justify', '').toLowerCase();
     } else {
       document.execCommand(cmd, false, value);
