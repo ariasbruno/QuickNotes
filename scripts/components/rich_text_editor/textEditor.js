@@ -52,11 +52,19 @@ function addLink() {
 const $content = $('#note_text');
 
 $content.addEventListener("input", updatePlaceholder);
-$content.addEventListener("keyup", updatePlaceholder);
+$content.addEventListener("focus", updatePlaceholder);
+$content.addEventListener("blur", updatePlaceholderBlur);
 $modalContainer.addEventListener("DOMContentLoaded", updateToolbar);
 
 
 function updatePlaceholder () {
+	if ($content.innerHTML === '' || $content.innerHTML === '<div><br></div>' || $content.innerHTML === '<br>') {
+    $content.setAttribute("data-placeholder", "on")
+  } else {
+    $content.setAttribute("data-placeholder", "off")
+  }
+}
+function updatePlaceholderBlur () {
 	if ($content.innerHTML.trim() === '' || $content.innerHTML === '<div><br></div>' || $content.innerHTML === '<br>') {
     $content.setAttribute("data-placeholder", "on")
   } else {
@@ -102,7 +110,7 @@ $('#change_background_color-btn').addEventListener('click', e => {
 let savedRange
 
 // Función para restaurar la selección guardada
-function restoreSelection() {
+function restoreSelection () {
   const selection = window.getSelection();
   if (savedRange) {
     selection.removeAllRanges();
@@ -111,34 +119,46 @@ function restoreSelection() {
 }
 
 // cambiar el tamaño de fuente
-const $changeFontSizeDisplayText = $('#change_font_size-display-text');
-const $changeFontSizeOptions = $('#change_font_size-options');
-
-$("#change_font_size-open-btn").addEventListener('click', () => {
-		$changeFontSizeOptions.classList.toggle('show');
-		$("#svg-open_change_font-size").classList.toggle('rotate');
-		const selection = window.getSelection();
-		if (selection.rangeCount > 0) {
-			savedRange = selection.getRangeAt(0);
-		}
+const $fontSizeInput = $("#font_size-input");
+$fontSizeInput.addEventListener("focus", () => {
+  const selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    savedRange = selection.getRangeAt(0);
+  }
 });
 
-$changeFontSizeOptions.addEventListener('click', e => {
-		if (e.target.matches('div[data-value]')) {
-			restoreSelection();
-			formatDoc('fontSize', e.target.getAttribute('data-value'));
-			$changeFontSizeDisplayText.textContent = e.target.textContent;
-			$changeFontSizeOptions.classList.remove('show');
-			$("#svg-open_change_font-size").classList.remove('rotate');
-		}
+$fontSizeInput.addEventListener("blur", () => {
+	$fontSizeInput.value = $fontSizeInput.value.replace(/[^0-9]/g, '');
+	minMaxInput()
+	restoreSelection()
+	formatDoc("fontSize", $fontSizeInput.value)
 });
 
-$modalContainer.addEventListener("click", e => {
-	if (!e.target.matches('.dropdown-font_size')) {
-		$changeFontSizeOptions.classList.remove('show');
-		$("#svg-open_change_font-size").classList.remove('rotate');
+function minMaxInput () {
+	const min = 1;
+	const max = 400;
+
+	if ($fontSizeInput.value) {
+		const numericValue = parseInt($fontSizeInput.value, 10);
+		if (numericValue < min) $fontSizeInput.value = min;
+		if (numericValue > max) $fontSizeInput.value = max;
 	}
-});
+}
+
+const $fontSizeInc = $("#font_size-increment");
+const $fontSizeDec = $("#font_size-decrement");
+
+$fontSizeInc.addEventListener("click", () => {
+$fontSizeInput.value++;
+minMaxInput()
+formatDoc("fontSize", $fontSizeInput.value)
+})
+
+$fontSizeDec.addEventListener("click", () => {
+$fontSizeInput.value--;
+minMaxInput()
+formatDoc("fontSize", $fontSizeInput.value)
+})
 
 // cambiar el encabezado
 const $changeHeaderDisplayText = $('#change_header-display-text');

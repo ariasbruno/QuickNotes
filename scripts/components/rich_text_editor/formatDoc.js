@@ -9,7 +9,9 @@ export function formatDoc(cmd, value = null) {
     }
     let block = node;
 
-    if (cmd.includes('justify')) {
+    if (cmd === "fontSize") {
+      block.style.fontSize = `${value}px`;
+    } else if (cmd.includes('justify')) {
       block.style.textAlign = cmd.replace('justify', '').toLowerCase();
     } else {
       document.execCommand(cmd, false, value);

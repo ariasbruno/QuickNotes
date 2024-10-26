@@ -90,6 +90,12 @@
     border: none;
     cursor: pointer;
   }
+
+  & hr{
+    background-color: var(--item_hover-background-color);
+    border: none;
+    height: 1px;
+  }
   
   #custom-color-div {
     display: flex;
@@ -148,19 +154,28 @@
       outline: none;
 
       @media (hover: hover) and (pointer: fine) {
-              &:hover {
-        box-shadow: 0 0 0 .15vw var(--icon-color);
+      &:hover {
+        box-shadow: 0 0 0 1px var(--icon-color);
       }
       }
-
 
       &:focus {
-        box-shadow: 0 0 0 .15vw var(--item_hover-icon-color);
+        box-shadow: 0 0 0 1.5px var(--item_hover-icon-color);
       }
     }
     #add_custom_color-btn {
       width: 32px;
       height: 32px;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--background-color);
+      color: var(--icon-color);
+      cursor: pointer;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: var(--item_hover-background-color);  
+        }
+      }
     }
   }
 
@@ -187,18 +202,13 @@
 
 
 
-
-
-
-
-
-#change_font_size-container, #change_header-container {
+#change_header-container {
   flex-shrink: 0;
   position: relative;
   display: inline-block;
   width: 94px;
   height: 32px;
-  & #change_font_size-display, #change_header-display {
+  #change_header-display {
     position: relative;
     background-color: var(--background-color);
     color: var(--text-color);
@@ -213,12 +223,11 @@
     align-items: center;
     justify-content: space-evenly;
     @media (hover: hover) and (pointer: fine) {
-          &:hover{
-      background-color: var(--item_hover-background-color);
-      cursor: pointer;
+      &:hover{
+        background-color: var(--item_hover-background-color);
+        cursor: pointer;
+      }
     }
-    }
-
 
     & p {
       flex-shrink: 0;
@@ -243,9 +252,7 @@
       }
     }
 
-
-
-    & #change_font_size-open-btn, #change_header-open-btn {
+    #change_header-open-btn {
       flex-shrink: 0;
       opacity: 0;
       position: absolute;
@@ -259,11 +266,10 @@
         cursor: pointer;
       }
       }
-
     }
   }
   
-  #change_font_size-options, #change_header-options {
+  #change_header-options {
     flex-shrink: 0;
     display: none;
     position: absolute;
@@ -289,8 +295,6 @@
       }
       }
 
-
-
       &:last-child {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
@@ -299,6 +303,35 @@
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
       }
+    }
+  }
+}
+
+#change_font_size-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 2px;
+
+  & #font_size-input{
+    width: 32px;
+    height: 24px;
+    text-align: center;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid var(--icon-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        box-shadow: 0 0 0 1px var(--icon-color);
+      }
+    }
+      
+    &:focus {
+      box-shadow: 0 0 0 1px var(--item_hover-icon-color);
     }
   }
 }
@@ -314,11 +347,7 @@
   cursor: pointer;
   width: 32px;
   height: 32px;
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-    background-color: var(--item_hover-background-color);
-  }
-  }
+
 
   & #dropdown-open {
     cursor: pointer;
@@ -326,6 +355,7 @@
     height: 100%;
     background-color: transparent;
     border: none;
+    border-radius: 5px;
     & svg {
       rotate: -90deg;
       color: var(--icon-color);
@@ -334,6 +364,11 @@
         rotate: 90deg;
       }
     }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+      background-color: var(--item_hover-background-color);
+    }
+  }
   }
 
   #dropdown-container{
@@ -348,10 +383,12 @@
     border-radius: 5px;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 176px;
+    min-width: 80px;
+    width: max-content;
     height: auto;
     max-height: 300px;
-    max-width: 200px;
+    max-width: 144px;
+    cursor: default;
     &.show{
       display: flex;
     }

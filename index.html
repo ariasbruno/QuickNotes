@@ -276,25 +276,19 @@
               <div class="option" data-value="p">Párrafo</div>
           </div>
         </div>
+
         <div id="change_font_size-container" class="dropdown-font_size">
-          <div id="change_font_size-display" class="dropdown-font_size">
-            <button id="change_font_size-open-btn" class="dropdown-font_size"></button>
-            <p id="change_font_size-display-text">Font Size</p>
-            <button class="open_change_font-size">
-              <svg aria-hidden="true" focusable="false"id="svg-open_change_font-size" class="open_change_font-size" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path class="open_change_font-size" fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z" />
-              </svg>
-            </button>
-          </div>
-          <div id="change_font_size-options">
-              <div class="option" data-value="1">Extra Small</div>
-              <div class="option" data-value="2">Small</div>
-              <div class="option" data-value="3">Regular</div>
-              <div class="option" data-value="4">Medium</div>
-              <div class="option" data-value="5">Large</div>
-              <div class="option" data-value="6">Extra Large</div>
-              <div class="option" data-value="7">Big</div>
-          </div>
+          <button id="font_size-decrement" class="btn_toolbar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M6 13q-.425 0-.712-.288T5 12t.288-.712T6 11h12q.425 0 .713.288T19 12t-.288.713T18 13z" />
+            </svg>
+          </button>
+          <input id="font_size-input" type="text" value="16">
+          <button id="font_size-increment" class="btn_toolbar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
+            </svg>
+          </button>
         </div>
 
 
@@ -388,19 +382,18 @@
             <path class="btn-unlink" fill="currentColor" d="M15.625 12.775L13.85 11H15q.425 0 .713.288T16 12q0 .25-.1.45t-.275.325M20.5 21.9q-.275.275-.7.275t-.7-.275l-17-17q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l17 17q.275.275.275.7t-.275.7M7 17q-2.075 0-3.537-1.463T2 12q0-1.725 1.05-3.075t2.7-1.775L7.6 9H7q-1.25 0-2.125.875T4 12t.875 2.125T7 15h3q.425 0 .713.288T11 16t-.288.713T10 17zm2-4q-.425 0-.712-.288T8 12t.288-.712T9 11h.625l1.975 2zm9.5 2.8q-.225-.35-.162-.75t.412-.625q.575-.425.913-1.05T20 12q0-1.25-.875-2.125T17 9h-3q-.425 0-.712-.288T13 8t.288-.712T14 7h3q2.075 0 3.538 1.463T22 12q0 1.225-.562 2.288t-1.563 1.762q-.35.225-.75.163T18.5 15.8" />
           </svg>
         </button>
-        <div id="dropdown">
-          <button id="dropdown-open">
-            <svg aria-hidden="true" focusable="false" id="dropdown-open-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z" />
+        <div id="dropdown" class="dropdown-overflow">
+          <button id="dropdown-open"  class="dropdown-overflow">
+            <svg class="dropdown-overflow" aria-hidden="true" focusable="false" id="dropdown-open-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path class="dropdown-overflow" fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z" />
             </svg>
           </button>
-          <div id="dropdown-container">
-
+          <div id="dropdown-container" class="dropdown-overflow">
           </div>
         </div>
     </div>
     <!-- TOOLBAR END -->
-     
+    
     <div id="colors_container" class="colors_container color-picker" style="display: none;">
       <div id="color-groups" class="color-picker"></div>
       <hr class="color-picker" style="margin: 16px 0;"/>
