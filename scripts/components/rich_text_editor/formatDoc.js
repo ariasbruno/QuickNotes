@@ -10,7 +10,13 @@ export function formatDoc(cmd, value = null) {
     let block = node;
 
     if (cmd === "fontSize") {
-      block.style.fontSize = `${value}px`;
+      const $content = document.querySelector('#note_text');
+      document.execCommand("fontSize", false, "7");
+      const fontElements = $content.querySelectorAll("font[size='7']");
+      fontElements.forEach((el) => {
+          el.removeAttribute("size");
+          el.style.fontSize = `${value}px`;
+      });
     } else if (cmd.includes('justify')) {
       if (block.nodeName !== "DIV") {
         for (let el = block.parentNode; el.nodeName !== "DIV"; el = el.parentNode) {

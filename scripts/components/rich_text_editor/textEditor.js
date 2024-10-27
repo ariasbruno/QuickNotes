@@ -54,6 +54,7 @@ const $content = $('#note_text');
 
 $content.addEventListener("input", updatePlaceholder);
 $content.addEventListener("focus", updatePlaceholder);
+
 $content.addEventListener("blur", updatePlaceholderBlur);
 $modalContainer.addEventListener("DOMContentLoaded", updateToolbar);
 
@@ -111,7 +112,6 @@ $('#change_background_color-btn').addEventListener('click', e => {
 
 let savedRange
 
-// Función para restaurar la selección guardada
 function restoreSelection () {
   const selection = window.getSelection();
   if (savedRange) {
@@ -120,8 +120,8 @@ function restoreSelection () {
   }
 }
 
-// cambiar el tamaño de fuente
 const $fontSizeInput = $("#font_size-input");
+
 $fontSizeInput.addEventListener("focus", () => {
   const selection = window.getSelection();
   if (selection.rangeCount > 0) {
@@ -133,7 +133,7 @@ $fontSizeInput.addEventListener("blur", () => {
 	$fontSizeInput.value = $fontSizeInput.value.replace(/[^0-9]/g, '');
 	minMaxInput()
 	restoreSelection()
-	formatDoc("fontSize", $fontSizeInput.value)
+	formatDoc("fontSize", $fontSizeInput.value);
 });
 
 function minMaxInput () {
@@ -151,15 +151,29 @@ const $fontSizeInc = $("#font_size-increment");
 const $fontSizeDec = $("#font_size-decrement");
 
 $fontSizeInc.addEventListener("click", () => {
-$fontSizeInput.value++;
-minMaxInput()
-formatDoc("fontSize", $fontSizeInput.value)
+	$fontSizeInput.value++;
+	minMaxInput()
+	formatDoc("fontSize", $fontSizeInput.value);
 })
 
 $fontSizeDec.addEventListener("click", () => {
-$fontSizeInput.value--;
-minMaxInput()
-formatDoc("fontSize", $fontSizeInput.value)
+	$fontSizeInput.value--;
+	minMaxInput()
+	formatDoc("fontSize", $fontSizeInput.value);
+})
+
+// $content.addEventListener("input", () => {
+// 	formatDoc("fontSize", $fontSizeInput.value);
+// });
+
+$content.addEventListener("click", () => {
+	const selection = window.getSelection().focusNode.parentNode
+	console.log(selection.nodeName);	
+	if (selection.nodeName === "FONT") {
+		$fontSizeInput.value = parseInt(selection.style.fontSize, 10)
+	}	else if (selection.nodeName === "Div") {
+		$fontSizeInput.value = 16
+	}
 })
 
 // cambiar el encabezado

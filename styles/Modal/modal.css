@@ -165,6 +165,10 @@
       color: rgb(85, 85, 85);
       cursor: text;
     }
+
+    & > div {
+      height: auto;
+    }
   }
 }
 

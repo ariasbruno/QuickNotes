@@ -95,6 +95,7 @@
     background-color: var(--item_hover-background-color);
     border: none;
     height: 1px;
+    margin: 16px 0;
   }
   
   #custom-color-div {
