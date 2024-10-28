@@ -239,43 +239,22 @@
           <path class="open_toolbar" fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z" />
         </svg>
       </button>
-      <button aria-label="desplegar opciones de la nota" id="note_options" class="note_options">
-        <svg aria-hidden="true" focusable="false"class="note_options" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle class="note_options" cx="12" cy="12" r="1" />
-          <circle class="note_options" cx="12" cy="5" r="1" />
-          <circle class="note_options" cx="12" cy="19" r="1" />
+      <button aria-label="desplegar opciones de la nota" id="note_options" class="note_options note_options-click">
+        <svg aria-hidden="true" focusable="false"class="note_options note_options-click" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle class="note_options note_options-click" cx="12" cy="12" r="1" />
+          <circle class="note_options note_options-click" cx="12" cy="5" r="1" />
+          <circle class="note_options note_options-click" cx="12" cy="19" r="1" />
         </svg>
       </button>
-      <div class="note_options-div">
+      <div class="note_options-div note_options-click">
         <ul>
-          <li role="button" tabindex="0" aria-label="información de la nota" id="note_options-info">Información</li>
+          <li role="button" tabindex="0" aria-label="información de la nota" id="note_options-info" class="note_options-click">Información</li>
         </ul>
       </div>
     </nav>
 
     <!-- TOOLBAR START-->
     <div id="toolbar" class="toolbar"> <!-- falta aria-label -->
-
-        <div id="change_header-container" class="dropdown-header">
-          <div id="change_header-display" class="dropdown-header">
-            <button id="change_header-open-btn" class="dropdown-header"></button>
-            <p id="change_header-display-text">Header</p>
-            <button class="open_change_header">
-              <svg aria-hidden="true" focusable="false"id="svg-open_change_header" class="open_change_header" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path class="open_change_header" fill="currentColor" d="m10.8 12l3.9 3.9q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-4.6-4.6q-.15-.15-.212-.325T8.425 12t.063-.375t.212-.325l4.6-4.6q.275-.275.7-.275t.7.275t.275.7t-.275.7z" />
-              </svg>
-            </button>
-          </div>
-          <div id="change_header-options">
-              <div class="option" data-value="H1">H1</div>
-              <div class="option" data-value="H2">H2</div>
-              <div class="option" data-value="H3">H3</div>
-              <div class="option" data-value="H4">H4</div>
-              <div class="option" data-value="H5">H5</div>
-              <div class="option" data-value="H6">H6</div>
-              <div class="option" data-value="p">Párrafo</div>
-          </div>
-        </div>
 
         <div id="change_font_size-container" class="dropdown-font_size">
           <button id="font_size-decrement" class="btn_toolbar">
@@ -311,15 +290,30 @@
             </svg>
           </button>
           <div id="text_colors_container" class="colors_container color-picker" style="display: none;">
+            <div role="button" tabindex="0" id="clear-text-color" class="color-picker clear-color-btn">Color por defecto
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M17.65 7.575q1.2 1.2 1.775 2.588T20 13.1q0 .425-.038.825t-.112.775t-.375.588t-.65.212q-.225 0-.437-.075t-.413-.275l-5.4-5.4q-.275-.275-.425-.638T12 8.35V4.8l-1.525 1.5q-.275.275-.7.263t-.7-.288q-.3-.3-.287-.712t.312-.688l1.85-1.825q.225-.225.5-.337T12 2.6t.55.113t.5.337zM12 21q-3.325 0-5.663-2.287T4 13.1q0-1.275.4-2.45T5.6 8.4L2.1 4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l17 17q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.4-2.4q-1.05.775-2.287 1.138T12 21m0-2v-4.175l-5-5q-.525.8-.763 1.613T6 13.1q0 2.5 1.75 4.2T12 19" />
+              </svg>
+            </div>
+
+            <div id="toggle_transparency-text" class="color-picker toggle_transparency">
+              <p class="color-picker toggle_transparency-text">Colores sólidos</p>
+              <label class="color-picker toggle_transparency-label">
+                <input id="toggle_transparency-input-text" class="color-picker toggle_transparency-input" type="checkbox" checked>
+                <span class="color-picker toggle_transparency-slider"></span>
+              </label>
+            </div>
+            
+
             <div id="text_color-groups" class="color-picker"></div>
             <hr class="color-picker"/>
             <div id="text_custom-colors" class="color-picker"></div>
         
             <div id="text_custom-color-div" class="custom-color-input color-picker">
               <div id="text_custom-color-display" class="custom-color-display color-picker">
-                <input id="text_custom-color_picker-input" class="color-picker" type="color"/>
+                <input id="text_custom-color_picker-input" class="custom-color_picker-input color-picker" type="color"/>
               </div>
-              <input id="text_custom-color-input" class="color-picker" type="text" value="#000000" />
+              <input id="text_custom-color-input" class="custom-color-input-text color-picker" type="text" value="#000000" />
               <button id="text_add_custom_color-btn" class="color-picker add_custom_color-btn">
                 <svg aria-hidden="true" focusable="false"class="color-picker add_custom_color-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path class="color-picker add_custom_color-btn" fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
@@ -337,15 +331,29 @@
             </svg>
           </button>
           <div id="background_colors_container" class="colors_container color-picker" style="display: none;">
+            <div role="button" tabindex="0" id="clear-text-color" class="color-picker clear-color-btn">Color por defecto
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M17.65 7.575q1.2 1.2 1.775 2.588T20 13.1q0 .425-.038.825t-.112.775t-.375.588t-.65.212q-.225 0-.437-.075t-.413-.275l-5.4-5.4q-.275-.275-.425-.638T12 8.35V4.8l-1.525 1.5q-.275.275-.7.263t-.7-.288q-.3-.3-.287-.712t.312-.688l1.85-1.825q.225-.225.5-.337T12 2.6t.55.113t.5.337zM12 21q-3.325 0-5.663-2.287T4 13.1q0-1.275.4-2.45T5.6 8.4L2.1 4.9q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l17 17q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-2.4-2.4q-1.05.775-2.287 1.138T12 21m0-2v-4.175l-5-5q-.525.8-.763 1.613T6 13.1q0 2.5 1.75 4.2T12 19" />
+              </svg>
+            </div>
+
+            <div id="toggle_transparency-background" class="color-picker toggle_transparency">
+              <p class="color-picker toggle_transparency-text">Colores sólidos</p>
+              <label class="color-picker toggle_transparency-label">
+                <input id="toggle_transparency-input-background" class="color-picker toggle_transparency-input" type="checkbox" checked>
+                <span class="color-picker toggle_transparency-slider"></span>
+              </label>
+            </div>
+
             <div id="background_color-groups" class="color-picker"></div>
-            <hr class="color-picker" style="margin: 16px 0;"/>
+            <hr class="color-picker"/>
             <div id="background_custom-colors" class="color-picker"></div>
         
             <div id="background_custom-color-div" class="custom-color-input color-picker">
               <div id="background_custom-color-display" class="custom-color-display color-picker">
-                <input id="background_custom-color_picker-input" class="color-picker" type="color"/>
+                <input id="background_custom-color_picker-input" class="custom-color_picker-input color-picker" type="color"/>
               </div>
-              <input id="background_custom-color-input" class="color-picker" type="text" value="#000000" />
+              <input id="background_custom-color-input" class="custom-color-input-text color-picker" type="text" value="#000000" />
               <button id="background_add_custom_color-btn" class="color-picker add_custom_color-btn">
                 <svg aria-hidden="true" focusable="false"class="color-picker add_custom_color-btn" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                   <path class="color-picker add_custom_color-btn" fill="currentColor" d="M11 13H6q-.425 0-.712-.288T5 12t.288-.712T6 11h5V6q0-.425.288-.712T12 5t.713.288T13 6v5h5q.425 0 .713.288T19 12t-.288.713T18 13h-5v5q0 .425-.288.713T12 19t-.712-.288T11 18z" />
@@ -431,17 +439,17 @@
     <div id="note_modal-div">
       <div id="note_text" contenteditable="true" spellcheck="false"></div>
     </div>
-    <div id="overlay"></div>
-    <dialog id="options-modal">
-      <button aria-label="cerrar información de la nota" id="close_options-modal" class="close_options-modal">
+    <div id="overlay" class="note_options-click"></div>
+    <dialog id="options-modal" class="note_options-click">
+      <button aria-label="cerrar información de la nota" id="close_options-modal" class="close_options-modal note_options-click">
         <svg aria-hidden="true" focusable="false"class="close_options-modal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path class="close_options-modal" fill="currentColor" d="m12 13.4l-2.9 2.9q-.275.275-.7.275t-.7-.275t-.275-.7t.275-.7l2.9-2.9l-2.9-2.875q-.275-.275-.275-.7t.275-.7t.7-.275t.7.275l2.9 2.9l2.875-2.9q.275-.275.7-.275t.7.275q.3.3.3.713t-.3.687L13.375 12l2.9 2.9q.275.275.275.7t-.275.7q-.3.3-.712.3t-.688-.3z" />
         </svg>
       </button>
-      <div id="options-modal-info-container">
-        <h3>Información de la nota</h3>
-        <p id="creation_date"></p>
-        <p id="date_last_edit"></p>
+      <div id="options-modal-info-container" class="note_options-click">
+        <h3 class="note_options-click">Información de la nota</h3>
+        <p id="creation_date" class="note_options-click"></p>
+        <p id="date_last_edit" class="note_options-click"></p>
       </div>
     </dialog>
   </section>

@@ -9,7 +9,6 @@ const $modalContainer = $("#note_modal")
 
 const $textCustomColorPickerInput = $("#text_custom-color_picker-input")
 const $backgroundCustomColorPickerInput = $("#background_custom-color_picker-input")
-const $highlightColor = $("#highlight_color")
 
 //btn toolbar
 const $btnUndo = $(".btn-undo")
@@ -162,48 +161,21 @@ $fontSizeDec.addEventListener("click", () => {
 	formatDoc("fontSize", $fontSizeInput.value);
 })
 
-// $content.addEventListener("input", () => {
-// 	formatDoc("fontSize", $fontSizeInput.value);
-// });
-
 $content.addEventListener("click", () => {
-	const selection = window.getSelection().focusNode.parentNode
-	console.log(selection.nodeName);	
-	if (selection.nodeName === "FONT") {
-		$fontSizeInput.value = parseInt(selection.style.fontSize, 10)
-	}	else if (selection.nodeName === "Div") {
-		$fontSizeInput.value = 16
-	}
-})
+	const selection = window.getSelection().focusNode.parentNode;
+	let fontSize = 16;
 
-// cambiar el encabezado
-const $changeHeaderDisplayText = $('#change_header-display-text');
-const $changeHeaderOptions = $('#change_header-options');
-
-$("#change_header-open-btn").addEventListener('click', () => {
-		$changeHeaderOptions.classList.toggle('show');
-		$("#svg-open_change_header").classList.toggle('rotate');
-		const selection = window.getSelection();
-		if (selection.rangeCount > 0) {
-			savedRange = selection.getRangeAt(0);
+	for (let el = selection; el && el.nodeName !== "DIV"; el = el.parentNode) {
+		if (el.style.fontSize) {
+			fontSize = parseInt(el.style.fontSize, 10);
+			break;
+		} else if (el.parentNode.style.fontSize) {
+			fontSize = parseInt(el.parentNode.style.fontSize, 10);
+			break;
 		}
-});
-
-$changeHeaderOptions.addEventListener('click', e => {
-	if (e.target.matches('div[data-value]')) {
-		restoreSelection();
-		formatDoc('formatBlock', e.target.getAttribute('data-value'));
-		$changeHeaderDisplayText.textContent = e.target.textContent;
-		$changeHeaderOptions.classList.remove('show');
-		$("#svg-open_change_header").classList.remove('rotate');
 	}
-});
 
-$modalContainer.addEventListener("click", e => {
-	if (!e.target.matches('.dropdown-header')) {
-		$changeHeaderOptions.classList.remove('show');
-		$("#svg-open_change_header").classList.remove('rotate');
-	}
+	$fontSizeInput.value = fontSize;
 });
 
 
@@ -215,3 +187,13 @@ function ensureFirstDiv() {
 
 $content.addEventListener("input", ensureFirstDiv);
 $content.addEventListener("focus", ensureFirstDiv);
+
+$("#toggle_transparency-input-text").addEventListener("click", (e) => {
+	restoreSelection()
+	handleColors(e, "render colors", typeBtn)
+})
+
+$("#toggle_transparency-input-background").addEventListener("click", (e) => {
+	restoreSelection()
+	handleColors(e, "render colors", typeBtn)
+})

@@ -56,17 +56,19 @@ $navSelection.classList.remove("open");
 
     
     const noteItem = document.createElement("div");
+    const noteItemForClick = document.createElement("div");
     const noteContent = document.createElement('div')
     const deleteNote = document.createElement('button')
     const noteTitle = document.createElement('h4');
     const noteText = document.createElement('p');
     const selectNote = document.createElement('button')
     
-    noteContent.classList.add("note_content", "note", "note-click");
+    noteItemForClick.classList.add("note", "note-click");
+    noteContent.classList.add("note_content", "note");
     deleteNote.classList.add("delete_button");
     selectNote.classList.add("select_button");
-    noteTitle.classList.add("note", "note-click");
-    noteText.classList.add("note", "note-click");
+    noteTitle.classList.add("note");
+    noteText.classList.add("note");
 
     
     if (config.notesOrder === "grid") {
@@ -75,6 +77,7 @@ $navSelection.classList.remove("open");
       noteItem.classList.add("note_item", "note", "note_item_column");
     }
 
+    noteItemForClick.setAttribute("data-note-id", `${note.id}`);
     noteItem.setAttribute("data-note-id", `${note.id}`);
     deleteNote.setAttribute("data-note-id", `${note.id}`);
     noteTitle.setAttribute("data-note-id", `${note.id}`);
@@ -82,9 +85,9 @@ $navSelection.classList.remove("open");
     noteContent.setAttribute("data-note-id", `${note.id}`);
     selectNote.setAttribute("data-note-id", `${note.id}`);
     
-    noteItem.setAttribute("role", "button");
-    noteItem.setAttribute("tabindex", "0");
-    noteItem.setAttribute("aria-label", `abrir nota con titulo ${note.title}`);
+    noteItemForClick.setAttribute("role", "button");
+    noteItemForClick.setAttribute("tabindex", "0");
+    noteItemForClick.setAttribute("aria-label", `abrir nota con titulo ${note.title}`);
     deleteNote.setAttribute("aria-label", `seleccionar nota con titulo ${note.title}`);
     selectNote.setAttribute("aria-label", `mover a papelera nota con titulo ${note.title}`);
     
@@ -96,9 +99,10 @@ $navSelection.classList.remove("open");
     noteContent.appendChild(noteTitle);
     noteContent.appendChild(noteText);
     
+    noteItemForClick.appendChild(deleteNote);
+    noteItemForClick.appendChild(selectNote);
     noteItem.appendChild(noteContent);
-    noteItem.appendChild(deleteNote);
-    noteItem.appendChild(selectNote);
+    noteItem.appendChild(noteItemForClick);
     
     notesSection.prepend(noteItem);
   });

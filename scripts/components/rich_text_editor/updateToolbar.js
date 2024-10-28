@@ -3,11 +3,9 @@ export function updateToolbar() {
   const $content = $('#note_text');
   $content.setAttribute("contenteditable", "true")
 
-  const $changeHeaderDisplayText = $('#change_header-display-text');
   const $textColorSvg = $("#change_text_color-svg")
   const $highlightColorSvg = $("#change_background_color-svg")
   
-  $changeHeaderDisplayText.textContent = "Header";
   $textColorSvg.style.color='var(--icon-color)';
   $highlightColorSvg.style.color ='var(--icon-color)';
 

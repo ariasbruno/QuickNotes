@@ -102,6 +102,12 @@ document.addEventListener("click", (e) => {
   }
 });
 
+document.addEventListener("click", e => {
+	if (!e.target.classList.contains("note_options-click")) {
+		notesInfo(undefined, "close")
+	}
+})
+
 function clickCreateNote() { // ! CREAR NOTA
   if($(".nav_bar-selection").classList.contains("open")) return;
   $$closeSaveNote.forEach(e => e.setAttribute("data-note-id", `new-note`))
