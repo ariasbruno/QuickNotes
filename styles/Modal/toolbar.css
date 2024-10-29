@@ -78,11 +78,23 @@
     margin-bottom: 8px;
     background-color: var(--item_hover-background-color);
     transition: background-color .1s ease;
+    position: relative;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
       background-color: #525252;
       }
+    }
+
+    & #clear-text-color-btn, & #clear-background-color-btn{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      border-radius: 20px;
+      opacity: 0;
+      cursor: pointer;
     }
 
     svg{

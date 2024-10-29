@@ -61,12 +61,16 @@ export function handleColors (e, action, typeBtn) {
   const $colorInput = typeBtn === "text" ? $('#text_custom-color-input') : $('#background_custom-color-input');
   const $changeColorSvg = typeBtn === "text" ? $("#change_text_color-svg") : $("#change_background_color-svg");
   
-  function handleColorSelect(color) {
-    $changeColorSvg.style.color = color;
+  function handleColorSelect(color, isDefault) {
     let typeFormat = typeBtn === "text" ? 'textColor' : 'hiliteColor';
     formatDoc(typeFormat, color)
     $textColorContent.style.display = 'none'
     $backgroundColorContent.style.display = 'none'
+    if (isDefault) {
+      $changeColorSvg.style.color = window.getComputedStyle(document.documentElement).getPropertyValue("--icon-color");
+    } else {
+    $changeColorSvg.style.color = color;
+    }
   }
   
   function createColorButton(color) {
@@ -107,7 +111,7 @@ export function handleColors (e, action, typeBtn) {
     $customColorsContainer.innerHTML = '';
     const grid = document.createElement('div');
     grid.className = 'color-grid color-picker';    
-    customColors.forEach(color => {
+    customColors.forEach(color => {      
       grid.appendChild(createColorButton(color));
     });
     $customColorsContainer.appendChild(grid);
@@ -122,6 +126,10 @@ export function handleColors (e, action, typeBtn) {
 
   } else if (action === "render colors") {
     renderColorGroups()
+    
+  } else if (action === "clear color") {
+    let colorDefault = typeBtn === "text" ? window.getComputedStyle(document.documentElement).getPropertyValue("--text-color") : "transparent";    
+    handleColorSelect(colorDefault, true)
     
   } else if (action === "pick color") {
     $colorInput.value = e.target.value;

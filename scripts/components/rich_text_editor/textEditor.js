@@ -43,7 +43,6 @@ $btnLink.addEventListener("click", () => addLink())
 $btnUnlink.addEventListener("click", () => formatDoc('unlink'))
 
 
-
 function addLink() {
 	const url = prompt('Insert url');
 	formatDoc('createLink', url);
@@ -96,6 +95,10 @@ $textCustomColorPickerInput.addEventListener('input', e => handleColors(e, "pick
 $backgroundCustomColorPickerInput.addEventListener('input', e => handleColors(e, "pick color", typeBtn) );
 
 $modalContainer.addEventListener("click", e => handleColors(e, "close container", typeBtn) )
+
+$("#clear-text-color").addEventListener("click", e => {restoreSelection(); {handleColors(e, "clear color", typeBtn); restoreSelection()}} )
+$("#clear-background-color").addEventListener("click", e => {restoreSelection(); {handleColors(e, "clear color", typeBtn); restoreSelection()}} )
+
 
 $('#change_text_color-btn').addEventListener('click', e => {
 	typeBtn = "text"

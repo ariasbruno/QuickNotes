@@ -2,9 +2,15 @@ export function handlerRead () {
   const $inputContent = document.getElementById("note_text");
   const $onlyReadBtn = document.getElementById("only_read-btn");
 
-  $inputContent.getAttribute("contenteditable") === "false" ? 
-  $inputContent.setAttribute("contenteditable", "true") : 
-  $inputContent.setAttribute("contenteditable", "false");
+  if ($inputContent.getAttribute("contenteditable") === "true") {
+    $inputContent.setAttribute("contenteditable", "false")
+
+    document.querySelector(".toolbar").classList.remove("open");
+    document.querySelector("#open_toolbar-btn").classList.remove("open");
+    document.querySelector("#note_modal-div").classList.remove('shifted');
+  } else {
+    $inputContent.setAttribute("contenteditable", "true")
+  }
 
   $inputContent.getAttribute("contenteditable") === "true" ?
   $onlyReadBtn.innerHTML =  `<svg class="only_read" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

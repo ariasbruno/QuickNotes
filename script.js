@@ -28,13 +28,10 @@ import { selectNote } from './scripts/components/note_section_actions/selectNote
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
 
-const $navSelection = $("#nav_bar-selection");
-const $main = $("#main");
 const $closeSaveNote = $("#close");
 const $$closeSaveNote = $$(".close");
 const $inputTitle = $("#title");
 const $inputContent = $("#note_text");
-
 
 let getNotes = JSON.parse(localStorage.getItem("notes")) || [];
 let getConfig = JSON.parse(localStorage.getItem("config")) || {notesOrder: "column", alertConfirmDelete: true,alertConfirmDeleteSelection: true, alertEmptyNote: true, toastUndo: true};
@@ -55,7 +52,7 @@ document.addEventListener("click", (e) => {
   let trashIndex = trashNow.findIndex(n => n.id === Number(idElement));  
 
   const clickEvents = {
-    "open_toolbar": () => {$(".toolbar").classList.toggle("open");$("#open_toolbar-btn").classList.toggle("open"); $("#note_modal-div").classList.toggle('shifted');},
+    "open_toolbar": () => openToolbar(),
     "only_read": () => handlerRead(),
     "theme_toggle": () => handlerTheme(),
     "nav_select_all": () => openSelectNotesNav(),
@@ -90,6 +87,9 @@ document.addEventListener("click", (e) => {
       "note_options-info": () => notesInfo(noteIndex, "open"),
     }
   }
+  if (!e.target.classList.contains("note_options-click")) {
+		notesInfo(undefined, "close")
+	}
   if (clickEvents.forId[e.target.id]){
     clickEvents.forId[e.target.id]()
   } else {
@@ -102,11 +102,11 @@ document.addEventListener("click", (e) => {
   }
 });
 
-document.addEventListener("click", e => {
-	if (!e.target.classList.contains("note_options-click")) {
-		notesInfo(undefined, "close")
-	}
-})
+function openToolbar() {
+  $(".toolbar").classList.toggle("open");
+  $("#open_toolbar-btn").classList.toggle("open");
+  $("#note_modal-div").classList.toggle('shifted');
+}
 
 function clickCreateNote() { // ! CREAR NOTA
   if($(".nav_bar-selection").classList.contains("open")) return;
