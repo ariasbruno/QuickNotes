@@ -13,12 +13,12 @@
   padding: 0 1rem;
   gap: 1rem;
   z-index: 10000;
-  background-color: var(--background-color);
-  box-shadow: 0px 1px 7px .4px var(--box-shadow);
+  background-color: var(--background-color-nav);
+  /* box-shadow: 0px 1px 7px .4px var(--box-shadow); */
   
   & p{
     color: var(--text-color);
-    font-weight: 400;
+    font-weight: 600;
     grid-area: text;
     justify-self: end;
   }
@@ -77,7 +77,7 @@
   }
   & #btn_order svg{
     fill: var(--icon-color);
-    transition: fill .3s ease;
+    transition: fill .2s ease;
   }
   @media (hover: hover) and (pointer: fine) {
       & #btn_order:hover svg{
@@ -92,8 +92,9 @@
     padding: 1rem;
     z-index: 100000;
     flex-direction: row-reverse;
+    background-color: var(--background-color-nav);
     box-shadow: 1px 3px 7px .4px var(--box-shadow);
-    transition: top 0.3s ease, box-shadow 1s ease;
+    transition: top .2s ease, box-shadow 1s ease;
     &.open{
       top: 0;
       box-shadow: none;
@@ -103,7 +104,7 @@
   .delete_trash_selection_btn{
     grid-area: area4;
     color: var(--icon-color);
-    transition: color .3s ease;
+    transition: color .2s ease;
   }
   & #delete_selection_btn,
   #delete_trash_selection_btn,
@@ -143,7 +144,7 @@
     border-radius: 5px;
     color: var(--icon-color);
     font-weight: 600;
-    transition: background-color .3s ease, color .3s ease;
+    transition: background-color .2s ease, color .2s ease;
     @media (hover: hover) and (pointer: fine) {
           &:hover{
       background-color: var(--select-btn-hover);
@@ -167,7 +168,7 @@
     font-weight: 9000;
     grid-area: text;
     justify-self: start;
-    transition: color .3s ease;
+    transition: color .2s ease;
     @media (hover: hover) and (pointer: fine) {
           &:hover{
       color: var(--item_hover-icon-color);

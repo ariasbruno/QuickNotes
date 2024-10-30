@@ -43,7 +43,7 @@
   &::before, &::after, &{
     background-color: var(--icon-color);
     border-radius: 5px;
-    transition: transform 0.3s ease, top .3s ease, background-color .3s ease;
+    transition: transform .3s ease, top .3s ease, background-color .2s ease;
   }
   &::before, &::after{
     content: '';
@@ -60,23 +60,23 @@
 }
 
 #sidebar {
-  color: var(--text-color);
   display: flex;
   flex-direction: column;
   justify-content: start;
   position: fixed;
-  top: 0;
-  left: calc(0px - var(--width-sidebar));
   width: var(--width-sidebar);
   height: 100%;
   padding-top: 5rem;
-  background-color: var(--background-color);
-  z-index: 999;
   gap: 1rem;
+  top: 0;
+  left: calc(0px - var(--width-sidebar));
+  color: var(--text-color);
+  background-color: var(--background-color-nav);
   transition: left .5s ease, box-shadow .5s ease;
+  z-index: 999;
   &.open {
     left: 0;
-    box-shadow: 1px 67px 10px .4px var(--box-shadow);
+    box-shadow: 1px 0px 10px .4px var(--box-shadow);
   }
 }
 .sidebar_div{
@@ -88,7 +88,8 @@
   gap: 1rem;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
-  transition: background-color .3s ease;
+  transition: background-color .2s ease, color .2s ease;
+  font-weight: 500;
   @media (hover: hover) and (pointer: fine){
       &:hover{
     cursor: pointer;
@@ -97,6 +98,7 @@
   @media (hover: hover) and (pointer: fine) {
     &:hover{
       background-color: var(--select-btn-hover);
+      color: var(--background-color);
       
       & svg:not(.sidebar_div_notes){
         color: var(--background-color);
@@ -109,6 +111,7 @@
 
   &.active{
     background-color: var(--select-btn-hover);
+    color: var(--background-color);
     
     & svg:not(.sidebar_div_notes){
       color: var(--background-color);
@@ -165,13 +168,14 @@ svg.sidebar_div_notes{
     width: 32px;
     justify-self: center;
     color: var(--icon-color);
-    transition: color .3s ease;
+    transition: color .2s ease;
   }
 }
 
 @media (min-width: 480px) {
   #sidebar {
     left: var(--sidebar-left);
-    box-shadow: 1px 67px 10px .4px var(--box-shadow);
+    /* border-right: 1px solid red; */
+    /* box-shadow: 1px 67px 10px .4px var(--box-shadow); */
   }
 }

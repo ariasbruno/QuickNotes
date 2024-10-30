@@ -40,8 +40,8 @@
   height: 4rem;
   padding: 1rem;
   z-index: 10000;
-  background-color: var(--background-color);
-  border-bottom: .1rem rgb(107, 106, 106) solid;
+  background-color: var(--background-color-nav);
+  /* border-bottom: .1rem rgb(107, 106, 106) solid; */
   cursor: default;
 
   & #close {
@@ -50,7 +50,7 @@
     height: 28px;
     width: 28px;
     color: var(--icon-color);
-    transition: color .3s ease;
+    transition: color .2s ease;
     @media (hover: hover) and (pointer: fine) {
       &:hover{
         color: var(--item_hover-icon-color);
@@ -64,7 +64,7 @@
     border: 0;
     font-size: 1.5rem;
     font-weight: bold;
-    background-color: var(--background-color);
+    background-color: transparent;
     color: var(--text-color);
     &:focus {   outline: none  }
   }
@@ -74,7 +74,7 @@
     height: 28px;
     width: 28px;
     color: var(--icon-color);
-    transition: color .3s ease;
+    transition: color .2s ease;
     @media (hover: hover) and (pointer: fine){
       &:hover{
         color: var(--item_hover-icon-color);
@@ -90,11 +90,11 @@
     height: 28px;
     width: 28px;
     color: var(--icon-color);
-    transition: background-color .3s ease, color .3s ease;
+    transition: background-color .2s ease, color .2s ease;
     & svg{
       width: 28px;
       height: 28px;
-      transition: background-color .3s ease, color .3s ease;
+      transition: background-color .2s ease, color .2s ease;
     }
     @media (hover: hover) and (pointer: fine) {
       &:hover{
@@ -114,7 +114,7 @@
     height: 28px;
     width: 28px;
     color: var(--icon-color);
-    transition: background-color .3s ease, color .3s ease;
+    transition: background-color .2s ease, color .2s ease;
     &.open svg{
       rotate: 90deg;
     }
@@ -122,7 +122,7 @@
       width: 28px;
       height: 28px;
       rotate: -90deg;
-      transition: background-color .3s ease, color .3s ease, rotate .3s ease;
+      transition: background-color .2s ease, color .2s ease, rotate .2s ease;
     }
     @media (hover: hover) and (pointer: fine) {
       &:hover{
@@ -139,7 +139,7 @@
 #note_modal-div{
   width: calc(min(60rem, 100%));
   margin: 0;
-  transition: margin .1s ease-out;
+  transition: margin .2s ease-out;
   &.shifted {
     margin-top: 70px;
   }
@@ -183,7 +183,7 @@
   transform: translateY(-10px);
   box-shadow: 0px 0px 10px 0px var(--box-shadow);
   background-color: var(--background-color);
-  transition: opacity 0.3s ease, transform 0.3s ease, height 0s ease;
+  transition: opacity .2s ease, transform .2s ease, height 0s ease;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover{
