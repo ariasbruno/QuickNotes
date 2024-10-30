@@ -41,7 +41,6 @@
   padding: 1rem;
   z-index: 10000;
   background-color: var(--background-color-nav);
-  /* border-bottom: .1rem rgb(107, 106, 106) solid; */
   cursor: default;
 
   & #close {
@@ -161,6 +160,7 @@
     
     &[data-placeholder="on"]:before{
       position: absolute;
+      padding-left: 2px;
       content: "Contenido de la nota...";
       color: rgb(85, 85, 85);
       cursor: text;

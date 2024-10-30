@@ -1,29 +1,29 @@
-import { DisplayNotes } from './scripts/view/DisplayNotes.js';
-import { DisplayTrash } from './scripts/view/DisplayTrash.js';
-import { DisplayConfig } from './scripts/view/DisplayConfig.js';
-import { changeNotesOrder } from './scripts/components/changeNotesOrder.js';
-import { useAlert } from './scripts/components/use_interactables/useAlert.js';
-import { modalAction } from './scripts/components/use_interactables/useModal.js'
-import { clickOpenCloseSidebar } from './scripts/components/use_interactables/useSidebar.js'
-import { isAlertActive } from './scripts/config/isAlertActive.js'
-import { configItems } from './scripts/config/configItems.js'
-import { deleteAllData } from './scripts/config/deleteAllData.js'
-import { handlerTheme } from './scripts/theme/handlerTheme.js';
-import { loadIcon } from './scripts/theme/loadIcon.js';
-import { updateToolbar } from './scripts/components/rich_text_editor/updateToolbar.js';
-import { handlerRead } from './scripts/components/modal/handlerRead.js';
-import { notesInfo } from './scripts/components/modal/notesInfo.js';
-import { handlerNoteOptions } from './scripts/components/modal/handlerNoteOptions.js';
-import { clickEscNavSelection } from './scripts/components/clickEscNavSelection.js';
-import { openSelectNotesNav } from './scripts/components/openSelectNotesNav.js';
-import { clickNavSelectNotesBtn } from './scripts/components/clickNavSelectNotesBtn.js';
-import { deleteAllSelectionTrash } from './scripts/components/trash_section_actions/deleteAllSelectionTrash.js'
-import { restoreAllSelectionTrash } from './scripts/components/trash_section_actions/restoreAllSelectionTrash.js'
-import { restoreNote } from './scripts/components/trash_section_actions/restoreNote.js'
-import { deletePermanently } from './scripts/components/trash_section_actions/deletePermanently.js'
-import { deleteNoteSelected } from './scripts/components/note_section_actions/deleteNoteSelected.js'
-import { clickDeleteNotes } from './scripts/components/note_section_actions/clickDeleteNotes.js'
-import { selectNote } from './scripts/components/note_section_actions/selectNote.js'
+import { DisplayNotes } from "./scripts/view/DisplayNotes.js";
+import { DisplayTrash } from "./scripts/view/DisplayTrash.js";
+import { DisplayConfig } from "./scripts/view/DisplayConfig.js";
+import { changeNotesOrder } from "./scripts/components/changeNotesOrder.js";
+import { useAlert } from "./scripts/components/use_interactables/useAlert.js";
+import { modalAction } from "./scripts/components/use_interactables/useModal.js"
+import { clickOpenCloseSidebar } from "./scripts/components/use_interactables/useSidebar.js"
+import { isAlertActive } from "./scripts/config/isAlertActive.js"
+import { configItems } from "./scripts/config/configItems.js"
+import { deleteAllData } from "./scripts/config/deleteAllData.js"
+import { handlerTheme } from "./scripts/theme/handlerTheme.js";
+import { loadIcon } from "./scripts/theme/loadIcon.js";
+import { updateToolbar } from "./scripts/components/rich_text_editor/updateToolbar.js";
+import { handlerRead } from "./scripts/components/modal/handlerRead.js";
+import { notesInfo } from "./scripts/components/modal/notesInfo.js";
+import { handlerNoteOptions } from "./scripts/components/modal/handlerNoteOptions.js";
+import { clickEscNavSelection } from "./scripts/components/clickEscNavSelection.js";
+import { openSelectNotesNav } from "./scripts/components/openSelectNotesNav.js";
+import { clickNavSelectNotesBtn } from "./scripts/components/clickNavSelectNotesBtn.js";
+import { deleteAllSelectionTrash } from "./scripts/components/trash_section_actions/deleteAllSelectionTrash.js"
+import { restoreAllSelectionTrash } from "./scripts/components/trash_section_actions/restoreAllSelectionTrash.js"
+import { restoreNote } from "./scripts/components/trash_section_actions/restoreNote.js"
+import { deletePermanently } from "./scripts/components/trash_section_actions/deletePermanently.js"
+import { deleteNoteSelected } from "./scripts/components/note_section_actions/deleteNoteSelected.js"
+import { clickDeleteNotes } from "./scripts/components/note_section_actions/clickDeleteNotes.js"
+import { selectNote } from "./scripts/components/note_section_actions/selectNote.js"
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => document.querySelectorAll(selector);
@@ -105,7 +105,7 @@ document.addEventListener("click", (e) => {
 function openToolbar() {
   $(".toolbar").classList.toggle("open");
   $("#open_toolbar-btn").classList.toggle("open");
-  $("#note_modal-div").classList.toggle('shifted');
+  $("#note_modal-div").classList.toggle("shifted");
 }
 
 function clickCreateNote() { // ! CREAR NOTA
@@ -245,3 +245,69 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
     }
   }
 };
+
+$$("#div-font_size-input").forEach(buttonContainer => {
+  const button = buttonContainer.querySelector("#font_size-input");
+  const tooltip = buttonContainer.querySelector(".tooltip");
+  let tooltipTimer;
+  
+
+  const showTooltip = () => {
+    tooltip.classList.add("show-tooltip");
+  };
+
+  const hideTooltip = () => {
+    tooltip.classList.remove("show-tooltip");
+  };
+
+  button.addEventListener("mouseenter", () => {
+    tooltipTimer = setTimeout(showTooltip, 500);
+  });
+
+  button.addEventListener("mouseleave", () => {
+    clearTimeout(tooltipTimer);
+    hideTooltip();
+  });
+
+  button.addEventListener("touchstart", () => {
+    tooltipTimer = setTimeout(showTooltip, 500);
+  }, { passive: true });
+
+  button.addEventListener("touchend", () => {
+    clearTimeout(tooltipTimer);
+    hideTooltip();
+  });
+}, { passive: true });
+
+$$(".div-btn_toolbar").forEach(buttonContainer => {
+  const button = buttonContainer.querySelector(".btn_toolbar");
+  const tooltip = buttonContainer.querySelector(".tooltip");
+  let tooltipTimer;
+  
+
+  const showTooltip = () => {
+    tooltip.classList.add("show-tooltip");
+  };
+
+  const hideTooltip = () => {
+    tooltip.classList.remove("show-tooltip");
+  };
+
+  button.addEventListener("mouseenter", () => {
+    tooltipTimer = setTimeout(showTooltip, 500);
+  });
+
+  button.addEventListener("mouseleave", () => {
+    clearTimeout(tooltipTimer);
+    hideTooltip();
+  });
+
+  button.addEventListener("touchstart", () => {
+    tooltipTimer = setTimeout(showTooltip, 500);
+  }, { passive: true });
+
+  button.addEventListener("touchend", () => {
+    clearTimeout(tooltipTimer);
+    hideTooltip();
+  }, { passive: true });
+});
