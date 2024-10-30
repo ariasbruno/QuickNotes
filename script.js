@@ -198,13 +198,14 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
   const note = notesNow[index]
   let titleValue = $inputTitle.value.trim();
   let textValue = $inputContent.innerHTML.trim();
+  let isTextEmpty = $inputContent.innerText.trim() === "";
   
   const noChange = note.title === titleValue && note.text === textValue;
 
-  const titleOrText = titleValue !== "" || (textValue !== "" && textValue !== "<br>");
+  const titleOrText = titleValue !== "" || !isTextEmpty;
 
-  const emptyNote = titleValue === "" && (textValue === "" || textValue === "<br>");
-
+  const emptyNote = titleValue === "" && isTextEmpty;
+  
   if (noChange) {
     DisplayNotes();
     modalAction("close");
@@ -218,6 +219,8 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
     modalAction("close");
 
   } else if (emptyNote) {
+    console.log("a");
+    
     if (showAlertConfirm) {
       useAlert("empty note").then(resolve=> {
         if(resolve){
