@@ -62,7 +62,7 @@ export function handleColors (e, action, typeBtn) {
   const $changeColorSvg = typeBtn === "text" ? $("#change_text_color-svg") : $("#change_background_color-svg");
   
   function handleColorSelect(color, isDefault) {
-    let typeFormat = typeBtn === "text" ? 'textColor' : 'hiliteColor';
+    let typeFormat = typeBtn === "text" ? 'foreColor' : 'hiliteColor';
     formatDoc(typeFormat, color)
     $textColorContent.style.display = 'none'
     $backgroundColorContent.style.display = 'none'

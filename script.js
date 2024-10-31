@@ -194,17 +194,15 @@ function createNoteFunction () { // ! CREAR NOTAS
 
 function updateNoteFunction(index, n) { // ! EDITAR NOTAS
   let notesNow = JSON.parse(localStorage.getItem("notes"))
-
   let showAlertConfirm = JSON.parse(localStorage.getItem("config")).alertEmptyNote
   const note = notesNow[index]
+  
   let titleValue = $inputTitle.value.trim();
   let textValue = $inputContent.innerHTML.trim();
   let isTextEmpty = $inputContent.innerText.trim() === "";
   
   const noChange = note.title === titleValue && note.text === textValue;
-
   const titleOrText = titleValue !== "" || !isTextEmpty;
-
   const emptyNote = titleValue === "" && isTextEmpty;
   
   if (noChange) {
@@ -220,16 +218,17 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
     modalAction("close");
 
   } else if (emptyNote) {
-    console.log("a");
     
     if (showAlertConfirm) {
       useAlert("empty note").then(resolve=> {
+
         if(resolve){
           isAlertActive("empty note")
           notesNow = notesNow.filter(n => n.id !== notesNow[index].id);
           localStorage.setItem("notes", JSON.stringify(notesNow));
           modalAction("close");
           DisplayNotes();
+
         }else if (!resolve){
           isAlertActive("empty note")
           $inputTitle.value = n.title;
@@ -238,6 +237,7 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
           backButtonListener("add")
         }
       })
+
     } else if (!showAlertConfirm) {
       notesNow = notesNow.filter(n => n.id !== notesNow[index].id);
       localStorage.setItem("notes", JSON.stringify(notesNow));
@@ -255,13 +255,7 @@ buttonsWithTooltips.forEach(buttonContainer => {
   let tooltipTimer;
 
   function adjustPositionModalColors () {
-    const rect = button.getBoundingClientRect();
-    console.log(tooltip.offsetWidth);
-
-    console.log(button.offsetWidth);
-    console.log(tooltip);
-    
-    
+    const rect = button.getBoundingClientRect(); 
   
     let position = 0;
   

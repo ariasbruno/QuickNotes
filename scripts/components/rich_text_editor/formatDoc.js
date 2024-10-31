@@ -1,36 +1,65 @@
+function getAncestorBlock(selection) {
+  let node = selection.anchorNode;
+  while (node && node.nodeType !== Node.ELEMENT_NODE) {
+    node = node.parentNode;
+  }
+  let block = node;
+  if (block && block.nodeName !== "DIV") {
+    for (let el = block.parentNode; el.nodeName !== "DIV"; el = el.parentNode) {
+      block = el.parentNode;
+    }
+  }
+  return block;
+}
+
 export function formatDoc(cmd, value = null) {
   const $content = document.querySelector('#note_text');
   const selection = window.getSelection();
+
   if (selection.rangeCount > 0) {
     const range = selection.getRangeAt(0);
-    let node = range.commonAncestorContainer;
-    while (node && node.nodeType !== Node.ELEMENT_NODE) {
-        node = node.parentNode;
-    }
-    let block = node;
+    const styledNode = document.createElement("span");    
 
-    if (cmd === "fontSize") {
-      document.execCommand("fontSize", false, "7");
-      const fontElements = $content.querySelectorAll("font[size='7']");
-      fontElements.forEach((el) => {
-        el.removeAttribute("size");
-        el.style.fontSize = `${value}px`;
-      });
-    } else if (cmd === "textColor") {
-      document.execCommand("foreColor", false , value);
-      // console.log(selection);
-      
-      // selection.focusNode.parentNode.removeAttribute("style");
-      // selection.focusNode.parentNode.style.color = `${value}`;
-    } else if (cmd.includes('justify')) {
-      if (block.nodeName !== "DIV") {
-        for (let el = block.parentNode; el.nodeName !== "DIV"; el = el.parentNode) {
-          block = el.parentNode
-        }
+    if (!selection.isCollapsed) {
+      if (cmd === "fontSize") {
+        styledNode.style.fontSize = `${value}px`;
+
+      } else if (cmd === "textColor") {
+        styledNode.style.color = value;
+
+      } else {
+        document.execCommand(cmd, false, value);
+        return;
       }
-      block.style.textAlign = cmd.replace('justify', '').toLowerCase();
+
+      range.surroundContents(styledNode);
+
     } else {
-      document.execCommand(cmd, false, value);
+      if (cmd === "fontSize") {
+        styledNode.style.fontSize = `${value}px`;
+
+      } else if (cmd === "textColor") {
+        styledNode.style.color = value;
+
+      } else {
+        document.execCommand(cmd, false, value);
+        return;
+      }
+      
+      styledNode.textContent = "\u200B";
+      range.insertNode(styledNode);
+
+      selection.removeAllRanges();
+      const newRange = document.createRange();
+      newRange.setStart(styledNode, 1);
+      selection.addRange(newRange);
+    }
+  }
+
+  if (cmd.includes('justify')) {
+    let block = getAncestorBlock(selection);
+    if (block) {
+      block.style.textAlign = cmd.replace('justify', '').toLowerCase();
     }
   }
 }
