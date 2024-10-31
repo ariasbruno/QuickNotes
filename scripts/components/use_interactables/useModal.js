@@ -103,9 +103,16 @@ function openDropdown() {
 }
 
 function isOutsideDropdown (e) {
-  if (!e.target.matches('.dropdown-overflow')) {
+  if (!e.target.matches('.dropdown-overflow') && !e.target.matches(".color-picker")) {
     $('#dropdown-container').classList.remove('show');
     $('#dropdown-open-svg').classList.remove('rotate');
+  } else if (e.target.matches(".color-picker")) {
+    for (let i = e.target ; i.nodeName !== "DIV"; i = i.parentNode) {
+      if (i.parentNode.parentNode.id === "toolbar") {
+        $('#dropdown-container').classList.remove('show');
+        $('#dropdown-open-svg').classList.remove('rotate');
+      }
+    }
   }
 }
 

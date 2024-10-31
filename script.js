@@ -44,6 +44,7 @@ localStorage.setItem("trash", JSON.stringify(getTrash))
 window.addEventListener("load", () => { DisplayNotes(); loadIcon() });
 
 document.addEventListener("click", (e) => {
+
   let notesNow = JSON.parse(localStorage.getItem("notes"))
   let trashNow = JSON.parse(localStorage.getItem("trash"))  
   
@@ -246,47 +247,38 @@ function updateNoteFunction(index, n) { // ! EDITAR NOTAS
   }
 };
 
-$$("#div-font_size-input").forEach(buttonContainer => {
-  const button = buttonContainer.querySelector("#font_size-input");
+const buttonsWithTooltips = document.querySelectorAll(".button_with_tooltip");
+
+buttonsWithTooltips.forEach(buttonContainer => {
+  const button = buttonContainer.querySelector(".hover_for_tooltip");
   const tooltip = buttonContainer.querySelector(".tooltip");
   let tooltipTimer;
-  
 
+  function adjustPositionModalColors () {
+    const rect = button.getBoundingClientRect();
+    console.log(tooltip.offsetWidth);
+
+    console.log(button.offsetWidth);
+    console.log(tooltip);
+    
+    
+  
+    let position = 0;
+  
+    if (rect.x + tooltip.offsetWidth > window.innerWidth) {
+      position = rect.x + tooltip.offsetWidth - window.innerWidth + 10;
+      tooltip.style.left = `-${position}px`;
+  
+    } else {
+      position = (tooltip.offsetWidth / 2) - (button.offsetWidth / 2);
+      tooltip.style.right = `-${position}px`;
+    }
+  };
+  
+  
   const showTooltip = () => {
     tooltip.classList.add("show-tooltip");
-  };
-
-  const hideTooltip = () => {
-    tooltip.classList.remove("show-tooltip");
-  };
-
-  button.addEventListener("mouseenter", () => {
-    tooltipTimer = setTimeout(showTooltip, 500);
-  });
-
-  button.addEventListener("mouseleave", () => {
-    clearTimeout(tooltipTimer);
-    hideTooltip();
-  });
-
-  button.addEventListener("touchstart", () => {
-    tooltipTimer = setTimeout(showTooltip, 500);
-  }, { passive: true });
-
-  button.addEventListener("touchend", () => {
-    clearTimeout(tooltipTimer);
-    hideTooltip();
-  });
-}, { passive: true });
-
-$$(".div-btn_toolbar").forEach(buttonContainer => {
-  const button = buttonContainer.querySelector(".btn_toolbar");
-  const tooltip = buttonContainer.querySelector(".tooltip");
-  let tooltipTimer;
-  
-
-  const showTooltip = () => {
-    tooltip.classList.add("show-tooltip");
+    adjustPositionModalColors()
   };
 
   const hideTooltip = () => {

@@ -103,13 +103,32 @@ $("#clear-background-color").addEventListener("click", e => {restoreSelection();
 $('#change_text_color-btn').addEventListener('click', e => {
 	typeBtn = "text"
 	handleColors(e, "open pick text color", typeBtn)
+	adjustPositionModalColors(e.target, "#text_colors_container")
 });
 
 $('#change_background_color-btn').addEventListener('click', e => {
 	typeBtn = "background"
 	handleColors(e, "open pick text background", typeBtn)
+	adjustPositionModalColors(e.target, "#background_colors_container")
 });
 // TEXT & BACKGROUND TEXT COLOR END
+
+function adjustPositionModalColors (e, modal) {
+	const button = e
+	const colorsContainer = document.querySelector(modal);
+  const rect = button.getBoundingClientRect();
+
+  let position = 0;
+
+  if (rect.x + colorsContainer.offsetWidth > window.innerWidth) {
+		position = rect.x + colorsContainer.offsetWidth - window.innerWidth + 10;
+		colorsContainer.style.left = `-${position}px`;
+
+  } else {
+		colorsContainer.style.left = "0";
+	}
+};
+
 
 
 let savedRange
