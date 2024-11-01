@@ -18,7 +18,7 @@ export function formatDoc(cmd, value = null) {
 
   if (selection.rangeCount > 0) {
     const range = selection.getRangeAt(0);
-    const styledNode = document.createElement("span");    
+    const styledNode = document.createElement("span");
 
     if (!selection.isCollapsed) {
       if (cmd === "fontSize") {
@@ -42,6 +42,13 @@ export function formatDoc(cmd, value = null) {
         styledNode.style.color = value;
 
       } else {
+        styledNode.textContent = "\u200B";
+        range.insertNode(styledNode);
+  
+        selection.removeAllRanges();
+        const newRange = document.createRange();
+        newRange.setStart(styledNode, 1);
+        selection.addRange(newRange);
         document.execCommand(cmd, false, value);
         return;
       }
