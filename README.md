@@ -1,6 +1,6 @@
 # QuickNotes 📝
 
-QuickNotes es mi primer proyecto web 100% vanilla, este es una pagina de notas que permite a los usuarios crear, editar, y gestionar sus notas de manera eficiente.
+QuickNotes, mi primer proyecto web, es una eficiente aplicación de notas 100% Vanilla JS (HTML/CSS/JS). Permite crear, editar y gestionar apuntes fácilmente, sin librerías externas.
 
 ## 🌟 Características Principales
 
